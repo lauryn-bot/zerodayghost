@@ -1,1 +1,129 @@
-<h1>Mon Portfolio Cyber</h1>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauryn Hecque--Nascimento | Portfolio Cyber & Infrastructure</title>
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --bg-card: #112240;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        h1 { font-size: 3rem; color: var(--secondary); margin-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; color: var(--text-main); margin-top: 0; }
+        .availability { color: var(--secondary); font-weight: bold; margin-bottom: 2rem; }
+
+        section { padding: 80px 10%; max-width: 1200px; margin: auto; }
+        h3 { border-left: 4px solid var(--secondary); padding-left: 15px; margin-bottom: 30px; font-size: 1.8rem; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--bg-card); padding: 25px; border-radius: 8px; border-bottom: 3px solid transparent; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); border-bottom: 3px solid var(--secondary); }
+
+        .badge { background: rgba(100, 255, 218, 0.1); color: var(--secondary); padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; margin-right: 5px; display: inline-block; }
+
+        .contact-links a { color: var(--secondary); text-decoration: none; margin: 0 15px; border: 1px solid var(--secondary); padding: 10px 20px; border-radius: 5px; transition: 0.3s; }
+        .contact-links a:hover { background: rgba(100, 255, 218, 0.1); }
+
+        ul { list-style-type: none; padding: 0; }
+        li { margin-bottom: 10px; color: var(--text-dim); }
+        li strong { color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Lauryn Hecque--Nascimento</h1>
+        <h2>Technicienne Informatique & Cybersécurité</h2>
+        <p class="availability">Recherche Alternance : 1 semaine formation / 2 semaines entreprise</p>
+        <div class="contact-links">
+            <a href="mailto:hecquelauryn@gmail.com">Email</a>
+            <a href="https://linkedin.com/in/LaurynHN">LinkedIn</a>
+            <a href="https://tryhackme.com/p/ZeroDayGhostNull">TryHackMe</a>
+        </div>
+    </header>
+
+    <section id="about">
+        <h3>À propos</h3>
+        <p>Étudiante en 2ème année de BTS SIO SISR (Moyenne : 15,6/20). Passionnée par les réseaux et la sécurité, je forge ma rigueur technique à travers des projets concrets et des certifications reconnues. Mon expérience d'immersion Orion aux Invalides a renforcé mon esprit d'équipe et ma discipline opérationnelle.</p>
+    </section>
+
+    <section id="skills">
+        <h3>Arsenal Technique</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>Systèmes & Virtualisation</h4>
+                <ul>
+                    <li>Windows Server & Windows 11</li>
+                    <li>Linux Debian (Fundamentals)</li>
+                    <li>VMWare</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Réseaux</h4>
+                <ul>
+                    <li>Architecture TCP/IP & Modèle OSI</li>
+                    <li>VLAN & Segmentation</li>
+                    <li>Adressage IPv4 & Routage OSPF</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Sécurité & Cloud</h4>
+                <ul>
+                    <li>Certifications Microsoft : AZ-900, MS-900, SC-900</li>
+                    <li>Cyber-entraînement : Top 25% TryHackMe</li>
+                    <li>RGPD & SensCyber</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h3>Projets Majeurs</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>VPN Site-to-Site (IPsec)</h4>
+                <p>Déploiement d'un tunnel sécurisé via Cisco Packet Tracer utilisant le chiffrement AES et l'authentification IKE.</p>
+                <span class="badge">Networking</span><span class="badge">Security</span>
+            </div>
+            <div class="card">
+                <h4>Entraînement Offensif/Défensif</h4>
+                <p>Analyse des vulnérabilités (OWASP Top 10) et reconnaissance OSINT sur TryHackMe. Classement mondial : Top 25%.</p>
+                <span class="badge">Cybersecurity</span><span class="badge">OSINT</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="hobbies">
+        <h3>Résilience & Discipline</h3>
+        <p>Le sport de haut niveau et de compétition forge ma capacité à travailler sous pression :</p>
+        <span class="badge">9 ans de Volley-ball</span>
+        <span class="badge">Triathlon</span>
+        <span class="badge">Escalade</span>
+    </section>
+
+</body>
+</html>
