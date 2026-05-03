@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport d'Intervention : VPN Site-to-Site IPsec | Lauryn H-N</title>
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --bg-card: #112240;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            padding: 20px 10%;
+            background: rgba(10, 25, 47, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        article {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 { color: var(--secondary); font-size: 2.5rem; }
+        h2 { border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-top: 40px; color: var(--text-main); }
+        h3 { color: var(--secondary); margin-top: 30px; }
+
+        .mission-box {
+            background: var(--bg-card);
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .img-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            border: 2px solid var(--bg-card);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-caption {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        code {
+            background: #011627;
+            color: #d6deeb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .status-ok {
+            color: #64ffda;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">← Retour </a>
+    </nav>
+
+    <article>
+        <h1>Rapport : VPN Site-to-Site IPsec</h1>
+        
+        <div class="mission-box">
+            <strong>OBJECTIF:</strong> Interconnecter deux réseaux locaux distants (LAN A et LAN C) de manière sécurisée via un tunnel chiffré traversant un réseau non sécurisé (Internet/WAN).
+        </div>
+
+        <h2>1. Infrastructure et Topologie</h2>
+        <p>Le projet repose sur trois routeurs Cisco 1941. Le routeur R2 simule le fournisseur d'accès Internet (ISP), tandis que R1 et R3 sont les passerelles de sécurité des deux sites distants.</p>
+        
+        <h3>Configuration matérielle</h3>
+        <p>Chaque routeur a été équipé d'un module <code>HWIC-2T</code> pour permettre les liaisons séries simulant le WAN.</p>
+        <div class="img-container">
+            <img src="HWIC-2T_ROUTEUR1.png" alt="Configuration matérielle R1">
+            <span class="img-caption">Vue physique du routeur R1 avec le module HWIC-2T installé.</span>
+        </div>
+
+        <h3>Plan d'adressage</h3>
+        <p>Les interfaces ont été configurées avec des IP statiques pour établir la connectivité de base avant le montage du tunnel.</p>
+        <div class="img-container">
+            <img src="configuration_des_interfaces-R1.png" alt="Interfaces R1">
+            <img src="configuration_des_interfaces-R2.png" alt="Interfaces R2">
+            <img src="configuration_des_interfaces-R3.png" alt="Interfaces R3">
+            <span class="img-caption">Vérification de l'état des interfaces UP/UP sur l'ensemble de l'infrastructure.</span>
+        </div>
+
+        <h2>2. Mise en place de la Sécurité</h2>
+        <h3>Activation des fonctionnalités cryptographiques</h3>
+        <p>Sur les équipements Cisco, la sécurité IPsec nécessite l'activation d'un package technologique spécifique. J'ai procédé à l'activation de la licence <code>securityk9</code>.</p>
+        <div class="img-container">
+            <img src="activation_de_la_licence.png" alt="Activation licence Cisco">
+            <span class="img-caption">Commande d'activation : license boot module c1900 technology-package securityk9.</span>
+        </div>
+
+        <h3>Configuration d'IPsec</h3>
+        <p>La configuration s'est déroulée en deux phases majeures :</p>
+        <ul>
+            <li><strong>Phase 1 (ISAKMP) :</strong> Définition de l'algorithme de chiffrement (AES), de l'authentification (Pre-shared key) et du groupe Diffie-Hellman.</li>
+            <li><strong>Phase 2 (IPsec) :</strong> Création du <code>transform-set</code> et de la <code>crypto map</code> pour l'encapsulation des données.</li>
+        </ul>
+
+        <h2>3. Validation et Tests de Chiffrement</h2>
+        <p>Pour valider la réussite du projet, un test de connectivité (Ping) a été effectué entre le <strong>PC-A (192.168.1.3)</strong> et le <strong>PC-C (192.168.3.3)</strong>.</p>
+        
+        <div class="img-container">
+            <img src="etape1-ipconfig_PC-A.png" alt="Configuration PC-A" style="width: 45%;">
+            <img src="etape1-ipconfig_PC-C.png" alt="Configuration PC-C" style="width: 45%;">
+            <span class="img-caption">Configuration IP statique des terminaux finaux.</span>
+        </div>
+
+        <h3>Preuve de chiffrement (Encapsulation/Décapsulation)</h3>
+        <p>L'analyse des compteurs de sécurité confirme que le trafic passe bien par le tunnel chiffré. On observe que les paquets sont encapsulés et chiffrés à l'envoi, puis décapsulés et déchiffrés à la réception.</p>
+        
+        <div class="img-container">
+            <img src="chiffrement_des_données(encaps et decaps).png" alt="Statistiques IPsec">
+            <span class="img-caption" class="status-ok">Succès : #pkts encaps: 7 | #pkts decaps: 6. Le tunnel est opérationnel.</span>
+        </div>
+    </article>
+
+    <footer style="text-align: center; padding: 40px; color: var(--text-dim);">
+        Rapport technique généré par Lauryn H-N - Spécialité SISR
+    </footer>
+
+</body>
+</html>
