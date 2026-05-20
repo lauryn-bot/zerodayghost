@@ -8,18 +8,18 @@
 
 ---
 
-## 🎯 Objectif
-Actuellement à la recherche d'une **Alternance (Rythme : 1 semaine en formation / 2 semaines en entreprise)** pour mettre en pratique mes compétences techniques, ma rigueur et mon esprit d'analyse au sein d'une équipe professionnelle.
+## 🎯 Contrat
+Alternante chez Hartwood.
 
 ## 🛠️ Compétences Techniques
 * **Administration Système :** Windows Server, Windows 11, Linux Debian.
 * **Réseaux :** Architecture TCP/IP, Modèle OSI, VLAN, Adressage IPv4, Routage OSPF.
 * **Sécurité & Cloud :** Certifications Microsoft (AZ-900, MS-900, SC-900), VPN Site-to-Site (IPsec), Analyse de vulnérabilités (OWASP).
-* **Cyber-entraînement :** Top 25% Mondial sur TryHackMe (Rang Gold), OSINT.
+* **Cyber-entraînement :** Top 15% Mondial sur TryHackMe (Rang Gold), OSINT.
 
 ## 📁 Structure du Projet
 Ce dépôt héberge le code source de mon portfolio, déployé via GitHub Pages :
 * `index.html` : Page d'accueil présentant mon profil, mes compétences et mes projets majeurs.
 * `projet-vpn.html` : Rapport technique détaillé illustrant la mise en place d'un tunnel VPN IPsec (Cisco Packet Tracer).
-* `CV_Alternance_LaurynHecque--Nascimento.pdf` : Mon CV téléchargeable.
+* `CV_Alternance_LaurynHecque--Nascimento (1).pdf` : Mon CV téléchargeable.
 * Les différents médias (captures d'écran techniques, badges de certification TryHackMe).
