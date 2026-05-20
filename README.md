@@ -21,5 +21,5 @@ Actuellement à la recherche d'une **Alternance (Rythme : 1 semaine en formation
 Ce dépôt héberge le code source de mon portfolio, déployé via GitHub Pages :
 * `index.html` : Page d'accueil présentant mon profil, mes compétences et mes projets majeurs.
 * `projet-vpn.html` : Rapport technique détaillé illustrant la mise en place d'un tunnel VPN IPsec (Cisco Packet Tracer).
-* `CV_Alternance_LaurynHecque--Nascimento.pdf` : Mon CV téléchargeable.
+* `CV_Alternance_LaurynHecque--Nascimento (1).pdf` : Mon CV téléchargeable.
 * Les différents médias (captures d'écran techniques, badges de certification TryHackMe).
