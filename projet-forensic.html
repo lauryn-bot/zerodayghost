@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projet : Atelier Forensic - CyberSup</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Styles spécifiques pour la mise en page du projet (si nécessaire) */
+        .project-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #ffffff; /* À adapter selon votre charte graphique */
+        }
+        .project-header {
+            margin-bottom: 30px;
+        }
+        .project-meta {
+            margin: 15px 0;
+        }
+        .project-section {
+            margin-bottom: 40px;
+        }
+        .project-section h5 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--secondary); /* Utilise votre variable de couleur secondaire */
+        }
+        .tools-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .tools-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .tools-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="project-container">
+        <a href="index.html" class="back-link">← Retour aux projets</a>
+
+        <header class="project-header">
+            <h1>Atelier Forensic – CyberSup</h1>
+            <p style="opacity: 0.8; font-style: italic;">Investigation numérique et géolocalisation</p>
+            
+            <div class="project-meta">
+                <span class="badge">Forensic</span>
+                <span class="badge">OSINT</span>
+                <span class="badge">GeoINT</span>
+            </div>
+        </header>
+
+        <section class="project-section">
+            <h5>Contexte du projet</h5>
+            <p>
+                Dans le cadre d'un atelier concours organisé par l'école CyberSup, j'ai participé à un challenge pratique d'investigation numérique. L'objectif principal était de résoudre des enquêtes complexes en identifiant la localisation géographique exacte de différents événements à partir d'indices textuels et visuels limités.
+            </p>
+        </section>
+
+        <section class="project-section">
+            <h5>Méthodologie & Compétences techniques</h5>
+            <p>Ce challenge a nécessité la mise en œuvre de plusieurs techniques d'analyse et de recherche :</p>
+            <ul class="tools-list">
+                <li><strong>Recherche en sources ouvertes (OSINT) :</strong> Utilisation de moteurs de recherche de manière avancée (Google Dorks), analyse de bases de données publiques et croisement d'informations pour identifier des contextes ou des structures.</li>
+                <li><strong>Renseignement géospatial (GeoINT) :</strong> Analyse détaillée d'éléments visuels sur des images (architecture, signalisation routière, végétation, reliefs, orientation des ombres) combinée à des outils de cartographie comme Google Earth et Street View.</li>
+                <li><strong>Analyse d'images :</strong> Extraction et étude des métadonnées (données EXIF) lorsqu'elles étaient disponibles, afin de récupérer des informations techniques sur la capture des fichiers.</li>
+            </ul>
+        </section>
+
+        <section class="project-section">
+            <h5>Déroulement de l'investigation</h5>
+            <p>
+                Face aux différents scénarios proposés, j'ai appliqué une approche rigoureuse : isoler les indices visuels clés, formuler des hypothèses géographiques, puis valider ou infirmer ces hypothèses par une analyse comparative sur les outils de cartographie. Ce processus itératif a permis de surmonter le bruit numérique et d'aboutir à des coordonnées géographiques précises pour chaque cas d'étude.
+            </p>
+        </section>
+
+        <section class="project-section">
+            <h5>Compétences consolidées</h5>
+            <ul class="tools-list">
+                <li>Application concrète des concepts théoriques de la cybersécurité défensive et du Forensic.</li>
+                <li>Développement de l'esprit de déduction, de la patience et d'une forte rigueur méthodologique.</li>
+                <li>Gestion du temps face à un volume important de données à analyser.</li>
+            </ul>
+        </section>
+
+        <a href="index.html" class="back-link">← Retour aux projets</a>
+    </main>
+
+</body>
+</html>
