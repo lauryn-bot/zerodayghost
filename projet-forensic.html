@@ -3,104 +3,131 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projet : Atelier Forensic - CyberSup</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        /* Styles spécifiques pour la mise en page du projet (si nécessaire) */
-        .project-container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
-            color: #ffffff; /* À adapter selon votre charte graphique */
+    <title>Compte-rendu : Atelier Forensic OSINT/GeoINT | Lauryn H-N</title>
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --bg-card: #112240;
         }
-        .project-header {
-            margin-bottom: 30px;
-        }
-        .project-meta {
-            margin: 15px 0;
-        }
-        .project-section {
-            margin-bottom: 40px;
-        }
-        .project-section h5 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--secondary); /* Utilise votre variable de couleur secondaire */
-        }
-        .tools-list {
-            list-style-type: none;
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
             padding: 0;
         }
-        .tools-list li {
-            margin-bottom: 10px;
-            padding-left: 20px;
-            position: relative;
+
+        nav {
+            padding: 20px 10%;
+            background: rgba(10, 25, 47, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .tools-list li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--secondary);
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
+
+        nav a {
             color: var(--secondary);
             text-decoration: none;
             font-weight: bold;
+        }
+
+        article {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 { color: var(--secondary); font-size: 2.5rem; }
+        h2 { border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-top: 40px; color: var(--text-main); }
+        h3 { color: var(--secondary); margin-top: 30px; }
+
+        .mission-box {
+            background: var(--bg-card);
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        code {
+            background: #011627;
+            color: #d6deeb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .status-ok {
+            color: #64ffda;
+            font-weight: bold;
+        }
+
+        .result-box {
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid var(--secondary);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
 
-    <main class="project-container">
-        <a href="index.html" class="back-link">← Retour aux projets</a>
+    <nav>
+        <a href="index.html">← Retour </a>
+    </nav>
 
-        <header class="project-header">
-            <h1>Atelier Forensic – CyberSup</h1>
-            <p style="opacity: 0.8; font-style: italic;">Investigation numérique et géolocalisation</p>
-            
-            <div class="project-meta">
-                <span class="badge">Forensic</span>
-                <span class="badge">OSINT</span>
-                <span class="badge">GeoINT</span>
-            </div>
-        </header>
+    <article>
+        <h1>Projet : Atelier Concours Forensic CyberSup</h1>
+        
+        <div class="mission-box">
+            <strong>OBJECTIF :</strong> Identifier la localisation géographique exacte de différentes scènes en exploitant uniquement des traces numériques et des données issues de sources ouvertes (OSINT/GeoINT).
+        </div>
 
-        <section class="project-section">
-            <h5>Contexte du projet</h5>
-            <p>
-                Dans le cadre d'un atelier concours organisé par l'école CyberSup, j'ai participé à un challenge pratique d'investigation numérique. L'objectif principal était de résoudre des enquêtes complexes en identifiant la localisation géographique exacte de différents événements à partir d'indices textuels et visuels limités.
-            </p>
-        </section>
+        <h2>1. Contexte et Méthodologie</h2>
+        <p>Ce projet s'est déroulé dans le cadre d'un atelier de mise en pratique. Il a nécessité l'application d'une méthode de recherche rigoureuse pour trier les informations pertinentes, formuler des hypothèses et les vérifier techniquement.</p>
+        
+        <h3>Environnement de travail</h3>
+        <p>Afin de mener à bien les recherches de manière fiable, l'environnement nécessitait l'utilisation de navigateurs paramétrés pour l'investigation et de divers outils d'extraction de métadonnées.</p>
 
-        <section class="project-section">
-            <h5>Méthodologie & Compétences techniques</h5>
-            <p>Ce challenge a nécessité la mise en œuvre de plusieurs techniques d'analyse et de recherche :</p>
-            <ul class="tools-list">
-                <li><strong>Recherche en sources ouvertes (OSINT) :</strong> Utilisation de moteurs de recherche de manière avancée (Google Dorks), analyse de bases de données publiques et croisement d'informations pour identifier des contextes ou des structures.</li>
-                <li><strong>Renseignement géospatial (GeoINT) :</strong> Analyse détaillée d'éléments visuels sur des images (architecture, signalisation routière, végétation, reliefs, orientation des ombres) combinée à des outils de cartographie comme Google Earth et Street View.</li>
-                <li><strong>Analyse d'images :</strong> Extraction et étude des métadonnées (données EXIF) lorsqu'elles étaient disponibles, afin de récupérer des informations techniques sur la capture des fichiers.</li>
-            </ul>
-        </section>
+        <h3>Processus d'analyse</h3>
+        <p>La méthode a suivi les étapes suivantes :</p>
+        <ul>
+            <li><strong>Collecte :</strong> Identification des indices visuels ou textuels initiaux.</li>
+            <li><strong>Traitement :</strong> Extraction des données associées (métadonnées EXIF, par exemple).</li>
+            <li><strong>Analyse :</strong> Croisement des informations avec des services de cartographie.</li>
+            <li><strong>Validation :</strong> Confirmation des coordonnées via plusieurs sources indépendantes.</li>
+        </ul>
 
-        <section class="project-section">
-            <h5>Déroulement de l'investigation</h5>
-            <p>
-                Face aux différents scénarios proposés, j'ai appliqué une approche rigoureuse : isoler les indices visuels clés, formuler des hypothèses géographiques, puis valider ou infirmer ces hypothèses par une analyse comparative sur les outils de cartographie. Ce processus itératif a permis de surmonter le bruit numérique et d'aboutir à des coordonnées géographiques précises pour chaque cas d'étude.
-            </p>
-        </section>
+        <h2>2. Techniques Utilisées</h2>
+        <h3>Recherche en Sources Ouvertes (OSINT)</h3>
+        <p>L'utilisation de requêtes avancées (<code>Google Dorks</code>) a permis de cibler des informations précises indexées sur le web. La recherche s'est également appuyée sur la consultation de registres publics et de réseaux sociaux pour comprendre le contexte des cas étudiés.</p>
 
-        <section class="project-section">
-            <h5>Compétences consolidées</h5>
-            <ul class="tools-list">
-                <li>Application concrète des concepts théoriques de la cybersécurité défensive et du Forensic.</li>
-                <li>Développement de l'esprit de déduction, de la patience et d'une forte rigueur méthodologique.</li>
-                <li>Gestion du temps face à un volume important de données à analyser.</li>
-            </ul>
-        </section>
+        <h3>Géolocalisation d'images (GeoINT)</h3>
+        <p>Face à des images sans données de localisation directes, l'analyse s'est concentrée sur les détails de l'environnement visuel :</p>
+        <ul>
+            <li>Observation de l'architecture, du relief et de la végétation.</li>
+            <li>Étude de la signalisation routière et des textes visibles.</li>
+            <li>Recherche inversée d'images couplée à des outils de cartographie dynamique (Google Earth, Street View).</li>
+            <li>Analyse des ombres pour déduire l'orientation et l'heure approximative.</li>
+        </ul>
 
-        <a href="index.html" class="back-link">← Retour aux projets</a>
-    </main>
+        <h2>3. Validation et Résultats</h2>
+        <p>L'efficacité de cette méthode a été prouvée par la résolution des différents cas pratiques. Le croisement des recherches OSINT et de l'analyse visuelle GeoINT a permis d'obtenir des coordonnées GPS très précises pour chaque situation.</p>
+        
+        <div class="result-box">
+            <span class="status-ok">Résultat : Localisations exactes identifiées. Compétences en recherche d'informations et analyse d'images (Forensic) validées.</span>
+        </div>
+    </article>
+
+    <footer style="text-align: center; padding: 40px; color: var(--text-dim);">
+        Rapport technique généré par Lauryn H-N - Spécialité SISR
+    </footer>
 
 </body>
 </html>
