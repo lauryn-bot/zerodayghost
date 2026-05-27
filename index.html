@@ -22,30 +22,55 @@
             padding: 0;
         }
 
+        /* --- NOUVELLE BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+            border-bottom: 2px solid var(--secondary);
+            padding-bottom: 5px;
+        }
+        /* ------------------------------------ */
+
         header {
-            height: 100vh;
+            min-height: 60vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 0 20px;
+            padding: 40px 20px;
         }
 
         h1 { font-size: 3rem; color: var(--secondary); margin-bottom: 0.5rem; }
         h2 { font-size: 1.5rem; color: var(--text-main); margin-top: 0; }
         .availability { color: var(--secondary); font-weight: bold; margin-bottom: 2rem; }
 
-        section { padding: 80px 10%; max-width: 1200px; margin: auto; }
+        section { padding: 60px 10%; max-width: 1200px; margin: auto; }
         h3 { border-left: 4px solid var(--secondary); padding-left: 15px; margin-bottom: 30px; font-size: 1.8rem; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .card { background: var(--bg-card); padding: 25px; border-radius: 8px; border-bottom: 3px solid transparent; transition: 0.3s; }
-        .card:hover { transform: translateY(-5px); border-bottom: 3px solid var(--secondary); }
+        .badge { background: rgba(100, 255, 218, 0.1); color: var(--secondary); padding: 8px 15px; border-radius: 15px; font-size: 0.95rem; margin-right: 10px; margin-bottom: 10px; display: inline-block; }
 
-        .badge { background: rgba(100, 255, 218, 0.1); color: var(--secondary); padding: 5px 12px; border-radius: 15px; font-size: 0.85rem; margin-right: 5px; margin-bottom: 10px; display: inline-block; }
-
-        .contact-links a { color: var(--secondary); text-decoration: none; margin: 0 15px; border: 1px solid var(--secondary); padding: 10px 20px; border-radius: 5px; transition: 0.3s; }
+        .contact-links a { color: var(--secondary); text-decoration: none; margin: 0 10px; border: 1px solid var(--secondary); padding: 10px 20px; border-radius: 5px; transition: 0.3s; font-weight: bold;}
         .contact-links a:hover { background: rgba(100, 255, 218, 0.1); }
          
         .contact-links {
@@ -55,23 +80,26 @@
          gap: 15px;                
          margin-top: 20px;
        }
-
-        ul { list-style-type: none; padding: 0; }
-        li { margin-bottom: 10px; color: var(--text-dim); }
-        li strong { color: var(--text-main); }
     </style>
 </head>
 <body>
+
+    <nav>
+        <a href="index.html" class="active">Accueil / À propos</a>
+        <a href="competences-projets.html">Compétences & Projets</a>
+        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+    </nav>
 
     <header>
         <h1>Lauryn Hecque--Nascimento</h1>
         <h2>Technicienne Informatique & Cybersécurité</h2>
         <p class="availability">Alternante chez Hartwood</p>
+        
         <div class="contact-links">
-            <a href="mailto:hecquelauryn@gmail.com">Email</a>
-            <a href="https://linkedin.com/in/LaurynHN">LinkedIn</a>
-            <a href="https://tryhackme.com/p/ZeroDayGhostNull">TryHackMe</a>
-            <a href="CV_Lauryn_Hecque--Nascimento.pdf" download style="background-color: var(--secondary); color: var(--primary); font-weight: bold;">Télécharger mon CV (PDF)</a>
+            <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank">TryHackMe</a>
+            <a href="mailto:hecquelauryn@gmail.com">Mail</a>
+            <a href="https://linkedin.com/in/LaurynHN" target="_blank">LinkedIn</a>
+            <a href="CV_Lauryn_Hecque--Nascimento.pdf" download style="background-color: var(--secondary); color: var(--primary);">Télécharger CV</a>
         </div>
     </header>
 
@@ -80,82 +108,14 @@
         <p>Étudiante en 1ère année de BTS SIO SISR (Moyenne : 15,6/20 avec les félicitations du conseil de classe). Passionnée par les réseaux et la sécurité informatique, je développe mes compétences techniques grâce à des projets concrets et des certifications reconnues. Mon expérience lors du programme Orion aux Invalides m'a permis de consolider mon esprit d'équipe et mon sens de l'organisation.</p>
     </section>
 
-    <section id="skills">
-        <h3>Compétences techniques</h3>
-        <div class="grid">
-            <div class="card">
-                <h4>Systèmes & Virtualisation</h4>
-                <ul>
-                    <li>Windows Server & Windows 11</li>
-                    <li>Linux Debian (Fundamentals)</li>
-                    <li>VMWare</li>
-                    <li>Support Matériel & Micro-informatique</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Réseaux</h4>
-                <ul>
-                    <li>Architecture TCP/IP & Modèle OSI</li>
-                    <li>VLAN & Segmentation</li>
-                    <li>Adressage IPv4 & Routage OSPF</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Sécurité, Cloud & Certifications</h4>
-                <ul>
-                    <li>Certifications Microsoft : AZ-900, MS-900, SC-900</li>
-                    <li>Cyber-entraînement : Rang : Platinum - Top 6% TryHackMe</li>
-                    <li>RGPD & SensCyber</li>
-                    <li>Certification Journée d'Immersion Orion - Sensibilisation Défense</li>
-                    <li>Analyse de vulnérabilités web (OWASP)</li>
-                    <li>Investigation numérique (Forensics / OSINT)</li>
-                    <li>Sécurité des environnements Windows</li>
-                    <li>Cartographie réseau et scan de vulnérabilités (Nmap)</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <h3>Projets</h3>
-        <div class="grid">
-          <div class="card">
-            <h4>VPN Site-to-Site (IPsec)</h4>
-            <p>Configuration d'un réseau privé virtuel (VPN) sous Cisco Packet Tracer, intégrant le chiffrement AES et l'authentification IKE.</p>
-            <a href="projet-vpn.html" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Consulter le détail du projet</a>
-            <br><br>
-            <span class="badge">Networking</span><span class="badge">Security</span>
-        </div>
-          <div class="card">
-                <h4>Entraînement Offensif/Défensif</h4>
-                <p>Identification des failles applicatives (OWASP Top 10) et collecte de données publiques (OSINT) sur TryHackMe. <strong>Rang : Platinum - Top 6% Mondial.</strong></p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 15px 0;">
-                    <img src="owasptop10-badgeTHM.png" alt="Badge OWASP" style="width: 70px; height: auto;">
-                    <img src="ohsint-badgeTHM.png" alt="Badge OhSINT" style="width: 70px; height: auto;">
-                    <img src="catlinux-badgeTHM.png" alt="Badge Linux" style="width: 70px; height: auto;">
-                    <img src="blue-badgeTHM.png" alt="Badge Blue" style="width: 70px; height: auto;">
-                    <img src="worldwideweb-badgeTHM.png" alt="Badge WorldWideWeb" style="width: 70px; height: auto;">
-                    <img src="cyberready-badgeTHM.png" alt="Badge CyberReady" style="width: 70px; height: auto;">
-                    <img src="hashcracker-badgeTHM.png" alt="Badge Hash Cracker" style="width: 70px; height: auto;">
-                </div>
-                <span class="badge">Cybersecurity</span><span class="badge">OSINT</span><span class="badge">Pentesting</span><span class="badge">Windows Security</span><span class="badge">Nmap</span>
-            </div>
-            <div class="card">
-            <h4>Atelier Forensic (CyberSup)</h4>
-            <p>Résolution d'enquêtes numériques via la collecte d'informations en sources ouvertes (OSINT) et la géolocalisation d'images (GeoINT).</p>
-            <a href="projet-forensic.html" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Consulter le détail du projet</a>
-            <br><br>
-            <span class="badge">Forensic</span><span class="badge">OSINT</span><span class="badge">GeoINT</span>
-        </div>
-        </div>
-    </section>
-
     <section id="hobbies">
-        <h3>Résilience & Discipline</h3>
+        <h3>Discipline</h3>
         <p>Grâce à mon parcours sportif en compétition, j'ai acquis une solide gestion du stress qui me permet de rester concentrée et efficace lors de situations intenses :</p>
-        <span class="badge">9 ans de Volley-ball</span>
-        <span class="badge">Triathlon</span>
-        <span class="badge">Escalade</span>
+        <div style="margin-top: 20px;">
+            <span class="badge">9 ans de Volley-ball</span>
+            <span class="badge">Triathlon</span>
+            <span class="badge">Escalade</span>
+        </div>
     </section>
 
 </body>
