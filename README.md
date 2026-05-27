@@ -15,7 +15,7 @@ Alternante chez Hartwood.
 * **Administration Système :** Windows Server, Windows 11, Linux Debian.
 * **Réseaux :** Architecture TCP/IP, Modèle OSI, VLAN, Adressage IPv4, Routage OSPF.
 * **Sécurité & Cloud :** Certifications Microsoft (AZ-900, MS-900, SC-900), VPN Site-to-Site (IPsec), Analyse de vulnérabilités (OWASP).
-* **Cyber-entraînement :** Top 6% Mondial sur TryHackMe (Rang Platinum), OSINT, OWASP 10, Nmap.
+* **Cyber-entraînement :** Top 6% Mondial sur TryHackMe (Rang Platinum), OSINT, Nmap.
 
 ## 📁 Structure du Projet
 Ce dépôt héberge le code source de mon portfolio, déployé via GitHub Pages :
