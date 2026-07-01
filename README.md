@@ -2,7 +2,7 @@
 # 🛡️ Portfolio Cyber & Infrastructure
 
 **Portfolio de Lauryn Hecque--Nascimento**
-Étudiante en 1ère année de BTS SIO SISR, passionnée par l'infrastructure réseau et la cybersécurité.
+Étudiante en 2ème année de BTS SIO SISR, passionnée par l'infrastructure réseau et la cybersécurité.
 
 🔗 **[Visiter mon Portfolio en ligne](https://lauryn-bot.github.io/zerodayghost/)**
 
