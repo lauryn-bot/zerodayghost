@@ -11,11 +11,19 @@
 ## 🎯 Contrat
 Alternante chez Hartwood.
 
-## 🛠️ Compétences Techniques
+### 🛠️ Compétences Techniques
+
 * **Administration Système :** Windows Server, Windows 11, Linux Debian.
 * **Réseaux :** Architecture TCP/IP, Modèle OSI, VLAN, Adressage IPv4, Routage OSPF.
-* **Sécurité & Cloud :** Certifications Microsoft (AZ-900, MS-900, SC-900), VPN Site-to-Site (IPsec), Analyse de vulnérabilités (OWASP).
-* **Cyber-entraînement :** Top 6% Mondial sur TryHackMe (Rang Platinum), OSINT, Nmap.
+* **Sécurité & Cloud :** VPN Site-to-Site (IPsec), Analyse de vulnérabilités (OWASP), Investigation numérique (Forensics / OSINT), Nmap.
+* **Cyber-entraînement :** Top 6% Mondial sur TryHackMe (Rang Platinum).
+
+### 🏅 Certifications Officielles
+
+* **Microsoft :** Azure Fundamentals (AZ-900), Microsoft 365 Fundamentals (MS-900), Security, Compliance, and Identity Fundamentals (SC-900).
+* **Microsoft Applied Skills :** Create, configure, and manage identities.
+* **Fortinet :** Fondamentaux de la cybersécurité et gestion des menaces.
+* **Autres :** Sensibilisation Défense Nationale (Journée d'Immersion Orion), SensCyber.
 
 ## 📁 Structure du Projet
 Ce dépôt héberge le code source de mon portfolio, déployé via GitHub Pages :
