@@ -65,6 +65,11 @@
         li::before { content: "•"; color: var(--secondary); position: absolute; left: 0; }
         
         p { color: var(--text-dim); }
+
+        /* Style spécifique pour l'alignement des logos de certification */
+        .badge-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 15px; margin-top: 15px; }
+        .badge-img { width: 65px; height: auto; transition: transform 0.2s; }
+        .badge-img:hover { transform: scale(1.1); }
     </style>
 </head>
 <body>
@@ -75,6 +80,7 @@
         <a href="experiences-diplomes.html">Expériences & Diplômes</a>
     </nav>
 
+    <!-- --- SECTION COMPÉTENCES TECHNIQUES --- -->
     <section id="skills">
         <h3>Compétences techniques</h3>
         <div class="grid">
@@ -93,33 +99,60 @@
                     <li>Architecture TCP/IP & Modèle OSI</li>
                     <li>VLAN & Segmentation</li>
                     <li>Adressage IPv4 & Routage OSPF</li>
-                    <li>Sécurisation de l'accès au Cloud - Microsoft Applied Skills </li>
                 </ul>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 15px 0;">
-                    <img src="create-configure-and-manage-identities-badgeMICRO.svg" alt="Badge IAM" style="width: 70px; height: auto;">
-                </div>
             </div>
             <div class="card">
-                <h4>Sécurité, Cloud & Certifications</h4>
+                <h4>Sécurité & Cloud</h4>
                 <ul>
-                    <li>Certifications Microsoft : AZ-900, MS-900, SC-900</li>
-                    <li>Cyber-entraînement : Rang : Platinum - Top 6% TryHackMe</li>
-                    <li>RGPD & SensCyber</li>
-                    <li>Certification Journée d'Immersion Orion - Sensibilisation Défense</li>
                     <li>Analyse de vulnérabilités web (OWASP)</li>
                     <li>Investigation numérique (Forensics / OSINT)</li>
                     <li>Sécurité des environnements Windows</li>
                     <li>Cartographie réseau et scan de vulnérabilités (Nmap)</li>
+                    <li>Application des règles RGPD</li>
                 </ul>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 15px 0;">
-                    <img src="AZ900-badgeMICRO.png" alt="Badge AZ900" style="width: 70px; height: auto;">
-                    <img src="MS900-badgeMICRO.png" alt="Badge MS-900" style="width: 70px; height: auto;">
-                    <img src="SC900-badgeMICRO.png" alt="Badge SC900" style="width: 70px; height: auto;">
-                </div>
             </div>
         </div>
     </section>
 
+    <!-- --- SECTION CERTIFICATIONS --- -->
+    <section id="certifications" style="padding-top: 20px; padding-bottom: 20px;">
+        <h3>Certifications officiels</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>Microsoft</h4>
+                <ul>
+                    <li><strong>AZ-900</strong> : Azure Fundamentals</li>
+                    <li><strong>MS-900</strong> : Microsoft 365 Fundamentals</li>
+                    <li><strong>SC-900</strong> : Security, Compliance, and Identity Fundamentals</li>
+                    <li><strong>Applied Skills</strong> : Microsoft Certified: Create, configure, and manage identities</li>
+                </ul>
+                <div class="badge-container">
+                    <img src="AZ900-badgeMICRO.png" alt="Badge AZ900" class="badge-img">
+                    <img src="MS900-badgeMICRO.png" alt="Badge MS-900" class="badge-img">
+                    <img src="SC900-badgeMICRO.png" alt="Badge SC900" class="badge-img">
+                    <img src="create-configure-and-manage-identities-badgeMICRO.svg" alt="Badge Applied Skills IAM" class="badge-img">
+                </div>
+            </div>
+            <div class="card">
+                <h4>Fortinet</h4>
+                <ul>
+                    <li><strong>Certification Fortinet</strong> : Maîtrise des fondamentaux de la cybersécurité et de la gestion des menaces (Cyber Threat Intelligence).</li>
+                </ul>
+                <div class="badge-container">
+                    <img src="Fortinet-badge.png" alt="Badge Fortinet" class="badge-img">
+                </div>
+            </div>
+            <div class="card">
+                <h4>Autres Titres & Sensibilisations</h4>
+                <ul>
+                    <li><strong>Certification Journée d'Immersion Orion</strong> : Sensibilisation Défense Nationale</li>
+                    <li><strong>SensCyber</strong> : Sensibilisation à la sécurité du numérique</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- SECTION PROJETS --- -->
     <section id="projects">
         <h3>Projets</h3>
         <div class="grid">
