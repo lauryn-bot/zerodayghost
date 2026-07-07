@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte-rendu : Haute Disponibilité (HSRP) | Lauryn H-N</title>
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --text-main: #ccd6f6;
+            --text-dim: #8892b0;
+            --bg-card: #112240;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            padding: 20px 10%;
+            background: rgba(10, 25, 47, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        article {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 { color: var(--secondary); font-size: 2.5rem; }
+        h2 { border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-top: 40px; color: var(--text-main); }
+        h3 { color: var(--secondary); margin-top: 30px; }
+
+        .mission-box {
+            background: var(--bg-card);
+            padding: 20px;
+            border-left: 4px solid var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .img-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .img-container img {
+            max-width: 100%;
+            border: 2px solid var(--bg-card);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .img-caption {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        code {
+            background: #011627;
+            color: #d6deeb;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        pre {
+            background: #011627;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #d6deeb;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .status-ok {
+            color: #64ffda;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">← Retour </a>
+    </nav>
+
+    <article>
+        <h1>Compte-rendu : Haute Disponibilité (HSRP)</h1>
+        
+        <div class="mission-box">
+            <strong>OBJECTIF :</strong> Garantir la continuité de service de la passerelle du VLAN 10 en éliminant tout point de défaillance unique (SPOF) grâce à l'implémentation du protocole HSRP.
+        </div>
+
+        <h2>1. Architecture et Topologie</h2>
+        <p>L'infrastructure repose sur deux routeurs Cisco ISR 2911 configurés en redondance et un switch Catalyst 2960. L'objectif est d'assurer un basculement transparent pour les utilisateurs finaux.</p>
+        
+        <div class="img-container">
+            <img src="schéma_cisco.png" alt="Schéma HSRP">
+            <span class="img-caption">Topologie réseau : Architecture HSRP Active/Standby.</span>
+        </div>
+
+<h2>2. Configuration Technique</h2>
+
+        <h3>Vérification de l'adressage (Interface Brief)</h3>
+        <p>Cette étape permet de valider que les interfaces physiques et logiques sont correctement configurées et actives (UP/UP) sur les deux routeurs.</p>
+        <div class="img-container">
+            <img src="R_Prcpl_Showstandbybrief.png" alt="Interface Brief Principal" style="width: 45%;">
+            <img src="R_Snd_Showstandbybrief.png" alt="Interface Brief Secondaire" style="width: 45%;">
+            <span class="img-caption">À gauche : Routeur Principal | À droite : Routeur Secondaire.</span>
+        </div>
+
+        <h3>Configuration HSRP (Running-config)</h3>
+        <p>La configuration ci-dessous illustre la mise en place du protocole HSRP sur l'interface <code>GigabitEthernet0/0.10</code>. On y observe la définition de l'IP virtuelle, la gestion des priorités (110 vs 100) et l'activation de la préemption.</p>
+        <div class="img-container">
+            <img src="R_Prcpl_showrunningconfig.png" alt="Running-Config Principal" style="width: 45%;">
+            <img src="R_Snd_showrunningconfig.png" alt="Running-Config Secondaire" style="width: 45%;">
+            <span class="img-caption">À gauche : Config. Routeur Principal | À droite : Config. Routeur Secondaire.</span>
+        </div>
+
+        <h3>Résolution d'incident (Troubleshooting)</h3>
+        <p>Lors de la phase de test, un conflit "Split-Brain" est apparu. L'analyse des ports via <code>show cdp neighbors</code> a révélé que les liaisons entre les routeurs et le switch étaient en mode "Access". Le passage des interfaces du switch en mode <strong>Trunk</strong> a résolu la problématique en autorisant les paquets HSRP.</p>
+        
+        <div class="img-container">
+            <img src="switch_cdp.png" alt="Troubleshooting CDP">
+            <span class="img-caption">Analyse du voisinage via la commande 'show cdp neighbors' sur le switch pour identifier la configuration des ports.</span>
+        </div>
+
+        <h2>3. Automatisation et Validation</h2>
+        <h3>Scripting d'automatisation</h3>
+        <p>Afin de fiabiliser les tests de connectivité, j'ai développé un script Python. Il automatise la vérification de la disponibilité du réseau et la validation des changements d'état lors du basculement (Failover).</p>
+        <div class="img-container">
+            <img src="script_python.png" alt="Script Python">
+            <span class="img-caption">Extraction du script d'automatisation des tests.</span>
+        </div>
+
+        <h3>Test de basculement (Failover)</h3>
+        <p>La validation finale consistait à vérifier l'état du protocole sur les deux équipements. Le routeur principal est bien en état <code>Active</code>, tandis que le secondaire est en <code>Standby</code>.</p>
+        
+        <div class="img-container">
+            <img src="R_Prcpl_Showstandbybrief.png" alt="HSRP Principal" style="width: 45%;">
+            <img src="R_Snd_Showstandbybrief.png" alt="HSRP Secondaire" style="width: 45%;">
+            <span class="img-caption" class="status-ok">À gauche : Routeur Principal (Active) | À droite : Routeur Secondaire (Standby).</span>
+        </div>
+    </article>
+
+    <footer style="text-align: center; padding: 40px; color: var(--text-dim);">
+        Rapport technique généré par Lauryn H-N - Spécialité SISR
+    </footer>
+
+</body>
+</html>
