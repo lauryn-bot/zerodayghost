@@ -67,8 +67,8 @@
         p { color: var(--text-dim); }
 
         /* Style spécifique pour l'alignement des logos de certification */
-        .badge-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 15px; margin-top: 15px; }
-        .badge-img { width: 65px; height: auto; transition: transform 0.2s; }
+        .badge-container { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 15px; margin-top: 15px; align-items: center; }
+        .badge-img { height: 60px; width: auto; object-fit: contain; transition: transform 0.2s; }
         .badge-img:hover { transform: scale(1.1); }
     </style>
 </head>
@@ -168,13 +168,14 @@
                    <li><strong>MOOC OSINT-FR</strong> : Initiation à l'investigation en sources ouvertes</li> 
                    <li><strong>Basel Institute On Governance</strong> : Open-Source Intelligence (OSINT) - ICAR</li> 
                 </ul>
-            <div>
+            <div class="badge-container">
                 <img src="rgpd-badge.png" alt="Badge RGPD" class="badge-img">
                 <img src="senscyber-badge.png" alt="Badge SensCyber" class="badge-img">
                 <img src="orion-badge.png" alt="Badge Orion" class="badge-img">
                 <img src="inrs-logo-SLIDE.png" alt="Badge TMS" class="badge-img">
                 <img src="moocosint-badge.png" alt="Badge MOOC OSINT" class="badge-img">
-                <img src="baselinstituteofgov-logo.png" alt="Badge ICAR" class="badge-img">
+                <img src="baselinstituteofgov-logo.png" alt="Badge ICAR" class="badge-img" style="background-color: white; padding: 5px; border-radius: 8px;">
+                </a>
             </div>
             </div>
         </div>
