@@ -8,22 +8,23 @@
 
 ---
 
-## 🎯 Contrat
-Alternante chez Hartwood.
+# 🎯 Contrat
+Alternante IT chez Hartwood.
 
-### 🛠️ Compétences Techniques
+# 🛠️ Compétences Techniques
+* **Administration & Développement** : Windows Server/11, Linux Debian, VMware, Python, HTML, CSS, JavaScript, PHP.
+* **Réseaux** : Architecture TCP/IP, Modèle OSI, Adressage IPv4, VLAN, OSPF, Nmap, SD-WAN.
+* **Sécurité & Cloud** : Azure (AZ/SC/MS 900), ZTNA/SASE, SIEM/SOAR, OWASP, Investigation numérique (Forensics / OSINT / GeoINT), Pentesting, RGPD.
+* **Cyber-entraînement** : Top 5% sur TryHackMe.
 
-* **Administration Système :** Windows Server, Windows 11, Linux Debian.
-* **Réseaux :** Architecture TCP/IP, Modèle OSI, VLAN, Adressage IPv4, Routage OSPF.
-* **Sécurité & Cloud :** VPN Site-to-Site (IPsec), Analyse de vulnérabilités (OWASP), Investigation numérique (Forensics / OSINT), Nmap.
-* **Cyber-entraînement :** Top 6% Mondial sur TryHackMe (Rang Platinum).
-
-### 🏅 Certifications Officielles
-
-* **Microsoft :** Azure Fundamentals (AZ-900), Microsoft 365 Fundamentals (MS-900), Security, Compliance, and Identity Fundamentals (SC-900).
-* **Microsoft Applied Skills :** Create, configure, and manage identities.
-* **Fortinet :** Fondamentaux de la cybersécurité et gestion des menaces.
-* **Autres :** Sensibilisation Défense Nationale (Journée d'Immersion Orion), SensCyber.
+# 🏆 Certifications Officielles & Académiques
+* **Universités d'élite** : 
+  * Cryptography I — Stanford University
+  * Financial Markets — Yale University[cite: 1]
+  * Hardware Security — University of Maryland[cite: 1]
+* **Microsoft** : Azure Fundamentals (AZ-900), Microsoft 365 (MS-900), Security, Compliance and Identity (SC-900), Microsoft Applied Skills (Gestion des identités).
+* **Fortinet & OSINT** : Fondamentaux de la cybersécurité (Fortinet NSE 1), Certificat Open-source Intelligence (Basel Institute - ICAR), Initiation OSINT-FR[cite: 1].
+* **Autres** : Sensibilisation Défense Nationale (Journée d'Immersion Orion), SensCyber.
 
 ## 📁 Structure du Projet
 Ce dépôt héberge le code source de mon portfolio, déployé via GitHub Pages :
