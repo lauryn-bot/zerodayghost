@@ -20,10 +20,10 @@ Alternante IT chez Hartwood.
 # 🏆 Certifications Officielles & Académiques
 * **Universités d'élite** : 
   * Cryptography I — Stanford University
-  * Financial Markets — Yale University[cite: 1]
-  * Hardware Security — University of Maryland[cite: 1]
+  * Financial Markets — Yale University
+  * Hardware Security — University of Maryland
 * **Microsoft** : Azure Fundamentals (AZ-900), Microsoft 365 (MS-900), Security, Compliance and Identity (SC-900), Microsoft Applied Skills (Gestion des identités).
-* **Fortinet & OSINT** : Fondamentaux de la cybersécurité (Fortinet NSE 1), Certificat Open-source Intelligence (Basel Institute - ICAR), Initiation OSINT-FR[cite: 1].
+* **Fortinet & OSINT** : Fondamentaux de la cybersécurité (Fortinet NSE 1), Certificat Open-source Intelligence (Basel Institute - ICAR), Initiation OSINT-FR.
 * **Autres** : Sensibilisation Défense Nationale (Journée d'Immersion Orion), SensCyber.
 
 ## 📁 Structure du Projet
