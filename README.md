@@ -23,6 +23,7 @@ Alternante IT chez Hartwood.
   * Financial Markets — Yale University
   * Hardware Security — University of Maryland
   * Classical Cryptosystems and Core Concepts - CU Boulder
+  * Mathematics for Computer Science - University of London
 * **Microsoft** : Azure Fundamentals (AZ-900), Microsoft 365 (MS-900), Security, Compliance and Identity (SC-900), Microsoft Applied Skills (Gestion des identités).
 * **Fortinet & OSINT** : Fondamentaux de la cybersécurité (Fortinet NSE 1), Certificat Open-source Intelligence (Basel Institute - ICAR), Initiation OSINT-FR.
 * **Autres** : Sensibilisation Défense Nationale (Journée d'Immersion Orion), SensCyber.
