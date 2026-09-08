@@ -6,12 +6,11 @@
     <title>Expériences & Diplômes | Lauryn Hecque--Nascimento</title>
     <style>
         :root {
-            /* Palette alignée sur ton CV et l'accueil */
-            --primary: #050a14;        /* Fond très sombre */
-            --secondary: #38bdf8;      /* Bleu azur */
-            --text-main: #e2e8f0;      /* Blanc cassé */
-            --text-dim: #94a3b8;       /* Gris bleuté */
-            --bg-card: #0f172a;        /* Bleu marine profond */
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
             --accent-card-border: rgba(56, 189, 248, 0.2);
         }
 
@@ -70,7 +69,7 @@
         .timeline-card {
             background: var(--bg-card);
             padding: 30px;
-            border-radius: 6px; /* Plus carré pour le côté pro */
+            border-radius: 6px;
             margin-bottom: 25px;
             border-left: 4px solid var(--secondary);
             border-top: 1px solid var(--accent-card-border);
@@ -103,32 +102,50 @@
             font-weight: 700;
         }
 
+        /* Correction du positionnement de la puce pour le lieu */
         .location {
             color: var(--text-dim);
             font-style: normal;
             margin: 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            padding-left: 20px; /* Espace pour la puce */
         }
 
-        /* Petit trait décoratif pour le lieu */
         .location::before {
             content: "•";
             color: var(--secondary);
-            margin-right: 8px;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 1.2;
+        }
+
+        /* Style des listes (Notes et Missions) */
+        .timeline-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 15px 0 0 20px; /* Alignement sous le texte du lieu */
+        }
+
+        .timeline-card li {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-card li::before {
+            content: "→";
+            color: var(--secondary);
+            position: absolute;
+            left: -5px;
             font-weight: bold;
         }
 
-        /* Amélioration lisibilité texte secondaire dans les cartes */
-        .timeline-card p {
-            color: var(--text-dim);
-            margin-top: 15px;
-            font-size: 1rem;
-        }
-
-        /* Style spécifique pour "En cours" ou Félicitations */
         strong {
             color: var(--secondary);
         }
@@ -148,13 +165,17 @@
         <div class="timeline-card">
             <span class="date">2026 - 2027</span>
             <h4 class="title">BTS SIO option SISR (Deuxième année - En cours)</h4>
-            <p class="location">Studi, Paris<br></p>
+            <p class="location">Studi, Paris</p>
         </div>
         
         <div class="timeline-card">
             <span class="date">2025 - 2026</span>
             <h4 class="title">BTS SIO option SISR (Première année)</h4>
-            <p class="location">Ingetis, Paris<br>Semestre 1 validé : 15,04/20 – Félicitations du Conseil de Classe<br>Semestre 2 validé : 15,27/20 – Félicitations du Conseil de Classe, passage en seconde année</p>
+            <p class="location">Ingetis, Paris</p>
+            <ul>
+                <li>Semestre 1 validé : <strong>15,04/20</strong> – Félicitations du Conseil de Classe</li>
+                <li>Semestre 2 validé : <strong>15,27/20</strong> – Félicitations du Conseil de Classe</li>
+            </ul>
         </div>
 
         <div class="timeline-card">
@@ -172,9 +193,9 @@
             <h4 class="title">ALTERNANCE - Administrateur réseaux, systèmes et sécurité</h4>
             <p class="location">Hartwood, Paris</p>
             <ul>
-                <li>Identité & Accès (IAM) : Provisioning et sécurisation des identités via Microsoft Entra ID.</li>
-                <li>Sécurisation des terminaux : Administration de Microsoft Intune (déploiement de profils de configuration et de conformité).</li>
-                <li>Infrastructure Cloud : Gestion des services Microsoft 365 (Exchange Online, Azure) et maintenance hardware.git</li>
+                <li><strong>Identité & Accès (IAM) :</strong> Provisioning et sécurisation des identités via Microsoft Entra ID.</li>
+                <li><strong>Sécurisation des terminaux :</strong> Administration de Microsoft Intune (déploiement de profils de configuration et de conformité).</li>
+                <li><strong>Infrastructure Cloud :</strong> Gestion des services Microsoft 365 (Exchange Online, Azure) et maintenance hardware.</li>
             </ul>
         </div>
 
