@@ -67,17 +67,15 @@
             background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
         }
 
-        /* Nouveau conteneur pour mettre la photo à gauche du texte */
         .header-container {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 40px;
-            flex-wrap: wrap; /* Permet de passer la photo au-dessus sur mobile */
+            flex-wrap: wrap; 
             max-width: 1200px;
         }
 
-        /* Conteneur pour aligner le texte à gauche de la photo */
         .header-text {
             display: flex;
             flex-direction: column;
@@ -85,7 +83,7 @@
         }
 
         .profile-pic {
-            width: 220px; /* Photo agrandie pour faire la hauteur des 4 lignes */
+            width: 220px; 
             height: 220px;
             border-radius: 50%;
             object-fit: cover;
@@ -143,7 +141,7 @@
         .contact-links a { 
             color: #fff; 
             text-decoration: none; 
-            margin: 0 5px 0 0; /* Ajusté pour l'alignement à gauche */
+            margin: 0 5px 0 0; 
             border: 1px solid var(--secondary); 
             padding: 12px 25px; 
             border-radius: 4px; 
@@ -166,15 +164,17 @@
         .contact-links {
             display: flex;
             flex-wrap: wrap;         
-            justify-content: flex-start;  /* Les boutons sont alignés à gauche sous le texte */
+            justify-content: flex-start;  
             gap: 15px;                
-            margin-top: 10px; /* Marge réduite car il y a déjà l'espace de "availability" */
+            margin-top: 10px; 
         }
 
+        /* Ajout d'une marge en bas pour décoller les pavés de texte du reste */
         p {
             color: var(--text-dim);
             font-size: 1.1rem;
             max-width: 800px;
+            margin-bottom: 35px; 
         }
 
         strong {
@@ -189,6 +189,7 @@
             margin-top: 40px;
         }
 
+        /* On retire la marge pour le texte du footer pour qu'il reste bien centré */
         footer p {
             margin: 0 auto;
             font-size: 0.9rem;
@@ -207,7 +208,7 @@
 
     <header>
         <div class="header-container">
-            <img src="photodeprofil.png" alt="Photo de Lauryn" class="profile-pic">
+            <img src="chemin-vers-ta-photo.jpg" alt="Photo de Lauryn" class="profile-pic">
             
             <div class="header-text">
                 <h1>Lauryn Hecque--Nascimento</h1>
@@ -226,7 +227,7 @@
 
     <section id="about">
         <h3>À propos</h3>
-        <p>Étudiante en 2ème année de BTS SIO SISR (Félicitations du conseil de classe pendant 2 semestres). Passionnée par les réseaux et la sécurité informatique, je développe mes compétences techniques grâce à des projets concrets et des certifications de renommée internationale (Stanford, University of London, Microsoft). Mon expérience lors du programme Orion aux Invalides m'a permis de consolider mon esprit d'équipe et mon sens de l'organisation.</p>
+        <p>Étudiante en 2ème année de BTS SIO SISR (Félicitations du conseil de classe), je me spécialise dans la cybersécurité défensive (Blue Team) et l'OSINT. Mon engagement se traduit par des résultats concrets : une participation au CTF DGA Deep Threats, un classement dans le Top 5% mondial sur TryHackMe, et l'obtention de multiples certifications internationales (Stanford, Microsoft...). Forte de mon expérience au programme Orion aux Invalides qui a forgé mon esprit d'équipe, je franchis aujourd'hui une nouvelle étape en créant ma propre mini-entreprise dédiée à l'Audit d'Exposition Externe et au Durcissement (EASM & Blue Team).</p>
     </section>
 
     <section id="languages">
@@ -243,11 +244,12 @@
 
 <section id="hobbies">
     <h3>Centres d'intérêts</h3>
-    <p>Étudiante en 2ème année de BTS SIO SISR (Félicitations du conseil de classe), je me spécialise dans la cybersécurité défensive (Blue Team) et l'OSINT. Mon engagement se traduit par des résultats concrets : une participation au CTF DGA Deep Threats, un classement dans le Top 5% mondial sur TryHackMe, et l'obtention de multiples certifications internationales (Stanford, Microsoft...). Forte de mon expérience au programme Orion aux Invalides qui a forgé mon esprit d'équipe, je franchis aujourd'hui une nouvelle étape en créant ma propre mini-entreprise dédiée à l'Audit d'Exposition Externe et au Durcissement (EASM & Blue Team).</p>
+    <p>Grâce à mon parcours sportif en compétition, j'ai acquis une solide gestion du stress et de l'effort. Une discipline et une rigueur que j'applique aujourd'hui dans la résolution de défis techniques en cybersécurité. Actuellement en quête de nouveaux défis, je prépare mon admission en Bachelor Cybersécurité pour approfondir mon expertise en ingénierie de défense.</p>
     
-    <div style="margin-top: 20px;">
+    <div>
+        <!-- La marge en bas a été ajustée ici pour ne pas avoir un double espace avec le p principal -->
         <p style="margin-bottom: 10px;"><strong>Cybersécurité & CTF :</strong></p>
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 25px;">
             <span class="badge">CTF Deep Threats (DGA - Campus OSINT) : Classé 184ᵉ / 360 équipes.</span>
             <span class="badge">Rang Mondial : Top 5% (Rang ~112,000 sur +2 millions d'utilisateurs)</span>
             <span class="badge">Engagement : +100 salles de hacking et défense résolues.</span>
