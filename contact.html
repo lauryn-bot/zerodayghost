@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me Contacter | Lauryn Hecque--Nascimento</title>
+    <style>
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Permet de pousser le footer tout en bas */
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+            flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        /* --- SECTION PRINCIPALE --- */
+        section { 
+            padding: 60px 10%; 
+            max-width: 1200px; 
+            margin: auto; 
+            flex: 1; /* Remplit l'espace vide pour pousser le footer */
+            width: 80%;
+        }
+
+        h3 { 
+            border-left: 5px solid var(--secondary); 
+            padding-left: 20px; 
+            margin-bottom: 20px; 
+            font-size: 2.2rem; 
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        /* --- LAYOUT GRID CONTACT --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+        }
+
+        /* --- COLONNE GAUCHE : INFOS --- */
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: var(--bg-card);
+            padding: 20px 25px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-card-border);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        .info-card:hover {
+            transform: translateX(10px);
+            border-color: var(--secondary);
+            background: #131c2e;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .icon {
+            font-size: 1.8rem;
+            background: var(--accent-badge);
+            padding: 10px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-card-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .info-text h4 {
+            margin: 0 0 5px 0;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .info-text p {
+            margin: 0;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* --- COLONNE DROITE : FORMULAIRE --- */
+        .contact-form {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 6px;
+            border: 1px solid var(--accent-card-border);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-main);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--primary);
+            border: 1px solid var(--accent-card-border);
+            border-radius: 4px;
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-sizing: border-box; /* Pour que le padding ne dépasse pas */
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            background: transparent;
+            color: var(--secondary);
+            border: 1px solid var(--secondary);
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin-top: auto; /* Pousse le footer en bas */
+        }
+
+        footer p {
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* Responsive form & grid */
+        @media (max-width: 768px) {
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            .contact-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Accueil / À propos</a>
+        <a href="competences-certifications.html">Compétences & Certifications</a>
+        <a href="projets.html">Projets</a>
+        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="contact.html" class="active">Me contacter</a>
+    </nav>
+
+    <section id="contact">
+        <h3>Connectons-nous !</h3>
+        <p class="subtitle">Ouverte aux opportunités, aux défis CTF et aux discussions autour de la cybersécurité et de l'OSINT.</p>
+
+        <div class="contact-container">
+            
+            <!-- COLONNE GAUCHE : Cartes d'informations -->
+            <div class="contact-info">
+                
+                <div class="info-card">
+                    <div class="icon">📍</div>
+                    <div class="info-text">
+                        <h4>Localisation</h4>
+                        <p>Paris, France</p>
+                    </div>
+                </div>
+
+                <!-- N'oublie pas de modifier "ton-email@proton.me" ci-dessous -->
+                <a href="mailto:ton-email@proton.me" class="info-card">
+                    <div class="icon">🛡️</div>
+                    <div class="info-text">
+                        <h4>Email Privé (Proton)</h4>
+                        <p>ton-email@proton.me <br><span style="font-size: 0.8rem; color: #3e9b85;">→ Communication chiffrée E2EE</span></p>
+                    </div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/lauryn-hecque-nascimento" target="_blank" class="info-card">
+                    <div class="icon">💼</div>
+                    <div class="info-text">
+                        <h4>LinkedIn</h4>
+                        <p>linkedin.com/in/lauryn-hecque-nascimento</p>
+                    </div>
+                </a>
+
+                <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank" class="info-card">
+                    <div class="icon">🎯</div>
+                    <div class="info-text">
+                        <h4>TryHackMe</h4>
+                        <p>ZeroDayGhostNull (Top 5% Mondial)</p>
+                    </div>
+                </a>
+
+                <a href="https://github.com/lauryn-bot" target="_blank" class="info-card">
+                    <div class="icon">💻</div>
+                    <div class="info-text">
+                        <h4>GitHub</h4>
+                        <p>github.com/lauryn-bot</p>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- COLONNE DROITE : Formulaire -->
+            <div class="contact-form">
+                <!-- L'attribut action="mailto:..." ouvrira le client mail de l'utilisateur avec tes infos pré-remplies -->
+                <!-- Pense à remplacer l'adresse mail ici aussi ! -->
+                <form action="mailto:ton-email@proton.me" method="post" enctype="text/plain">
+                    
+                    <div class="form-group">
+                        <label for="name">Nom / Organisation</label>
+                        <input type="text" id="name" name="Nom" placeholder="Votre nom complet" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="Email" placeholder="votre.email@domaine.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="Sujet" placeholder="Ex: Offre d'emploi, Collaboration..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="Message" placeholder="Détaillez votre demande ici..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Initier la connexion 🚀</button>
+                </form>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+</body>
+</html>
