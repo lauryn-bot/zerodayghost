@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projets | Lauryn Hecque--Nascimento</title>
+    <style>
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+            flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        /* --- SECTION ET TYPOGRAPHIE --- */
+        section { 
+            padding: 60px 10%; 
+            max-width: 1200px; 
+            margin: auto; 
+            min-height: 70vh; /* Pour que le footer reste en bas même si on filtre beaucoup */
+        }
+
+        h3 { 
+            border-left: 5px solid var(--secondary); 
+            padding-left: 20px; 
+            margin-bottom: 30px; 
+            font-size: 2.2rem; 
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        /* --- BARRE DE FILTRES --- */
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--accent-card-border);
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--secondary);
+            color: var(--primary);
+            border-color: var(--secondary);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- GRILLE ET CARTES --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 25px; 
+        }
+
+        .card { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 6px; 
+            border: 1px solid var(--accent-card-border);
+            transition: all 0.4s ease; 
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { 
+            transform: translateY(-8px); 
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        h4 { 
+            color: var(--secondary); 
+            font-size: 1.4rem; 
+            margin-top: 0; 
+            margin-bottom: 15px; 
+            font-weight: 700;
+        }
+
+        p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 15px; }
+
+        /* --- LISTE DES COMPÉTENCES ACQUISES --- */
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+            flex-grow: 1; /* Pousse les liens vers le bas */
+        }
+
+        .card li {
+            margin-bottom: 8px;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .card li::before {
+            content: "→";
+            color: var(--secondary);
+            position: absolute;
+            left: -5px;
+            font-weight: bold;
+        }
+
+        .card li strong {
+            color: var(--text-main);
+        }
+
+        /* --- BADGES ET LIENS --- */
+        .badge { 
+            background: var(--accent-badge); 
+            color: var(--secondary); 
+            padding: 5px 12px; 
+            border-radius: 4px; 
+            font-size: 0.8rem; 
+            margin-right: 6px; 
+            margin-bottom: 10px; 
+            display: inline-block; 
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.1);
+        }
+
+        .project-link {
+            color: var(--secondary); 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+            display: inline-block;
+            margin-bottom: 15px;
+            transition: 0.3s;
+        }
+
+        .project-link:hover {
+            text-decoration: underline;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Accueil / À propos</a>
+        <a href="competences-certifications.html">Compétences & Certifications</a>
+        <a href="projets.html" class="active">Projets</a>
+        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="contact.html">Me contacter</a>
+    </nav>
+
+    <section id="projects">
+        <h3>Projets</h3>
+
+        <!-- BARRE DE FILTRES -->
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="security">Cybersécurité</button>
+            <button class="filter-btn" data-filter="networking">Réseaux</button>
+            <button class="filter-btn" data-filter="osint">OSINT / Forensic</button>
+            <button class="filter-btn" data-filter="automation">Automatisation (Python)</button>
+        </div>
+
+        <div class="grid">
+            
+            <!-- PROJET 1 -->
+            <div class="card" data-category="networking security">
+                <h4>VPN Site-to-Site (IPsec)</h4>
+                <p>Configuration d'un réseau privé virtuel (VPN) sous Cisco Packet Tracer, intégrant le chiffrement AES et l'authentification IKE.</p>
+                
+                <ul>
+                    <li><strong>Cryptographie appliquée :</strong> Mise en pratique des algorithmes de chiffrement (AES) pour sécuriser la data en transit.</li>
+                    <li><strong>Architecture Réseau :</strong> Déploiement de tunnels sécurisés entre deux sites distants.</li>
+                    <li><strong>Analyse de trafic :</strong> Vérification de l'encapsulation et de la confidentialité des paquets.</li>
+                </ul>
+
+                <a href="projet-vpn.html" class="project-link">→ Consulter le détail du projet</a>
+                
+                <div>
+                    <span class="badge">Networking</span>
+                    <span class="badge">Security</span>
+                </div>
+            </div>
+
+            <!-- PROJET 2 -->
+            <div class="card" data-category="networking automation">
+                <h4>Haute Disponibilité (HSRP)</h4>
+                <p>Déploiement d'une architecture réseau redondante sous Cisco Packet Tracer, implémentant le protocole HSRP pour assurer la continuité de service.</p>
+                
+                <ul>
+                    <li><strong>Résilience (Disaster Recovery) :</strong> Conception d'une infrastructure tolérante aux pannes (Failover).</li>
+                    <li><strong>Routage avancé :</strong> Configuration de passerelles virtuelles pour éviter les interruptions de service (SLA).</li>
+                    <li><strong>Automatisation :</strong> Scripting Python pour tester dynamiquement la bascule en cas de coupure de lien.</li>
+                </ul>
+
+                <a href="projet-hsrp.html" class="project-link">→ Consulter le détail du projet</a>
+                
+                <div>
+                    <span class="badge">Networking</span>
+                    <span class="badge">Automation</span>
+                </div>
+            </div>
+
+            <!-- PROJET 3 -->
+            <div class="card" data-category="automation networking">
+                <h4>Subnet Calculator (Automation)</h4>
+                <p>Outil d'automatisation réseau développé en Python permettant de calculer les adresses réseau, broadcast et hôtes via une interface Web.</p>
+                
+                <ul>
+                    <li><strong>Développement Python :</strong> Maîtrise de la logique algorithmique pour le calcul d'adressage IP (CIDR).</li>
+                    <li><strong>Déploiement d'interface :</strong> Création d'une interface graphique interactive avec le framework Web <em>Streamlit</em>.</li>
+                    <li><strong>Versionnement :</strong> Utilisation de Git/GitHub pour la gestion et le partage du code source.</li>
+                </ul>
+                
+                <a href="https://github.com/lauryn-bot/Subnet-Calculator-Pro.git" target="_blank" class="project-link">→ Voir le Code (GitHub)</a>
+                
+                <div>
+                    <span class="badge">Python</span>
+                    <span class="badge">Automation</span>
+                    <span class="badge">Networking</span>
+                </div>
+            </div>
+
+            <!-- PROJET 4 -->
+            <div class="card" data-category="security osint">
+                <h4>Entraînement Offensif/Défensif</h4>
+                <p>Identification de failles applicatives (OWASP Top 10) et collecte de données publiques (OSINT) sur TryHackMe. <strong>Top 5% Mondial.</strong></p>
+                
+                <ul>
+                    <li><strong>Sécurité Offensive (Red) :</strong> Exploitation de vulnérabilités web, élévation de privilèges (Linux/Windows) et utilisation d'outils de scan (Nmap).</li>
+                    <li><strong>Sécurité Défensive (Blue) :</strong> Analyse de logs, investigation de compromissions et hardening système.</li>
+                    <li><strong>Méthodologie OSINT :</strong> Recherche avancée d'informations en sources ouvertes.</li>
+                </ul>
+
+                <div style="display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 10px; margin-bottom: 15px;">
+                    <img src="owasptop10-badgeTHM.png" alt="Badge OWASP" style="width: 50px; height: auto;">
+                    <img src="ohsint-badgeTHM.png" alt="Badge OhSINT" style="width: 50px; height: auto;">
+                    <img src="catlinux-badgeTHM.png" alt="Badge Linux" style="width: 50px; height: auto;">
+                    <img src="blue-badgeTHM.png" alt="Badge Blue" style="width: 50px; height: auto;">
+                    <img src="worldwideweb-badgeTHM.png" alt="Badge WorldWideWeb" style="width: 50px; height: auto;">
+                    <img src="cyberready-badgeTHM.png" alt="Badge CyberReady" style="width: 50px; height: auto;">
+                    <img src="hashcracker-badgeTHM.png" alt="Badge Hash Cracker" style="width: 50px; height: auto;">
+                </div>
+                
+                <div>
+                    <span class="badge">Cybersecurity</span>
+                    <span class="badge">OSINT</span>
+                    <span class="badge">Pentesting</span>
+                    <span class="badge">Nmap</span>
+                </div>
+            </div>
+
+            <!-- PROJET 5 -->
+            <div class="card" data-category="security osint">
+                <h4>Atelier Forensic (CyberSup)</h4>
+                <p>Résolution d'enquêtes numériques via la collecte d'informations en sources ouvertes (OSINT) et la géolocalisation d'images (GeoINT).</p>
+                
+                <ul>
+                    <li><strong>Investigation numérique :</strong> Traçabilité, analyse d'en-têtes et extraction de métadonnées (Forensic).</li>
+                    <li><strong>GeoINT / IMINT :</strong> Géolocalisation précise et analyse d'images satellites.</li>
+                    <li><strong>Rapport d'incident :</strong> Synthèse des découvertes et rédaction de rapports détaillés sur les menaces potentielles.</li>
+                </ul>
+
+                <a href="projet-forensic.html" class="project-link">→ Consulter le détail du projet</a>
+                
+                <div>
+                    <span class="badge">Forensic</span>
+                    <span class="badge">OSINT</span>
+                    <span class="badge">GeoINT</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+    <!-- SCRIPT POUR LE FILTRE DE PROJETS -->
+    <script>
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const cards = document.querySelectorAll('.card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Retire la classe 'active' de tous les boutons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Ajoute la classe 'active' au bouton cliqué
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                cards.forEach(card => {
+                    const categories = card.getAttribute('data-category');
+                    
+                    // Si on clique sur "Tous" ou que la carte contient la catégorie demandée
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        card.style.display = 'flex'; // On l'affiche
+                    } else {
+                        card.style.display = 'none'; // On la cache
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
