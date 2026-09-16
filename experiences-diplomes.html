@@ -23,18 +23,22 @@
             padding: 0;
         }
 
+        /* Nav identique à l'accueil */
         nav {
             background-color: var(--bg-card);
-            padding: 15px 20px;
+            padding: 15px 30px;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             position: sticky;
-            top: 0;
+            top: 20px;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
             flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
         }
 
         nav a {
@@ -72,9 +76,8 @@
             border-radius: 6px;
             margin-bottom: 25px;
             border-left: 4px solid var(--secondary);
-            border-top: 1px solid var(--accent-card-border);
-            border-right: 1px solid var(--accent-card-border);
-            border-bottom: 1px solid var(--accent-card-border);
+            border: 1px solid var(--accent-card-border); /* Bordure unifiée */
+            border-left: 4px solid var(--secondary); /* Surcharge pour garder la bande bleue à gauche */
             transition: all 0.3s ease;
             position: relative;
         }
@@ -83,6 +86,7 @@
             transform: translateX(8px);
             background: #131c2e;
             box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            border-color: var(--secondary);
         }
 
         .date {
@@ -102,7 +106,6 @@
             font-weight: 700;
         }
 
-        /* Correction du positionnement de la puce pour le lieu */
         .location {
             color: var(--text-dim);
             font-style: normal;
@@ -110,7 +113,7 @@
             font-weight: 600;
             font-size: 1rem;
             position: relative;
-            padding-left: 20px; /* Espace pour la puce */
+            padding-left: 20px;
         }
 
         .location::before {
@@ -123,11 +126,10 @@
             line-height: 1.2;
         }
 
-        /* Style des listes (Notes et Missions) */
         .timeline-card ul {
             list-style: none;
             padding: 0;
-            margin: 15px 0 0 20px; /* Alignement sous le texte du lieu */
+            margin: 15px 0 0 20px;
         }
 
         .timeline-card li {
@@ -149,14 +151,31 @@
         strong {
             color: var(--secondary);
         }
+
+        /* Footer identique à l'accueil */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html">Accueil / À propos</a>
-        <a href="competences-projets.html">Compétences & Projets</a>
+        <a href="competences-certifications.html">Compétences & Certifications</a>
+        <a href="projets.html">Projets</a>
         <a href="experiences-diplomes.html" class="active">Expériences & Diplômes</a>
+        <a href="contact.html">Me contacter</a>
     </nav>
 
     <section id="diplomes">
@@ -164,13 +183,16 @@
 
         <div class="timeline-card">
             <span class="date">2026 - 2027</span>
-            <h4 class="title">BTS SIO option SISR (Deuxième année - En cours)</h4>
+            <h4 class="title">B2 - BTS SIO option SISR (Deuxième année - En cours)</h4>
             <p class="location">Studi, Paris</p>
+            <ul>
+                <li><strong>Spécialisation :</strong> Cybersécurité défensive, administration systèmes et réseaux (Blue Team / Infrastructure).</li>
+            </ul>
         </div>
         
         <div class="timeline-card">
             <span class="date">2025 - 2026</span>
-            <h4 class="title">BTS SIO option SISR (Première année)</h4>
+            <h4 class="title">B1 - BTS SIO option SISR (Première année)</h4>
             <p class="location">Ingetis, Paris</p>
             <ul>
                 <li>Semestre 1 validé : <strong>15,04/20</strong> – Félicitations du Conseil de Classe</li>
@@ -182,6 +204,10 @@
             <span class="date">2025</span>
             <h4 class="title">Baccalauréat Général</h4>
             <p class="location">Institution Jeanne D'Arc, Montrouge</p>
+            <ul>
+                <li><strong>Spécialités :</strong> Mathématiques & Physique-Chimie (Développement d'un esprit logique et analytique).</li>
+                <li><strong>Option :</strong> Latin & Grec ancien.</li>
+            </ul>
         </div>
     </section>
 
@@ -203,38 +229,67 @@
             <span class="date">2026</span>
             <h4 class="title">STAGE - Technicien Informatique</h4>
             <p class="location">Centre Net Copie, Paris</p>
+            <ul>
+                <li><strong>Support IT & Résolution d'incidents :</strong> Diagnostic et dépannage matériel/logiciel pour assurer la continuité de service.</li>
+                <li><strong>Maintenance :</strong> Préparation, configuration et entretien des postes informatiques.</li>
+                <li><strong>Relation Utilisateur :</strong> Accompagnement technique et vulgarisation informatique auprès des clients.</li>
+            </ul>
         </div>
         
         <div class="timeline-card">
             <span class="date">2025 / 2026</span>
             <h4 class="title">CDD - Garde d'enfant</h4>
             <p class="location">Société Kinougarde, Paris</p>
+            <ul>
+                <li><strong>Sens des responsabilités :</strong> Prise en charge de la sécurité et du bien-être des enfants au quotidien.</li>
+                <li><strong>Adaptabilité & Rigueur :</strong> Gestion des imprévus, respect strict des consignes parentales et organisation du temps.</li>
+            </ul>
         </div>
 
         <div class="timeline-card">
             <span class="date">2025</span>
             <h4 class="title">Bénévolat dans une librairie</h4>
             <p class="location">Librairie Franciscaine, Paris</p>
+            <ul>
+                <li><strong>Organisation & Autonomie :</strong> Gestion méticuleuse des stocks et mise en rayon.</li>
+                <li><strong>Écoute active :</strong> Analyse des besoins des lecteurs pour fournir un conseil personnalisé et adapté.</li>
+            </ul>
         </div>
 
         <div class="timeline-card">
             <span class="date">2023</span>
             <h4 class="title">STAGE - Conseillère en choix de revêtements (Showroom)</h4>
             <p class="location">BNP Paribas Immobilier, Boulogne-Billancourt</p>
+            <ul>
+                <li><strong>Analyse du besoin (B2C) :</strong> Compréhension des attentes clients pour proposer des solutions techniques et esthétiques ciblées.</li>
+                <li><strong>Communication professionnelle :</strong> Interaction dans un environnement haut de gamme exigeant de la rigueur et une excellente présentation.</li>
+            </ul>
         </div>
 
         <div class="timeline-card">
             <span class="date">2023</span>
             <h4 class="title">Bénévolat baby-sitting au Pass Caritas</h4>
             <p class="location">Institution Jeanne D'Arc, Montrouge</p>
+            <ul>
+                <li><strong>Engagement social & Fiabilité :</strong> Implication bénévole démontrant un fort sens du service et du dévouement.</li>
+                <li><strong>Pédagogie & Patience :</strong> Compétences transverses essentielles pour l'accompagnement et la sensibilisation (atout en sécurité informatique).</li>
+            </ul>
         </div>
 
         <div class="timeline-card">
             <span class="date">2021</span>
             <h4 class="title">STAGE - Vendeuse et conseillère en produit</h4>
             <p class="location">Boulangerie Eva, Paris</p>
+            <ul>
+                <li><strong>Gestion du stress :</strong> Capacité à travailler efficacement dans un environnement dynamique, particulièrement lors des pics d'affluence.</li>
+                <li><strong>Travail d'équipe :</strong> Coordination avec les autres employés pour assurer un service client fluide et rapide.</li>
+            </ul>
         </div>
     </section>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
 
 </body>
 </html>
