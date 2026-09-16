@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compétences & Projets | Lauryn Hecque--Nascimento</title>
+    <title>Compétences & Certifications | Lauryn Hecque--Nascimento</title>
     <style>
         :root {
             /* Palette cohérente avec le CV et les autres pages */
-            --primary: #050a14;        /* Fond noir cyber */
-            --secondary: #38bdf8;      /* Bleu azur */
-            --text-main: #e2e8f0;      /* Blanc cassé */
-            --text-dim: #94a3b8;       /* Gris bleuté */
-            --bg-card: #0f172a;        /* Bleu marine profond */
-            --accent-badge: #1e293b;   /* Fond des tags style CV */
+            --primary: #050a14;        
+            --secondary: #38bdf8;      
+            --text-main: #e2e8f0;      
+            --text-dim: #94a3b8;       
+            --bg-card: #0f172a;        
+            --accent-badge: #1e293b;   
         }
 
         body {
@@ -24,18 +24,22 @@
             padding: 0;
         }
 
+        /* Nav identique à l'accueil */
         nav {
             background-color: var(--bg-card);
-            padding: 15px 20px;
+            padding: 15px 30px;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             position: sticky;
-            top: 0;
+            top: 20px;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
             flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
         }
 
         nav a {
@@ -95,7 +99,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        /* Tags style CV (rectangulaires et sobres) */
         .badge { 
             background: var(--accent-badge); 
             color: var(--secondary); 
@@ -129,7 +132,6 @@
         
         p { color: var(--text-dim); font-size: 1rem; }
 
-        /* Style spécifique pour les logos de certification */
         .badge-container { 
             display: flex; 
             flex-wrap: wrap; 
@@ -154,7 +156,6 @@
             filter: grayscale(0%);
         }
 
-        /* Style pour les liens de diplômes */
         .diploma-link {
             display: inline-block;
             margin-top: auto;
@@ -171,19 +172,36 @@
         }
 
         strong { color: var(--secondary); }
+
+        /* Footer identique à l'accueil */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin-top: 40px;
+        }
+
+        footer p {
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html">Accueil / À propos</a>
-        <a href="competences-projets.html" class="active">Compétences & Projets</a>
+        <a href="competences-certifications.html" class="active">Compétences & Certifications</a>
+        <a href="projets.html">Projets</a>
         <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="contact.html">Me contacter</a>
     </nav>
 
     <!-- --- SECTION COMPÉTENCES TECHNIQUES --- -->
-    <section id="skills">
-        <h3>Compétences techniques</h3>
+    <section id="skills-tech">
+        <h3>Pôle Technique (Hard Skills)</h3>
         <div class="grid">
             <div class="card">
                 <h4>Systèmes & Virtualisation</h4>
@@ -228,16 +246,47 @@
         </div>
     </section>
 
+    <!-- --- SECTION COMPÉTENCES HUMAINES (NOUVEAU) --- -->
+    <section id="skills-human" style="padding-top: 0;">
+        <h3>Pôle Humain (Soft Skills & Gouvernance)</h3>
+        <div class="grid">
+            <div class="card">
+                <h4>Gestion de crise & Résilience</h4>
+                <ul>
+                    <li><strong>Gestion du stress :</strong> Acquise par la pratique du sport en compétition (Triathlon, Marathon, Volley-ball).</li>
+                    <li><strong>Discipline & Rigueur :</strong> Essentielles pour le suivi d'incidents complexes en Blue Team.</li>
+                    <li><strong>Adaptabilité :</strong> Capacité à réagir rapidement face aux nouvelles menaces (Threat Intelligence).</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Entrepreneuriat & Leadership</h4>
+                <ul>
+                    <li><strong>Prise d'initiative :</strong> Création de ma propre mini-entreprise dédiée à l'Audit d'Exposition Externe (EASM).</li>
+                    <li><strong>Gestion de projet :</strong> Planification, organisation et suivi des objectifs de sécurité.</li>
+                    <li><strong>Sens des responsabilités :</strong> Consolidé lors du programme de Défense Orion aux Invalides.</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Esprit d'équipe & Communication</h4>
+                <ul>
+                    <li><strong>Collaboration :</strong> Travailler efficacement en équipe, que ce soit sur un terrain de volley ou lors d'un CTF (Deep Threats DGA).</li>
+                    <li><strong>Communication interculturelle :</strong> Anglais opérationnel (C1), Espagnol (B1), notions de Portugais et d'Arabe.</li>
+                    <li><strong>Vulgarisation :</strong> Capacité à expliquer des enjeux de sécurité complexes (ex: RGPD) à des utilisateurs finaux.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
     <!-- --- SECTION CERTIFICATIONS --- -->
-    <section id="certifications" style="padding-top: 20px; padding-bottom: 20px;">
+    <section id="certifications" style="padding-top: 0; padding-bottom: 20px;">
         <h3>Certifications officielles</h3>
         <div class="grid">
             <div class="card">
-    <h4>University of London</h4>
-    <ul>
-        <li><strong>Mathematics for Computer Science</strong> : Validée avec 88,75 % de moyenne. Maîtrise de l'arithmétique binaire et des bases de numération (décimale, octale, hexadécimale), de l'analyse des séquences (suites arithmétiques et géométriques), et des démonstrations par récurrence (induction). Ces fondations théoriques renforcent l'analyse algorithmique et l'application des concepts de cryptographie. (Via Coursera)</li>
-             </ul>
-               <br>
+                <h4>University of London</h4>
+                <ul>
+                    <li><strong>Mathematics for Computer Science</strong> : Validée avec 88,75 % de moyenne. Maîtrise de l'arithmétique binaire et des bases de numération (décimale, octale, hexadécimale), de l'analyse des séquences (suites arithmétiques et géométriques), et des démonstrations par récurrence (induction). Ces fondations théoriques renforcent l'analyse algorithmique et l'application des concepts de cryptographie. (Via Coursera)</li>
+                </ul>
+                <br>
                 <a href="Diplome_UniversityOfLondon.pdf" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Voir le diplôme (PDF)</a>
             </div>
             <div class="card">
@@ -248,7 +297,7 @@
                 <br>
                 <a href="Diplome_ColoradoBoulder.pdf" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Voir le diplôme (PDF)</a>
             </div>
-                 <div class="card">
+            <div class="card">
                 <h4>University Of Maryland</h4>
                 <ul>
                     <li><strong>Hardware Security</strong> : Validée avec 87,14 % de moyenne. Maîtrise de l'analyse des attaques par canal latéral (SCA), détection et prévention des chevaux de Troie matériels, protection de la propriété intellectuelle (IP) et architecture de confiance (TPM, PUF, sécurité des FPGA). (Via Coursera)</li>
@@ -264,7 +313,7 @@
                 <br>
                 <a href="Diplome_Stanford.pdf" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Voir le diplôme (PDF)</a>
             </div>
-             <div class="card">
+            <div class="card">
                 <h4>Yale University</h4>
                 <ul>
                     <li><strong>Financial Markets</strong> : Validée avec 95,31 % de moyenne. Maîtrise de l'architecture des marchés financiers, finance comportementale, gestion des risques (CAPM), produits dérivés (options, contrats à terme) et cadres réglementaires. (Via Coursera)</li>
@@ -309,74 +358,21 @@
                    <li><strong>MOOC OSINT-FR</strong> : Initiation à l'investigation en sources ouvertes</li> 
                    <li><strong>Basel Institute On Governance</strong> : Open-Source Intelligence (OSINT) - ICAR</li> 
                 </ul>
-            <div class="badge-container">
-                <img src="rgpd-badge.png" alt="Badge RGPD" class="badge-img">
-                <img src="senscyber-badge.png" alt="Badge SensCyber" class="badge-img">
-                <img src="orion-badge.png" alt="Badge Orion" class="badge-img">
-                <img src="inrs-logo-SLIDE.png" alt="Badge TMS" class="badge-img">
-                <img src="moocosint-badge.png" alt="Badge MOOC OSINT" class="badge-img">
-                <img src="baselinstituteofgov-logo.png" alt="Badge ICAR" class="badge-img" style="background-color: white; padding: 5px; border-radius: 8px;">
-            </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- --- SECTION PROJETS --- -->
-    <section id="projects">
-        <h3>Projets</h3>
-        <div class="grid">
-            
-            <div class="card">
-                <h4>VPN Site-to-Site (IPsec)</h4>
-                <p>Configuration d'un réseau privé virtuel (VPN) sous Cisco Packet Tracer, intégrant le chiffrement AES et l'authentification IKE.</p>
-                <a href="projet-vpn.html" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Consulter le détail du projet</a>
-                <br><br>
-                <span class="badge">Networking</span><span class="badge">Security</span>
-            </div>
-
-            <div class="card">
-    <h4>Haute Disponibilité (HSRP)</h4>
-    <p>Déploiement d'une architecture réseau redondante sous Cisco Packet Tracer, implémentant le protocole HSRP pour assurer la continuité de service et automatisation des tests via Python.</p>
-    <a href="projet-hsrp.html" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Consulter le détail du projet</a>
-    <br><br>
-    <span class="badge">Networking</span><span class="badge">Automation</span>
-</div>
-
-<div class="card">
-    <h4>Subnet Calculator (Automation)</h4>
-    <p>Outil d'automatisation réseau développé en Python. Calcule les adresses réseau, broadcast et hôtes avec une interface Web (Streamlit).</p>
-    
-    <a href="https://github.com/lauryn-bot/Subnet-Calculator-Pro.git" target="_blank" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Voir le Code (GitHub)</a>
-    
-    <br><br>
-    <span class="badge">Python</span><span class="badge">Automation</span><span class="badge">Networking</span>
-</div>
-
-            <div class="card">
-                <h4>Entraînement Offensif/Défensif</h4>
-                <p>Identification des failles applicatives (OWASP Top 10) et collecte de données publiques (OSINT) sur TryHackMe. <strong>Top 5% Mondial.</strong></p>
-                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 15px 0;">
-                    <img src="owasptop10-badgeTHM.png" alt="Badge OWASP" style="width: 70px; height: auto;">
-                    <img src="ohsint-badgeTHM.png" alt="Badge OhSINT" style="width: 70px; height: auto;">
-                    <img src="catlinux-badgeTHM.png" alt="Badge Linux" style="width: 70px; height: auto;">
-                    <img src="blue-badgeTHM.png" alt="Badge Blue" style="width: 70px; height: auto;">
-                    <img src="worldwideweb-badgeTHM.png" alt="Badge WorldWideWeb" style="width: 70px; height: auto;">
-                    <img src="cyberready-badgeTHM.png" alt="Badge CyberReady" style="width: 70px; height: auto;">
-                    <img src="hashcracker-badgeTHM.png" alt="Badge Hash Cracker" style="width: 70px; height: auto;">
+                <div class="badge-container">
+                    <img src="rgpd-badge.png" alt="Badge RGPD" class="badge-img">
+                    <img src="senscyber-badge.png" alt="Badge SensCyber" class="badge-img">
+                    <img src="orion-badge.png" alt="Badge Orion" class="badge-img">
+                    <img src="inrs-logo-SLIDE.png" alt="Badge TMS" class="badge-img">
+                    <img src="moocosint-badge.png" alt="Badge MOOC OSINT" class="badge-img">
+                    <img src="baselinstituteofgov-logo.png" alt="Badge ICAR" class="badge-img" style="background-color: white; padding: 5px; border-radius: 8px;">
                 </div>
-                <span class="badge">Cybersecurity</span><span class="badge">OSINT</span><span class="badge">Pentesting</span><span class="badge">Windows Security</span><span class="badge">Nmap</span>
             </div>
-
-            <div class="card">
-                <h4>Atelier Forensic (CyberSup)</h4>
-                <p>Résolution d'enquêtes numériques via la collecte d'informations en sources ouvertes (OSINT) et la géolocalisation d'images (GeoINT).</p>
-                <a href="projet-forensic.html" style="color: var(--secondary); text-decoration: none; font-weight: bold; font-size: 0.9rem;">→ Consulter le détail du projet</a>
-                <br><br>
-                <span class="badge">Forensic</span><span class="badge">OSINT</span><span class="badge">GeoINT</span>
-            </div>
-
         </div>
     </section>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
 
 </body>
 </html>
