@@ -31,12 +31,11 @@
             justify-content: center;
             gap: 30px;
             position: sticky;
-            top: 20px; /* Un peu d'espace en haut pour l'effet flottant */
+            top: 20px;
             z-index: 1000;
             box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            border: 1px solid rgba(56, 189, 248, 0.2); /* Bordure complète au lieu de juste en bas */
+            border: 1px solid rgba(56, 189, 248, 0.2); 
             flex-wrap: wrap;
-            /* Nouvelles règles pour raccourcir et arrondir la barre */
             width: fit-content;
             margin: 20px auto 0 auto;
             border-radius: 50px;
@@ -64,24 +63,30 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            text-align: center;
             padding: 60px 20px;
             background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
         }
 
-        /* Conteneur pour aligner la photo et le titre */
-        .title-container {
+        /* Nouveau conteneur pour mettre la photo à gauche du texte */
+        .header-container {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin-bottom: 0.2rem;
-            flex-wrap: wrap;
             justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap; /* Permet de passer la photo au-dessus sur mobile */
+            max-width: 1200px;
+        }
+
+        /* Conteneur pour aligner le texte à gauche de la photo */
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
         }
 
         .profile-pic {
-            width: 80px;
-            height: 80px;
+            width: 220px; /* Photo agrandie pour faire la hauteur des 4 lignes */
+            height: 220px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--secondary);
@@ -90,7 +95,7 @@
         h1 { 
             font-size: 3.5rem; 
             color: var(--secondary); 
-            margin: 0; /* Margin géré par le conteneur maintenant */
+            margin: 0; 
             letter-spacing: -1px;
             font-weight: 800;
         }
@@ -138,7 +143,7 @@
         .contact-links a { 
             color: #fff; 
             text-decoration: none; 
-            margin: 0 5px; 
+            margin: 0 5px 0 0; /* Ajusté pour l'alignement à gauche */
             border: 1px solid var(--secondary); 
             padding: 12px 25px; 
             border-radius: 4px; 
@@ -161,9 +166,9 @@
         .contact-links {
             display: flex;
             flex-wrap: wrap;         
-            justify-content: center;  
+            justify-content: flex-start;  /* Les boutons sont alignés à gauche sous le texte */
             gap: 15px;                
-            margin-top: 30px;
+            margin-top: 10px; /* Marge réduite car il y a déjà l'espace de "availability" */
         }
 
         p {
@@ -176,7 +181,6 @@
             color: var(--secondary);
         }
 
-        /* Style du footer ajouté */
         footer {
             background-color: var(--bg-card);
             text-align: center;
@@ -202,19 +206,21 @@
     </nav>
 
     <header>
-        <div class="title-container">
-            <!-- Remplace "chemin-vers-ta-photo.jpg" par le nom de ton fichier image (ex: ma-photo.png) -->
+        <div class="header-container">
             <img src="photodeprofil.png" alt="Photo de Lauryn" class="profile-pic">
-            <h1>Lauryn Hecque--Nascimento</h1>
-        </div>
-        <h2>Administratrice Sécurité, Systèmes & Réseaux</h2>
-        <p class="availability">Alternante chez Hartwood</p>
-        
-        <div class="contact-links">
-            <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank">TryHackMe</a>
-            <a href="mailto:hecquelauryn@gmail.com">Mail</a>
-            <a href="www.linkedin.com/in/lauryn-hecque-nascimento" target="_blank">LinkedIn</a>
-            <a href="CV-Lauryn-HECQUE--NASCIMENTO-BTS.pdf" download style="background-color: #3e9b85; color: var(--primary);">Télécharger CV</a>
+            
+            <div class="header-text">
+                <h1>Lauryn Hecque--Nascimento</h1>
+                <h2>Administratrice Sécurité, Systèmes & Réseaux</h2>
+                <p class="availability">Alternante chez Hartwood</p>
+                
+                <div class="contact-links">
+                    <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank">TryHackMe</a>
+                    <a href="mailto:hecquelauryn@gmail.com">Mail</a>
+                    <a href="www.linkedin.com/in/lauryn-hecque-nascimento" target="_blank">LinkedIn</a>
+                    <a href="CV-Lauryn-HECQUE--NASCIMENTO-BTS.pdf" download style="background-color: #3e9b85; color: var(--primary);">Télécharger CV</a>
+                </div>
+            </div>
         </div>
     </header>
 
