@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lauryn Hecque--Nascimento | Portfolio Cyber & Infrastructure</title>
     
+    <!-- BALISES SEO & OPEN GRAPH (Pour un beau rendu sur LinkedIn, Discord, etc.) -->
+    <title>Lauryn Hecque--Nascimento | Portfolio Cyber & Infrastructure</title>
+    <meta name="description" content="Portfolio de Lauryn Hecque--Nascimento. Étudiante spécialisée en cybersécurité défensive (Blue Team), OSINT et administration infrastructure réseaux.">
+    <meta property="og:title" content="Lauryn Hecque--Nascimento | Portfolio Cyber">
+    <meta property="og:description" content="Découvrez mes projets, certifications et compétences en cybersécurité défensive (Blue Team) et OSINT.">
+    <meta property="og:type" content="website">
+    <!-- Remplace l'URL ci-dessous par l'URL de l'image que tu veux afficher lors du partage du lien -->
+    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+
     <!-- Script Particles.js pour l'effet réseau en arrière-plan -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
@@ -17,6 +25,21 @@
             --text-dim: #94a3b8;       /* Gris bleuté pour les textes secondaires */
             --bg-card: #0f172a;        /* Bleu marine profond pour les cartes/nav */
             --accent-badge: #1e293b;   /* Fond des badges (gris-bleu pro) */
+        }
+
+        /* --- SCROLLBAR PERSONNALISÉE --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-badge); 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary); 
         }
 
         body {
@@ -122,7 +145,7 @@
             cursor: default;
         }
 
-        /* NOUVEL EFFET : Lueur élégante (Glow) au survol */
+        /* Lueur élégante (Glow) au survol */
         h1:hover {
             color: #fff;
             text-shadow: 0 0 15px rgba(56, 189, 248, 0.6), 0 0 30px rgba(56, 189, 248, 0.4);
@@ -226,6 +249,33 @@
             color: var(--secondary);
         }
 
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            outline: none;
+            background-color: var(--secondary);
+            color: var(--primary);
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: #fff;
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
         footer {
             background-color: var(--bg-card);
             text-align: center;
@@ -315,11 +365,14 @@
         </div>
     </section>
 
+    <!-- Bouton pour remonter en haut de la page -->
+    <button id="backToTop" title="Retour en haut">↑</button>
+
     <footer>
         <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
     </footer>
 
-    <!-- SCRIPTS UI/UX (Typewriter + Particules) -->
+    <!-- SCRIPTS UI/UX (Typewriter, Particules, Back To Top) -->
     <script>
         // 1. Animation Machine à Écrire
         const textToType = "Administratrice Sécurité, Systèmes & Réseaux";
@@ -330,22 +383,22 @@
             if (i < textToType.length) {
                 typewriterElement.innerHTML += textToType.charAt(i);
                 i++;
-                setTimeout(typeWriter, 40); // Vitesse de frappe (40ms)
+                setTimeout(typeWriter, 40);
             }
         }
         
         window.onload = function() {
-            setTimeout(typeWriter, 400); // Démarre 0.4s après le chargement
+            setTimeout(typeWriter, 400); 
         };
 
         // 2. Initialisation Particles.js (Effet réseau)
         particlesJS('particles-js', {
             "particles": {
                 "number": {
-                    "value": 70, // Quantité de "noeuds"
+                    "value": 70, 
                     "density": { "enable": true, "value_area": 800 }
                 },
-                "color": { "value": "#38bdf8" }, // Couleur bleu cyan
+                "color": { "value": "#38bdf8" }, 
                 "shape": { "type": "circle" },
                 "opacity": {
                     "value": 0.5,
@@ -364,7 +417,7 @@
                 },
                 "move": {
                     "enable": true,
-                    "speed": 1.5, // Mouvement très lent et fluide
+                    "speed": 1.5, 
                     "direction": "none",
                     "random": false,
                     "straight": false,
@@ -377,11 +430,11 @@
                 "events": {
                     "onhover": {
                         "enable": true,
-                        "mode": "grab" // Relie la souris aux points proches
+                        "mode": "grab" 
                     },
                     "onclick": {
                         "enable": true,
-                        "mode": "push" // Ajoute des points au clic
+                        "mode": "push" 
                     },
                     "resize": true
                 },
@@ -391,6 +444,26 @@
                 }
             },
             "retina_detect": true
+        });
+
+        // 3. Script pour le bouton "Retour en haut"
+        const backToTopBtn = document.getElementById("backToTop");
+
+        // Affiche ou cache le bouton en fonction du défilement
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) { // S'affiche après 300px de scroll
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        // Remonte en haut au clic
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
         });
     </script>
 </body>
