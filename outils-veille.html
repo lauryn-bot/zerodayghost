@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outils & Veille | Lauryn Hecque--Nascimento</title>
+    <style>
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 25px; /* Légèrement réduit pour faire tenir le nouveau lien */
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+            flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
+        }
+
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--secondary);
+        }
+
+        /* --- SECTIONS --- */
+        section { 
+            padding: 60px 10%; 
+            max-width: 1200px; 
+            margin: auto; 
+            flex: 1; 
+        }
+
+        h3 { 
+            border-left: 5px solid var(--secondary); 
+            padding-left: 20px; 
+            margin-bottom: 20px; 
+            font-size: 2.2rem; 
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        /* --- GRILLES & CARTES --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 60px;
+        }
+
+        .card { 
+            background: var(--bg-card); 
+            padding: 30px; 
+            border-radius: 6px; 
+            border: 1px solid var(--accent-card-border);
+            transition: all 0.3s ease; 
+        }
+
+        .card:hover { 
+            transform: translateY(-5px); 
+            border-color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        h4 { 
+            color: var(--secondary); 
+            font-size: 1.3rem; 
+            margin-top: 0; 
+            margin-bottom: 20px; 
+            font-weight: 700;
+        }
+
+        /* --- STYLE DES OUTILS (Tags) --- */
+        .tools-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tool-tag {
+            background: rgba(56, 189, 248, 0.05);
+            color: var(--text-main);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-tag:hover {
+            background: var(--secondary);
+            color: var(--primary);
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+        }
+
+        /* --- STYLE DE LA VEILLE (Listes) --- */
+        .veille-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .veille-list li {
+            margin-bottom: 15px;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .veille-list li::before {
+            content: "→";
+            color: var(--secondary);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .veille-list strong {
+            color: var(--text-main);
+        }
+
+        .source-link {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .source-link:hover {
+            text-decoration: underline;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--bg-card);
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid rgba(56, 189, 248, 0.1);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 0 auto;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html">Accueil / À propos</a>
+        <a href="competences-certifications.html">Compétences & Certifications</a>
+        <a href="projets.html">Projets</a>
+        <a href="outils-veille.html" class="active">Outils & Veille</a>
+        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="contact.html">Me contacter</a>
+    </nav>
+
+    <section id="toolbox">
+        <h3>Ma Boîte à Outils (Stack)</h3>
+        <p class="subtitle">Aperçu des logiciels, plateformes et technologies que j'utilise au quotidien pour l'administration et la sécurité.</p>
+
+        <div class="grid">
+            
+            <div class="card">
+                <h4>🛡️ Blue Team & Cybersécurité</h4>
+                <div class="tools-container">
+                    <span class="tool-tag">Wireshark</span>
+                    <span class="tool-tag">Nmap</span>
+                    <span class="tool-tag">Wazuh (SIEM)</span>
+                    <span class="tool-tag">Suricata (IDS)</span>
+                    <span class="tool-tag">Microsoft Defender</span>
+                    <span class="tool-tag">Splunk</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>🔍 OSINT & Forensics</h4>
+                <div class="tools-container">
+                    <span class="tool-tag">Maltego</span>
+                    <span class="tool-tag">Sherlock</span>
+                    <span class="tool-tag">ExifTool</span>
+                    <span class="tool-tag">Shodan</span>
+                    <span class="tool-tag">Google Dorks</span>
+                    <span class="tool-tag">Autopsy</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>🖥️ Systèmes & Réseaux</h4>
+                <div class="tools-container">
+                    <span class="tool-tag">Windows Server</span>
+                    <span class="tool-tag">Linux (Debian/Kali)</span>
+                    <span class="tool-tag">Active Directory</span>
+                    <span class="tool-tag">Microsoft Entra ID</span>
+                    <span class="tool-tag">Cisco Packet Tracer</span>
+                    <span class="tool-tag">VMware</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <h4>⚙️ Automatisation & Code</h4>
+                <div class="tools-container">
+                    <span class="tool-tag">Python</span>
+                    <span class="tool-tag">Bash</span>
+                    <span class="tool-tag">Git / GitHub</span>
+                    <span class="tool-tag">Streamlit</span>
+                    <span class="tool-tag">Markdown</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="veille">
+        <h3>Veille Technologique (CTI)</h3>
+        <p class="subtitle">Dans un domaine où les menaces évoluent chaque jour, la Threat Intelligence (CTI) est indispensable. Voici comment je maintiens mes connaissances à jour.</p>
+
+        <div class="grid">
+            
+            <div class="card">
+                <h4>🏛️ Sources Institutionnelles</h4>
+                <ul class="veille-list">
+                    <li><strong>CERT-FR (ANSSI) :</strong> Suivi quotidien des bulletins d'alerte et des avis de vulnérabilités critiques ciblant la France.</li>
+                    <li><strong>CISA (USA) :</strong> Consultation du catalogue "Known Exploited Vulnerabilities" (KEV) pour prioriser les correctifs.</li>
+                    <li><strong>MITRE ATT&CK :</strong> Analyse constante des nouvelles TTPs (Tactiques, Techniques et Procédures) utilisées par les acteurs de la menace.</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>📰 Médias & Agrégateurs</h4>
+                <ul class="veille-list">
+                    <li><strong>Feedly (Flux RSS) :</strong> Utilisation d'un agrégateur pour centraliser les articles de <em>BleepingComputer</em>, <em>The Hacker News</em> et <em>ZATAZ</em>.</li>
+                    <li><strong>Bases de données CVE :</strong> Recherche active sur le NIST (NVD) pour comprendre l'impact technique des nouvelles failles.</li>
+                    <li><strong>Réseaux Sociaux :</strong> Suivi de la communauté InfoSec sur X (Twitter) et LinkedIn (chercheurs en sécurité, OSINTers).</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h4>🎧 Podcasts & Communautés</h4>
+                <ul class="veille-list">
+                    <li><strong>NoLimitSecu :</strong> Podcast francophone de référence pour des analyses approfondies sur des sujets cyber pointus.</li>
+                    <li><strong>Darknet Diaries :</strong> Histoires réelles d'incidents de sécurité, de hackers et d'enquêtes numériques (en anglais).</li>
+                    <li><strong>Discord / Root-Me :</strong> Échanges réguliers de méthodologies avec d'autres passionnés et joueurs de CTF.</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+</body>
+</html>
