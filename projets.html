@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- BALISES SEO & OPEN GRAPH -->
     <title>Projets | Lauryn Hecque--Nascimento</title>
+    <meta name="description" content="Portfolio de Lauryn Hecque--Nascimento. Étudiante spécialisée en cybersécurité défensive (Blue Team), OSINT et administration infrastructure réseaux.">
+    <meta property="og:title" content="Lauryn Hecque--Nascimento | Portfolio Cyber">
+    <meta property="og:description" content="Découvrez mes projets, certifications et compétences en cybersécurité défensive (Blue Team) et OSINT.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+
     <style>
         :root {
             --primary: #050a14;
@@ -13,6 +21,21 @@
             --bg-card: #0f172a;
             --accent-card-border: rgba(56, 189, 248, 0.2);
             --accent-badge: #1e293b;
+        }
+
+        /* --- SCROLLBAR PERSONNALISÉE --- */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--primary); 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-badge); 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary); 
         }
 
         body {
@@ -191,6 +214,33 @@
             letter-spacing: 0.5px;
         }
 
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop {
+            display: none; 
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 99;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            outline: none;
+            background-color: var(--secondary);
+            color: var(--primary);
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: #fff;
+            color: var(--primary);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.6);
+            transform: translateY(-3px);
+        }
+
         /* --- FOOTER --- */
         footer {
             background-color: var(--bg-card);
@@ -212,7 +262,7 @@
     <nav>
         <a href="index.html">Accueil / À propos</a>
         <a href="competences-certifications.html">Compétences & Certifications</a>
-        <a href="projets.html">Projets</a>
+        <a href="projets.html" class="active">Projets</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="experiences-diplomes.html">Expériences & Diplômes</a>
         <a href="contact.html">Me contacter</a>
@@ -342,12 +392,16 @@
         </div>
     </section>
 
+    <!-- Bouton pour remonter en haut de la page -->
+    <button id="backToTop" title="Retour en haut">↑</button>
+
     <footer>
         <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
     </footer>
 
-    <!-- SCRIPT POUR LE FILTRE DE PROJETS -->
+    <!-- SCRIPT POUR LE FILTRE DE PROJETS ET LE BOUTON RETOUR EN HAUT -->
     <script>
+        // --- FILTRE DES PROJETS ---
         const filterBtns = document.querySelectorAll('.filter-btn');
         const cards = document.querySelectorAll('.card');
 
@@ -370,6 +424,24 @@
                         card.style.display = 'none'; // On la cache
                     }
                 });
+            });
+        });
+
+        // --- BOUTON RETOUR EN HAUT ---
+        const backToTopBtn = document.getElementById("backToTop");
+
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) { 
+                backToTopBtn.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+            }
+        });
+
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
             });
         });
     </script>
