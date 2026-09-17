@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lauryn Hecque--Nascimento | Portfolio Cyber & Infrastructure</title>
+    
+    <!-- Script Particles.js pour l'effet réseau en arrière-plan -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
     <style>
         :root {
             /* Palette alignée sur ton nouveau CV */
@@ -56,6 +60,7 @@
         }
 
         /* ------------------------------------ */
+        /* MODIFICATIONS HEADER POUR EFFETS UI */
 
         header {
             min-height: 55vh;
@@ -65,6 +70,18 @@
             align-items: center;
             padding: 60px 20px;
             background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
+            position: relative; /* Nécessaire pour les particules */
+            overflow: hidden;
+        }
+
+        /* Conteneur du canvas des particules */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1; /* Derrière le contenu */
         }
 
         .header-container {
@@ -74,6 +91,8 @@
             gap: 40px;
             flex-wrap: wrap; 
             max-width: 1200px;
+            z-index: 2; /* Devant les particules */
+            position: relative;
         }
 
         .header-text {
@@ -88,6 +107,9 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--secondary);
+            /* Ajout d'une petite lueur cyber autour de la photo */
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+            z-index: 2;
         }
 
         h1 { 
@@ -96,6 +118,15 @@
             margin: 0; 
             letter-spacing: -1px;
             font-weight: 800;
+            transition: 0.2s; /* Pour l'effet au survol */
+            cursor: default;
+        }
+
+        /* Effet GLITCH au survol du nom */
+        h1:hover {
+            color: #fff;
+            text-shadow: 3px 0px 0px rgba(56,189,248,0.8), -3px 0px 0px rgba(255,0,85,0.8);
+            transform: skew(-2deg);
         }
 
         h2 { 
@@ -104,6 +135,20 @@
             margin-top: 10px;
             font-weight: 400;
             opacity: 0.9;
+            min-height: 2.5rem; /* Evite que le texte en dessous saute au chargement */
+        }
+
+        /* Curseur de la machine à écrire */
+        .typewriter-text {
+            border-right: 2px solid var(--secondary);
+            animation: blinkCursor 0.7s infinite;
+            display: inline-block;
+        }
+
+        @keyframes blinkCursor {
+            0% { border-right-color: var(--secondary); }
+            50% { border-right-color: transparent; }
+            100% { border-right-color: var(--secondary); }
         }
 
         .availability { 
@@ -149,6 +194,8 @@
             font-weight: 600;
             font-size: 0.9rem;
             background: transparent;
+            position: relative; /* Pour passer par dessus les particules */
+            z-index: 2;
         }
 
         .contact-links a:hover { 
@@ -169,7 +216,6 @@
             margin-top: 10px; 
         }
 
-        /* Ajout d'une marge en bas pour décoller les pavés de texte du reste */
         p {
             color: var(--text-dim);
             font-size: 1.1rem;
@@ -189,7 +235,6 @@
             margin-top: 40px;
         }
 
-        /* On retire la marge pour le texte du footer pour qu'il reste bien centré */
         footer p {
             margin: 0 auto;
             font-size: 0.9rem;
@@ -199,7 +244,7 @@
 <body>
 
     <nav>
-        <a href="index.html">Accueil / À propos</a>
+        <a href="index.html" class="active">Accueil / À propos</a>
         <a href="competences-certifications.html">Compétences & Certifications</a>
         <a href="projets.html">Projets</a>
         <a href="outils-veille.html">Outils & Veille</a>
@@ -208,12 +253,16 @@
     </nav>
 
     <header>
+        <!-- Arrière-plan généré par JS -->
+        <div id="particles-js"></div>
+
         <div class="header-container">
             <img src="photodeprofil.png" alt="Photo de Lauryn" class="profile-pic">
             
             <div class="header-text">
                 <h1>Lauryn Hecque--Nascimento</h1>
-                <h2>Administratrice Sécurité, Systèmes & Réseaux</h2>
+                <!-- Remplacement du texte statique par le span vide pour la machine à écrire -->
+                <h2><span id="typewriter" class="typewriter-text"></span></h2>
                 <p class="availability">Alternante chez Hartwood</p>
                 
                 <div class="contact-links">
@@ -243,34 +292,107 @@
         </div>
     </section>
 
-<section id="hobbies">
-    <h3>Centres d'intérêts</h3>
-    <p>Grâce à mon parcours sportif en compétition, j'ai acquis une solide gestion du stress et de l'effort. Une discipline et une rigueur que j'applique aujourd'hui dans la résolution de défis techniques en cybersécurité. Actuellement en quête de nouveaux défis, je prépare mon admission en Bachelor Cybersécurité pour approfondir mon expertise en ingénierie de défense.</p>
-    
-    <div>
-        <!-- La marge en bas a été ajustée ici pour ne pas avoir un double espace avec le p principal -->
-        <p style="margin-bottom: 10px;"><strong>Cybersécurité & CTF :</strong></p>
-        <div style="margin-bottom: 25px;">
-            <span class="badge">CTF Deep Threats (DGA - Campus OSINT) : Classé 184ᵉ / 360 équipes.</span>
-            <span class="badge">Rang Mondial : Top 5% (Rang ~112,000 sur +2 millions d'utilisateurs)</span>
-            <span class="badge">Engagement : +100 salles de hacking et défense résolues.</span>
-            <span class="badge">CTF CyberSup 2026 (OSINT/Forensic)</span>
-        </div>
-
-        <p style="margin-bottom: 10px;"><strong>Sports :</strong></p>
+    <section id="hobbies">
+        <h3>Centres d'intérêts</h3>
+        <p>Grâce à mon parcours sportif en compétition, j'ai acquis une solide gestion du stress et de l'effort. Une discipline et une rigueur que j'applique aujourd'hui dans la résolution de défis techniques en cybersécurité. Actuellement en quête de nouveaux défis, je prépare mon admission en Bachelor Cybersécurité pour approfondir mon expertise en ingénierie de défense.</p>
+        
         <div>
-            <span class="badge">Volley-ball (9 ans - compétitions départementales & régionales)</span>
-            <span class="badge">Triathlon</span>
-            <span class="badge">Course à pied (Compétitions - Record : 21,1km)</span>
-            <span class="badge">Escalade</span>
-            <span class="badge">Natation (Record : 2km)</span>
+            <p style="margin-bottom: 10px;"><strong>Cybersécurité & CTF :</strong></p>
+            <div style="margin-bottom: 25px;">
+                <span class="badge">CTF Deep Threats (DGA - Campus OSINT) : Classé 184ᵉ / 360 équipes.</span>
+                <span class="badge">Rang Mondial : Top 5% (Rang ~112,000 sur +2 millions d'utilisateurs)</span>
+                <span class="badge">Engagement : +100 salles de hacking et défense résolues.</span>
+                <span class="badge">CTF CyberSup 2026 (OSINT/Forensic)</span>
+            </div>
+
+            <p style="margin-bottom: 10px;"><strong>Sports :</strong></p>
+            <div>
+                <span class="badge">Volley-ball (9 ans - compétitions départementales & régionales)</span>
+                <span class="badge">Triathlon</span>
+                <span class="badge">Course à pied (Compétitions - Record : 21,1km)</span>
+                <span class="badge">Escalade</span>
+                <span class="badge">Natation (Record : 2km)</span>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<footer>
-    <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
-</footer>
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
 
+    <!-- SCRIPTS UI/UX (Typewriter + Particules) -->
+    <script>
+        // 1. Animation Machine à Écrire
+        const textToType = "Administratrice Sécurité, Systèmes & Réseaux";
+        const typewriterElement = document.getElementById("typewriter");
+        let i = 0;
+
+        function typeWriter() {
+            if (i < textToType.length) {
+                typewriterElement.innerHTML += textToType.charAt(i);
+                i++;
+                setTimeout(typeWriter, 40); // Vitesse de frappe (40ms)
+            }
+        }
+        
+        window.onload = function() {
+            setTimeout(typeWriter, 400); // Démarre 0.4s après le chargement
+        };
+
+        // 2. Initialisation Particles.js (Effet réseau)
+        particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 70, // Quantité de "noeuds"
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#38bdf8" }, // Couleur bleu cyan
+                "shape": { "type": "circle" },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#38bdf8",
+                    "opacity": 0.2,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1.5, // Mouvement très lent et fluide
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab" // Relie la souris aux points proches
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push" // Ajoute des points au clic
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": { "distance": 180, "line_linked": { "opacity": 0.6 } },
+                    "push": { "particles_nb": 3 }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
