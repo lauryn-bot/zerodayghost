@@ -238,7 +238,6 @@
 </head>
 <body>
 
-    <!-- On ajoute Write-Ups à la navigation -->
     <nav>
         <a href="index.html">Accueil / À propos</a>
         <a href="competences-certif.html">Compétences & Certif</a>
@@ -267,11 +266,11 @@
             </div>
 
             <div class="writeup-content">
-                <h4>🎯 1. Le Contexte (Scénario)</h4>
+                <h4>1. Le Contexte (Scénario)</h4>
                 <p>Lors d'un exercice de type CTF, l'objectif initial était d'investiguer sur une tentative de phishing ciblant des employés. Le seul artefact fourni (Indicateur de Compromission - IoC) était un nom de domaine suspect trouvé dans les logs d'un pare-feu : <strong>login-secure-portal[.]xyz</strong>.</p>
                 <p>Mon but : Remonter la piste de l'attaquant, cartographier son infrastructure (EASM) et proposer des contre-mesures.</p>
 
-                <h4>🕵️‍♀️ 2. Méthodologie & Investigation (OSINT)</h4>
+                <h4>2. Méthodologie & Investigation (OSINT)</h4>
                 <p>J'ai débuté mon investigation en interrogeant les bases de données WHOIS pour identifier l'hébergeur et la date de création du domaine. L'attaquant avait utilisé un service de protection de la vie privée, mais j'ai décidé d'effectuer un <em>Reverse IP Lookup</em> et d'utiliser <strong>SpiderFoot</strong>.</p>
                 
                 <p>En analysant l'adresse IP associée avec Shodan, j'ai repéré un certificat SSL expiré qui trahissait d'autres domaines hébergés sur le même serveur :</p>
@@ -284,10 +283,10 @@
 
                 <p>Grâce à cette manipulation, j'ai pu identifier un <strong>cluster d'infrastructures malveillantes</strong> complet appartenant au même acteur de la menace (Threat Actor).</p>
 
-                <h4>✅ 3. Résolution & Résultats</h4>
+                <h4>3. Résolution & Résultats</h4>
                 <p>J'ai exporté la liste complète des 14 noms de domaines frauduleux liés à cette adresse IP. En croisant ces données sur <strong>VirusTotal</strong> et <strong>AlienVault OTX</strong>, il a été confirmé qu'il s'agissait d'une campagne de credential harvesting (vol d'identifiants).</p>
 
-                <h4>🛡️ 4. Recommandations (Approche Blue Team)</h4>
+                <h4>4. Recommandations (Approche Blue Team)</h4>
                 <p>Trouver l'attaquant est une chose, sécuriser l'entreprise en est une autre. Voici les recommandations d'atténuation suite à cette analyse :</p>
                 
                 <div class="blue-team-box">
