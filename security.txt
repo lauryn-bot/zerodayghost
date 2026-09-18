@@ -1,0 +1,22 @@
+# =======================================================================
+# Politique de Divulgation des Vulnérabilités (VDP)
+# Lauryn Hecque--Nascimento - Portfolio Cybersécurité
+# =======================================================================
+
+# Contact principal (Privilégiez les communications chiffrées si possible)
+Contact: mailto:ton-email@proton.me
+
+# Clé publique PGP pour le chiffrement des communications
+Encryption: https://TON-LIEN-GITHUB-OU-AUTRE/pgp-key.txt
+
+# Langues parlées pour les rapports
+Preferred-Languages: fr, en
+
+# Politique de sécurité
+Policy: Je suis ouverte aux signalements de failles éthiques sur ce portfolio. Toute découverte (XSS, mauvaise configuration, etc.) peut m'être remontée via l'email ci-dessus.
+
+# Je suis à l'écoute d'opportunités professionnelles (Alternance/Emploi) !
+Hiring: https://TON-LIEN-GITHUB-OU-AUTRE/contact.html
+
+# Date d'expiration de ce fichier (Format ISO 8601 - Requis par la RFC 9116)
+Expires: 2027-12-31T23:59:00.000Z
