@@ -75,7 +75,8 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        /* Effet au survol uniquement */
+        nav a:hover {
             color: var(--secondary);
         }
 
@@ -261,7 +262,7 @@
 
     <nav>
         <a href="index.html">Accueil / À propos</a>
-        <a href="competences-certif.html">Compétences & Certif</a>
+        <a href="competences-certifications.html">Compétences & Certif</a>
         <a href="projets.html">Projets</a>
         <a href="writeups.html">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
@@ -370,7 +371,31 @@
                 </div>
             </div>
 
-            <!-- PROJET 5 -->
+            <!-- NOUVEAU PROJET CTF DGA -->
+            <div class="card" data-category="security osint">
+                <h4>CTF Deep Threats (DGA)</h4>
+                <p>Participation au challenge de cybersécurité et d'investigation numérique organisé par la Direction Générale de l'Armement (Campus OSINT). <strong>Classé 184ᵉ / 487 équipes.</strong></p>
+                
+                <ul>
+                    <li><strong>Investigation (OSINT) :</strong> Collecte, croisement et analyse d'informations en sources ouvertes pour traquer des menaces.</li>
+                    <li><strong>Travail d'équipe :</strong> Coordination, répartition des tâches et communication sous contrainte de temps.</li>
+                    <li><strong>Gouvernance & Reporting :</strong> Rédaction de rapports d'incident et propositions de remédiation (Blue Team).</li>
+                </ul>
+
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+                    <!-- Pense à remplacer par le nom exact de ton PDF -->
+                    <a href="Certificat_CTF_Deep_Threats.pdf" target="_blank" class="project-link" style="margin-bottom: 0;">📄 Voir le certificat officiel</a>
+                    <a href="writeups.html" class="project-link" style="margin-bottom: 0;">🔍 Lire mon rapport d'investigation (Write-Up)</a>
+                </div>
+                
+                <div>
+                    <span class="badge">OSINT</span>
+                    <span class="badge">Threat Intelligence</span>
+                    <span class="badge">Cybersécurité</span>
+                </div>
+            </div>
+
+            <!-- PROJET 6 -->
             <div class="card" data-category="security osint">
                 <h4>Atelier Forensic (CyberSup)</h4>
                 <p>Résolution d'enquêtes numériques via la collecte d'informations en sources ouvertes (OSINT) et la géolocalisation d'images (GeoINT).</p>
