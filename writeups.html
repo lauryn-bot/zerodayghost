@@ -12,6 +12,9 @@
     <meta property="og:type" content="website">
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
+    <!-- Script Particles.js pour l'arrière-plan immersif -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
     <style>
         :root {
             --primary: #050a14;
@@ -40,6 +43,17 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            position: relative;
+        }
+
+        /* Particules en arrière-plan fixe */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1; 
         }
 
         /* --- BARRE DE NAVIGATION --- */
@@ -77,7 +91,7 @@
         /* --- SECTION PRINCIPALE (OPTIMISÉE POUR LA LECTURE) --- */
         section { 
             padding: 60px 10%; 
-            max-width: 900px; /* Plus étroit pour un confort de lecture type "Blog" */
+            max-width: 900px; 
             margin: auto; 
             flex: 1; 
         }
@@ -99,11 +113,12 @@
 
         /* --- ARTICLE WRITE-UP --- */
         .writeup-container {
-            background: var(--bg-card);
+            background: rgba(15, 23, 42, 0.95);
             padding: 40px;
             border-radius: 8px;
             border: 1px solid var(--accent-card-border);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
             margin-bottom: 40px;
         }
 
@@ -115,14 +130,14 @@
 
         .writeup-header h1 {
             color: var(--secondary);
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin: 0 0 15px 0;
             line-height: 1.2;
         }
 
         .writeup-meta {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             color: var(--text-dim);
             font-size: 0.9rem;
             align-items: center;
@@ -148,6 +163,8 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
         }
 
         .writeup-content p {
@@ -168,6 +185,12 @@
             overflow-x: auto;
             border: 1px solid var(--accent-card-border);
             margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .highlight {
+            color: #f92672; /* Rose syntaxique */
+            font-weight: bold;
         }
 
         /* Boîte Blue Team (Recommandations) */
@@ -192,6 +215,7 @@
             margin: 0;
             padding-left: 20px;
             color: var(--text-main);
+            line-height: 1.6;
         }
 
         .blue-team-box li {
@@ -238,11 +262,15 @@
 </head>
 <body>
 
+    <!-- Fond de particules -->
+    <div id="particles-js"></div>
+
+    <!-- On ajoute Write-Ups à la navigation -->
     <nav>
         <a href="index.html">Accueil / À propos</a>
         <a href="competences-certif.html">Compétences & Certif</a>
         <a href="projets.html">Projets</a>
-        <a href="writeups.html">Write-Ups</a>
+        <a href="writeups.html" class="active">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="experiences-diplomes.html">Expériences & Diplômes</a>
         <a href="contact.html">Contact</a>
@@ -256,46 +284,48 @@
         <article class="writeup-container">
             
             <div class="writeup-header">
-                <h1>CTF OSINT : Traque d'une infrastructure malveillante</h1>
+                <h1>CTF DGA : Investigation OSINT & Attaque de Surface (EASM)</h1>
                 <div class="writeup-meta">
-                    <span>🗓️ Publié le 18 Septembre 2026</span>
+                    <span class="badge">DGA Deep Threats</span>
                     <span class="badge">OSINT</span>
                     <span class="badge">Threat Intelligence</span>
-                    <span class="badge">Blue Team</span>
+                    <span class="badge">Web Forensics</span>
                 </div>
             </div>
 
             <div class="writeup-content">
-                <h4>1. Le Contexte (Scénario)</h4>
-                <p>Lors d'un exercice de type CTF, l'objectif initial était d'investiguer sur une tentative de phishing ciblant des employés. Le seul artefact fourni (Indicateur de Compromission - IoC) était un nom de domaine suspect trouvé dans les logs d'un pare-feu : <strong>login-secure-portal[.]xyz</strong>.</p>
-                <p>Mon but : Remonter la piste de l'attaquant, cartographier son infrastructure (EASM) et proposer des contre-mesures.</p>
+                <p>Ce compte-rendu détaille la méthodologie utilisée lors du CTF <strong>Deep Threats</strong> (organisé par la DGA et Campus OSINT) pour résoudre deux défis majeurs liés à la sécurité des infrastructures et à l'investigation de menaces.</p>
 
-                <h4>2. Méthodologie & Investigation (OSINT)</h4>
-                <p>J'ai débuté mon investigation en interrogeant les bases de données WHOIS pour identifier l'hébergeur et la date de création du domaine. L'attaquant avait utilisé un service de protection de la vie privée, mais j'ai décidé d'effectuer un <em>Reverse IP Lookup</em> et d'utiliser <strong>SpiderFoot</strong>.</p>
-                
-                <p>En analysant l'adresse IP associée avec Shodan, j'ai repéré un certificat SSL expiré qui trahissait d'autres domaines hébergés sur le même serveur :</p>
+                <h4>1. Threat Intel : Analyse d'un Courrier Indésirable</h4>
+                <p><strong>Contexte :</strong> L'employé Enzo Riesmeyer de Marinatech Industries a reçu un email de menaces. L'objectif était d'identifier l'expéditeur et son infrastructure.</p>
+                <p>En analysant l'en-tête (header) de l'email d'origine, j'ai pu extraire l'adresse IP source (<span class="highlight">47.242.108.213</span>). L'étude du domaine expéditeur a révélé un pixel de tracking, ce qui a permis de découvrir un domaine secondaire grâce à une politique SPF. La configuration DMARC de ce nouveau domaine (lotustrack.xyz) a fourni un pivot décisif :</p>
                 
                 <div class="code-block">
-                    $ nmap -p 443 --script ssl-cert login-secure-portal.xyz<br>
-                    | ssl-cert: Subject: commonName=admin-it-update.xyz<br>
-                    | Subject Alternative Name: DNS:admin-it-update.xyz, DNS:rh-portal-auth.com
+                    _dmarc.lotustrack.xyz. IN TXT "v=DMARC1; p=none; ruf=mailto:admin@<span class="highlight">pxltrakln.int</span>;"
                 </div>
 
-                <p>Grâce à cette manipulation, j'ai pu identifier un <strong>cluster d'infrastructures malveillantes</strong> complet appartenant au même acteur de la menace (Threat Actor).</p>
+                <p>En croisant ces données DNS avec l'adresse IP initiale (liée au VLAN gouvernemental du Lianhua), j'ai pu remonter jusqu'à la société écran "Lianhua-Europe Cultural & Economic Cooperation Ltd" et identifier l'acteur de la menace : <strong>Chen Rong</strong>.</p>
 
-                <h4>3. Résolution & Résultats</h4>
-                <p>J'ai exporté la liste complète des 14 noms de domaines frauduleux liés à cette adresse IP. En croisant ces données sur <strong>VirusTotal</strong> et <strong>AlienVault OTX</strong>, il a été confirmé qu'il s'agissait d'une campagne de credential harvesting (vol d'identifiants).</p>
+                <h4>2. EASM : Mauvaise Configuration Serveur (Le Pacte)</h4>
+                <p><strong>Contexte :</strong> Retrouver un contrat confidentiel entre AquaVentis et Hydronix Marine Corporation, dissimulé sur une infrastructure mal sécurisée.</p>
+                <p>L'enquête a révélé deux versions du site d'Hydronix : une version locale (.ln) et une version internationale (.int). L'analyse de la version internationale a révélé une vulnérabilité critique : le module Apache <code>mod_status</code> était activé et publiquement accessible via <code>/server-status</code>.</p>
+                
+                <div class="code-block">
+                    [Misconfiguration detected]: <span class="highlight">/s3cr3tfileS3cuR7s3d</span> is accessible to everyone.
+                </div>
 
-                <h4>4. Recommandations (Approche Blue Team)</h4>
-                <p>Trouver l'attaquant est une chose, sécuriser l'entreprise en est une autre. Voici les recommandations d'atténuation suite à cette analyse :</p>
+                <p>Ce Directory Listing non intentionnel a permis d'accéder à l'arborescence des fichiers sensibles du serveur (Index of /s3cr3tfileS3cuR7s3d) et de télécharger l'accord stratégique (HMC_AquaVentis_Strategic_Development_Agreement.pdf) contenant la clause recherchée.</p>
+
+                <h4>Recommandations (Approche Blue Team)</h4>
+                <p>L'exploitation de ces failles met en évidence plusieurs lacunes de sécurité du côté des cibles. Voici les mesures de durcissement (Hardening) que je recommanderais en tant qu'administratrice sécurité :</p>
                 
                 <div class="blue-team-box">
-                    <h5>🛠️ Mesures de remédiation immédiates :</h5>
+                    <h5>Mesures de remédiation :</h5>
                     <ul>
-                        <li><strong>Pare-feu & Proxy :</strong> Bloquer l'accès sortant vers l'adresse IP racine de l'attaquant et blacklister les 14 domaines découverts.</li>
-                        <li><strong>SIEM (Wazuh/Splunk) :</strong> Créer une règle de détection pour alerter si un utilisateur tente de se résoudre (requête DNS) vers l'un de ces domaines.</li>
-                        <li><strong>Microsoft Entra ID (IAM) :</strong> Imposer l'authentification multifacteur (MFA) stricte (ex: FIDO2 ou Microsoft Authenticator) pour rendre le vol de mot de passe inefficace.</li>
-                        <li><strong>Sensibilisation :</strong> Lancer une courte campagne d'information auprès des collaborateurs concernant les emails d'urgence RH ou IT.</li>
+                        <li><strong>Durcissement Messagerie (Anti-Phishing) :</strong> Renforcer la politique DMARC en la passant de <code>p=none</code> à <code>p=reject</code> ou <code>p=quarantine</code> pour empêcher l'usurpation (Spoofing) des domaines.</li>
+                        <li><strong>Sécurisation Apache (Web) :</strong> Désactiver l'interface <code>/server-status</code> en production, ou en restreindre l'accès à l'IP locale (127.0.0.1) via la directive <code>Require ip</code>.</li>
+                        <li><strong>Désactivation du Directory Listing :</strong> Ajouter la directive <code>Options -Indexes</code> dans le fichier de configuration Apache ou le <code>.htaccess</code> pour empêcher l'affichage de l'arborescence des dossiers.</li>
+                        <li><strong>Audit d'Exposition Externe (EASM) :</strong> Mettre en place un scan régulier de la surface d'attaque pour détecter les services inutiles exposés sur le web.</li>
                     </ul>
                 </div>
             </div>
@@ -313,6 +343,26 @@
     </footer>
 
     <script>
+        // 1. Initialisation Particles.js (Effet réseau immersif)
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#38bdf8" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.3, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+            },
+            "retina_detect": true
+        });
+
+        // 2. Bouton Retour en haut
         const backToTopBtn = document.getElementById("backToTop");
         window.addEventListener("scroll", () => {
             if (window.scrollY > 300) { backToTopBtn.style.display = "block"; } 
