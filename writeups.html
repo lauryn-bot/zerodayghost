@@ -16,6 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #050a14;
             --secondary: #38bdf8;
@@ -94,6 +99,7 @@
             max-width: 900px; 
             margin: auto; 
             flex: 1; 
+            width: 100%;
         }
 
         h3 { 
@@ -120,6 +126,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             backdrop-filter: blur(10px);
             margin-bottom: 40px;
+            width: 100%;
         }
 
         .writeup-header {
@@ -263,48 +270,50 @@
         /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
         /* ======================================================== */
         @media (max-width: 768px) {
-            /* 1. Correction de la barre de navigation EXACTEMENT COMME index.html */
+            
+            /* SÉCURITÉ : Bloque le défilement horizontal (la bande grise) */
+            body, html {
+                overflow-x: hidden;
+            }
+
+            /* On corrige la barre de navigation */
             nav {
-                width: 90%; 
-                padding: 15px;
-                gap: 12px;
-                border-radius: 15px; 
+                width: 95%; 
+                padding: 12px 10px;
+                gap: 8px;
+                border-radius: 12px; 
             }
             
             nav a {
-                font-size: 0.85rem; 
+                font-size: 0.75rem; 
             }
 
-            /* 2. On réduit les marges extérieures pour avoir plus de place sur téléphone */
+            /* On réduit les marges extérieures pour avoir plus de place */
             section { 
-                padding: 40px 5%; 
+                padding: 30px 15px; 
             }
 
-            /* 3. On réduit les marges intérieures de l'article pour ne pas écraser le texte */
+            /* On réduit les marges intérieures du rapport */
             .writeup-container {
-                padding: 20px;
+                padding: 20px 15px;
             }
 
-            /* 4. On adapte la taille des titres pour qu'ils ne débordent pas */
+            /* On adapte la taille des titres pour qu'ils ne débordent pas */
             .writeup-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
+                word-wrap: break-word; /* Force le titre à passer à la ligne s'il est trop long */
             }
 
             h3 {
-                font-size: 1.8rem;
-                text-align: center;
+                font-size: 1.6rem;
             }
 
-            .subtitle {
-                text-align: center;
-            }
-
-            /* 5. On s'assure que les blocs de code peuvent scroller horizontalement sans casser la page */
+            /* On s'assure que les longs textes/liens dans le code ne cassent pas l'écran */
             .code-block {
-                font-size: 0.85rem;
-                padding: 15px;
-                overflow-x: auto;
-                white-space: pre-wrap; /* Permet au code de passer à la ligne s'il est trop long */
+                font-size: 0.8rem;
+                padding: 12px;
+                white-space: pre-wrap; 
+                word-break: break-word; /* Oblige les très longues lignes à se couper */
             }
             
             .blue-team-box {
@@ -383,7 +392,6 @@
             </div>
 
         </article>
-        <!-- FIN DE L'ARTICLE -->
 
     </section>
 
@@ -395,7 +403,6 @@
     </footer>
 
     <script>
-        // 1. Initialisation Particles.js (Effet réseau immersif)
         particlesJS('particles-js', {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
@@ -414,7 +421,6 @@
             "retina_detect": true
         });
 
-        // 2. Bouton Retour en haut
         const backToTopBtn = document.getElementById("backToTop");
         window.addEventListener("scroll", () => {
             if (window.scrollY > 300) { backToTopBtn.style.display = "block"; } 
