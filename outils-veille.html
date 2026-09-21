@@ -13,6 +13,11 @@
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
     <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #050a14;
             --secondary: #38bdf8;
@@ -78,7 +83,7 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover {
             color: var(--secondary);
         }
 
@@ -88,6 +93,7 @@
             max-width: 1200px; 
             margin: auto; 
             flex: 1; 
+            width: 100%;
         }
 
         h3 { 
@@ -239,6 +245,45 @@
             margin: 0 auto;
             font-size: 0.9rem;
             color: var(--text-dim);
+        }
+
+        /* ======================================================== */
+        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        /* ======================================================== */
+        @media (max-width: 768px) {
+            
+            body, html {
+                overflow-x: hidden;
+            }
+
+            /* Le nouveau menu compact pour téléphone */
+            nav {
+                width: 95%; 
+                padding: 12px 10px;
+                gap: 8px;
+                border-radius: 12px; 
+            }
+            
+            nav a {
+                font-size: 0.75rem; 
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .subtitle {
+                text-align: center;
+            }
+
+            .card {
+                padding: 20px;
+            }
         }
     </style>
 </head>

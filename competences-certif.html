@@ -13,6 +13,11 @@
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
     <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             /* Palette cohérente avec le CV et les autres pages */
             --primary: #050a14;        
@@ -45,6 +50,9 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* Nav identique à l'accueil */
@@ -75,12 +83,12 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover {
             color: var(--secondary);
         }
 
         /* --- CONFIGURATION DES SECTIONS --- */
-        section { padding: 60px 10%; max-width: 1200px; margin: auto; }
+        section { padding: 60px 10%; max-width: 1200px; margin: auto; flex: 1; }
 
         h3 { 
             border-left: 5px solid var(--secondary); 
@@ -229,13 +237,44 @@
             text-align: center;
             padding: 20px;
             border-top: 1px solid rgba(56, 189, 248, 0.1);
-            margin-top: 40px;
+            margin-top: auto;
         }
 
         footer p {
             margin: 0 auto;
             font-size: 0.9rem;
             color: var(--text-dim);
+        }
+
+        /* ======================================================== */
+        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        /* ======================================================== */
+        @media (max-width: 768px) {
+            
+            body, html {
+                overflow-x: hidden;
+            }
+
+            /* Le nouveau menu compact pour téléphone */
+            nav {
+                width: 95%; 
+                padding: 12px 10px;
+                gap: 8px;
+                border-radius: 12px; 
+            }
+            
+            nav a {
+                font-size: 0.75rem; 
+            }
+
+            section {
+                padding: 40px 5%;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
         }
     </style>
 </head>

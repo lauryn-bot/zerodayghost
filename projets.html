@@ -13,6 +13,11 @@
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
     <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #050a14;
             --secondary: #38bdf8;
@@ -45,6 +50,9 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         /* --- BARRE DE NAVIGATION --- */
@@ -85,7 +93,8 @@
             padding: 60px 10%; 
             max-width: 1200px; 
             margin: auto; 
-            min-height: 70vh; /* Pour que le footer reste en bas même si on filtre beaucoup */
+            flex: 1; /* Pour que le footer reste en bas même si on filtre beaucoup */
+            width: 100%;
         }
 
         h3 { 
@@ -248,7 +257,7 @@
             text-align: center;
             padding: 20px;
             border-top: 1px solid rgba(56, 189, 248, 0.1);
-            margin-top: 40px;
+            margin-top: auto;
         }
 
         footer p {
@@ -256,13 +265,54 @@
             font-size: 0.9rem;
             color: var(--text-dim);
         }
+
+        /* ======================================================== */
+        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        /* ======================================================== */
+        @media (max-width: 768px) {
+            
+            body, html {
+                overflow-x: hidden;
+            }
+
+            /* Le nouveau menu compact pour téléphone */
+            nav {
+                width: 95%; 
+                padding: 12px 10px;
+                gap: 8px;
+                border-radius: 12px; 
+            }
+            
+            nav a {
+                font-size: 0.75rem; 
+            }
+
+            /* On réduit les marges extérieures pour avoir plus de place */
+            section { 
+                padding: 40px 5%; 
+            }
+
+            h3 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            /* Adaptation des boutons de filtre pour mobile */
+            .filter-container {
+                gap: 10px;
+            }
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 8px 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="index.html">Accueil / À propos</a>
-        <a href="competences-certifications.html">Compétences & Certif</a>
+        <a href="competences-certif.html">Compétences & Certif</a>
         <a href="projets.html">Projets</a>
         <a href="writeups.html">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>

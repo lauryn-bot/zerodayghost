@@ -13,6 +13,11 @@
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
     <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         :root {
             --primary: #050a14;
             --secondary: #38bdf8;
@@ -78,7 +83,7 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        nav a:hover {
             color: var(--secondary);
         }
 
@@ -88,7 +93,7 @@
             max-width: 1200px; 
             margin: auto; 
             flex: 1; /* Remplit l'espace vide pour pousser le footer */
-            width: 80%;
+            width: 100%;
         }
 
         h3 { 
@@ -272,13 +277,56 @@
             color: var(--text-dim);
         }
 
-        /* Responsive form & grid */
+        /* ======================================================== */
+        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
+        /* ======================================================== */
         @media (max-width: 768px) {
+            
+            body, html {
+                overflow-x: hidden;
+            }
+
+            /* Le nouveau menu compact pour téléphone */
+            nav {
+                width: 95%; 
+                padding: 12px 10px;
+                gap: 8px;
+                border-radius: 12px; 
+            }
+            
+            nav a {
+                font-size: 0.75rem; 
+            }
+
+            /* Adaptations spécifiques pour la page Contact */
+            section {
+                padding: 40px 5%;
+            }
+
+            h3 {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+
+            .subtitle {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            /* Force la grille à passer en 1 seule colonne sur mobile */
             .contact-container {
                 grid-template-columns: 1fr;
+                gap: 30px;
             }
+
             .contact-form {
                 padding: 25px;
+            }
+
+            /* Permet aux longs liens (ex: mail ou linkedin) de ne pas déborder */
+            .info-text p {
+                word-wrap: break-word;
+                word-break: break-word;
             }
         }
     </style>
@@ -312,8 +360,7 @@
                     </div>
                 </div>
 
-                <!-- N'oublie pas de modifier "ton-email@proton.me" ci-dessous -->
-                <a href="mailto:ton-email@proton.me" class="info-card">
+                <a href="mailto:hecquelauryn@proton.me" class="info-card">
                     <div class="icon">🛡️</div>
                     <div class="info-text">
                         <h4>Email Privé (Proton)</h4>
@@ -348,8 +395,6 @@
             </div>
 
             <div class="contact-form">
-                <!-- L'attribut action="mailto:..." ouvrira le client mail de l'utilisateur avec tes infos pré-remplies -->
-                <!-- Pense à remplacer l'adresse mail ici aussi ! -->
                 <form action="mailto:hecquelauryn@proton.me" method="post" enctype="text/plain">
                     
                     <div class="form-group">
