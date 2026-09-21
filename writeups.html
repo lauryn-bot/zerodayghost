@@ -84,7 +84,8 @@
             transition: 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        /* Correction ici : uniquement le hover allume le lien en bleu */
+        nav a:hover {
             color: var(--secondary);
         }
 
@@ -258,6 +259,44 @@
         }
 
         footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        /* --- ADAPTATION POUR TÉLÉPHONE (RESPONSIVE) --- */
+        @media (max-width: 768px) {
+            /* On corrige la barre de navigation */
+            nav {
+                width: 85%;
+                padding: 15px;
+                gap: 10px;
+                border-radius: 20px; /* On réduit l'arrondi */
+            }
+
+            /* On réduit les marges extérieures */
+            section { 
+                padding: 30px 5%; 
+            }
+
+            /* On réduit les marges intérieures du rapport */
+            .writeup-container {
+                padding: 20px;
+            }
+
+            /* On réduit un peu la taille des titres */
+            .writeup-header h1, h3 {
+                font-size: 1.8rem;
+            }
+
+            /* On adapte les blocs de code pour qu'ils ne débordent pas */
+            .code-block {
+                font-size: 0.8rem;
+                padding: 10px;
+                word-wrap: break-word;
+            }
+            
+            /* On ajuste la boîte bleue des recommandations */
+            .blue-team-box {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -265,12 +304,12 @@
     <!-- Fond de particules -->
     <div id="particles-js"></div>
 
-    <!-- On ajoute Write-Ups à la navigation -->
+    <!-- On a retiré le class="active" ici -->
     <nav>
         <a href="index.html">Accueil / À propos</a>
         <a href="competences-certif.html">Compétences & Certif</a>
         <a href="projets.html">Projets</a>
-        <a href="writeups.html" class="active">Write-Ups</a>
+        <a href="writeups.html">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="experiences-diplomes.html">Expériences & Diplômes</a>
         <a href="contact.html">Contact</a>
