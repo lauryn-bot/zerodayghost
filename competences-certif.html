@@ -19,7 +19,6 @@
         }
 
         :root {
-            /* Palette cohérente avec le CV et les autres pages */
             --primary: #050a14;        
             --secondary: #38bdf8;      
             --text-main: #e2e8f0;      
@@ -88,7 +87,7 @@
         }
 
         /* --- CONFIGURATION DES SECTIONS --- */
-        section { padding: 60px 10%; max-width: 1200px; margin: auto; flex: 1; }
+        section { padding: 60px 10%; max-width: 1200px; margin: auto; flex: 1; width: 100%; }
 
         h3 { 
             border-left: 5px solid var(--secondary); 
@@ -107,10 +106,12 @@
             font-weight: 700;
         }
 
+        /* ======================================================== */
+        /* CORRECTION MASONRY (POUR EMPÊCHER LES TROUS GÉANTS) */
+        /* ======================================================== */
         .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
-            gap: 25px; 
+            column-width: 320px; /* Crée des colonnes automatiques selon l'écran */
+            column-gap: 25px;
             margin-bottom: 50px;
         }
 
@@ -120,8 +121,15 @@
             border-radius: 6px; 
             border: 1px solid rgba(56, 189, 248, 0.1);
             transition: all 0.3s ease; 
-            display: flex;
+            
+            /* Paramètres pour le nouvel affichage */
+            display: inline-flex;
             flex-direction: column;
+            width: 100%;
+            break-inside: avoid; /* Empêche la carte d'être coupée entre deux colonnes */
+            page-break-inside: avoid;
+            -webkit-column-break-inside: avoid;
+            margin-bottom: 25px; /* L'espacement vertical se fait ici maintenant */
         }
 
         .card:hover { 
