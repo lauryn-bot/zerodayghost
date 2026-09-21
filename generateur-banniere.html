@@ -2,9 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Générateur de Bannière LinkedIn</title>
+    <title>Bannière LinkedIn | Lauryn H-N</title>
     <style>
-        /* On centre la bannière sur la page avec un fond gris foncé autour pour bien la voir */
         body {
             display: flex;
             justify-content: center;
@@ -15,117 +14,147 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* --- TAILLE EXACTE EXIGÉE PAR LES RÉSEAUX SOCIAUX --- */
-        .banner {
-            width: 1200px;
-            height: 630px;
-            background: radial-gradient(circle at right, #0f172a 0%, #050a14 100%);
-            display: flex;
-            align-items: center;
-            padding: 0 80px;
-            box-sizing: border-box;
+        /* Dimensions officielles de la bannière LinkedIn */
+        .linkedin-banner {
+            width: 1584px;
+            height: 396px;
+            background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
         }
 
-        /* Petit effet de grille en fond (ambiance réseau/cyber) */
-        .banner::before {
+        /* Effet de grille Cyber (Identique à ton portfolio) */
+        .linkedin-banner::before {
             content: "";
             position: absolute;
             top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(rgba(56, 189, 248, 0.04) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(56, 189, 248, 0.04) 1px, transparent 1px);
-            background-size: 50px 50px;
+            background: linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: 0;
-            transform: rotate(-10deg);
+            transform: rotate(-5deg);
         }
 
+        /* Zone de sécurité à gauche pour la photo de profil LinkedIn */
+        .safe-zone {
+            width: 350px;
+            height: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Contenu principal (décalé à droite pour ne pas être caché par la photo) */
         .content {
             z-index: 1;
+            flex: 1;
+            padding: 40px 60px 40px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .name-wrapper {
             display: flex;
             align-items: center;
-            gap: 70px;
-            width: 100%;
-        }
-
-        /* Ta photo de profil */
-        .profile {
-            width: 380px;
-            height: 380px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid #38bdf8;
-            box-shadow: 0 0 60px rgba(56, 189, 248, 0.5); /* La fameuse lueur cyan */
-        }
-
-        /* Bloc de texte */
-        .text-box {
-            color: #e2e8f0;
-            flex: 1;
+            gap: 20px;
+            margin-bottom: 10px;
         }
 
         h1 {
-            font-size: 4.2rem;
+            color: #e2e8f0;
+            font-size: 3.5rem;
             margin: 0;
-            font-weight: 800;
             letter-spacing: -1px;
-            line-height: 1.1;
+            font-weight: 800;
+        }
+
+        .highlight {
+            color: #38bdf8;
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
         }
 
         h2 {
-            font-size: 2.4rem;
             color: #38bdf8;
-            margin: 15px 0 25px 0;
-            font-weight: 600;
+            font-size: 1.8rem;
+            margin: 0 0 20px 0;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
-        p {
-            font-size: 1.6rem;
-            color: #94a3b8;
-            margin-bottom: 50px;
-            max-width: 650px;
-            line-height: 1.4;
-        }
-
-        /* Section Logos */
-        .logos {
+        .badges-row {
             display: flex;
-            gap: 20px;
-            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
         }
 
-        .logo-badge {
+        .cyber-badge {
             background: #1e293b;
-            border: 1px solid rgba(56,189,248,0.3);
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 1.3rem;
-            font-weight: bold;
+            color: #e2e8f0;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cyber-badge strong {
             color: #38bdf8;
+        }
+
+        .portfolio-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #94a3b8;
+            font-size: 1.3rem;
+            background: rgba(56, 189, 248, 0.05);
+            padding: 10px 20px;
+            border-radius: 50px;
+            width: fit-content;
+            border: 1px dashed rgba(56, 189, 248, 0.4);
+        }
+
+        .portfolio-link span {
+            color: #38bdf8;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <!-- C'est ce bloc qu'il faudra capturer -->
-    <div class="banner">
+    <!-- ZONE À CAPTURER -->
+    <div class="linkedin-banner">
+        
+        <!-- Espace vide à gauche pour laisser la place à ta photo de profil LinkedIn -->
+        <div class="safe-zone"></div>
+
         <div class="content">
-            <img src="photodeprofil.png" alt="Lauryn" class="profile">
+            <div class="name-wrapper">
+                <h1>LAURYN HECQUE--NASCIMENTO</h1>
+            </div>
             
-            <div class="text-box">
-                <h1>Lauryn Hecque--Nascimento</h1>
-                <h2>Cybersécurité Défensive & OSINT</h2>
-                <p>Découvrez mon portfolio, mes projets d'infrastructure réseaux et mes certifications.</p>
-                
-                <div class="logos">
-                    <div class="logo-badge">Microsoft</div>
-                    <div class="logo-badge">TryHackMe</div>
-                    <div class="logo-badge">Stanford</div>
-                    <div class="logo-badge">Fortinet</div>
-                </div>
+            <h2>Blue Team • OSINT • Infrastructure Réseaux</h2>
+            
+            <div class="badges-row">
+                <div class="cyber-badge">🎯 Top 5% <strong>TryHackMe</strong></div>
+                <div class="cyber-badge">🛡️ Certifiée <strong>Security Blue Team</strong></div>
+                <div class="cyber-badge">🚩 CTF DGA <strong>Deep Threats</strong></div>
+            </div>
+
+            <div class="portfolio-link">
+                💻 Découvrez mes projets & Write-Ups sur <span>lauryn-hecque.github.io</span>
             </div>
         </div>
+
     </div>
 
 </body>
