@@ -92,13 +92,33 @@
 
         .card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
+        /* CORRECTION DU DÉBORDEMENT ICI */
         .card-header {
-            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05); 
+            padding-bottom: 15px;
         }
 
-        .card-acronym { font-size: 1.8rem; font-weight: 900; color: var(--secondary); letter-spacing: 1px; min-width: 110px; }
-        .card-title { font-size: 1.1rem; color: #fff; font-weight: 600; margin: 0; line-height: 1.2; }
+        .card-acronym { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            color: var(--secondary); 
+            letter-spacing: 1px; 
+            flex-shrink: 0; /* <-- Empêche l'écrasement du texte ! */
+        }
+        
+        .card-title { 
+            font-size: 1.1rem; 
+            color: #fff; 
+            font-weight: 600; 
+            margin: 0; 
+            line-height: 1.2; 
+            word-wrap: break-word; /* Force le titre à passer à la ligne si besoin */
+        }
+
         p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 0; }
 
         /* Tags d'outils */
@@ -128,8 +148,9 @@
             section { padding: 40px 5%; }
             h3 { font-size: 1.8rem; text-align: center; }
             .subtitle { text-align: center; }
+            
+            /* Sur téléphone, on empile l'acronyme et le titre l'un sur l'autre */
             .card-header { flex-direction: column; text-align: center; gap: 5px; }
-            .card-acronym { min-width: auto; }
         }
     </style>
 </head>
