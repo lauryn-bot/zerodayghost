@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Projet Mini-SOC Wazuh | Lauryn Hecque--Nascimento</title>
+    <meta name="description" content="Compte-rendu technique : Déploiement d'un SOC, ingénierie de détection (MITRE ATT&CK) et réponse automatisée avec Wazuh.">
+    <meta property="og:title" content="Projet Mini-SOC Wazuh | Lauryn H-N">
+    <meta property="og:description" content="Construction d'un SOC de A à Z : SIEM, Sysmon, Threat Intel et SOAR.">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="URL_DE_TON_IMAGE.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        /* SÉCURITÉ ANTI-DÉBORDEMENT */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+            --success: #38bdf8; 
+        }
+
+        /* --- SCROLLBAR PERSONNALISÉE --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+            flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
+        }
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav a:hover { color: var(--secondary); }
+
+        /* --- CONTENEUR DU RAPPORT --- */
+        section { padding: 40px 10% 80px 10%; max-width: 900px; margin: auto; flex: 1; width: 100%; }
+
+        .back-link {
+            display: inline-flex; align-items: center; color: var(--secondary); text-decoration: none; font-weight: 600;
+            margin-bottom: 25px; transition: 0.3s; background: rgba(56, 189, 248, 0.1); padding: 8px 16px;
+            border-radius: 30px; border: 1px solid var(--accent-card-border);
+        }
+        .back-link:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); transform: translateX(-5px); }
+
+        article {
+            background: rgba(15, 23, 42, 0.95); padding: 40px; border-radius: 8px; border: 1px solid var(--accent-card-border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+
+        h1 { color: var(--secondary); font-size: 2.2rem; margin-top: 0; margin-bottom: 10px; line-height: 1.2; }
+        .authors { color: var(--text-dim); font-style: italic; margin-bottom: 25px; font-size: 0.95rem; }
+        
+        h2 { border-bottom: 1px solid var(--accent-card-border); padding-bottom: 10px; margin-top: 40px; color: #fff; font-size: 1.6rem; }
+        h3 { color: var(--secondary); margin-top: 30px; font-size: 1.2rem; }
+        p { color: var(--text-main); font-size: 1.05rem; }
+
+        .badge { 
+            background: var(--accent-badge); color: var(--secondary); padding: 5px 12px; border-radius: 4px; 
+            font-size: 0.8rem; font-weight: 600; border: 1px solid rgba(56, 189, 248, 0.1); margin-right: 8px; display: inline-block; margin-bottom: 20px;
+        }
+
+        .mission-box {
+            background-color: rgba(56, 189, 248, 0.05); border-left: 4px solid var(--secondary); padding: 20px;
+            border-radius: 0 6px 6px 0; margin: 25px 0; color: var(--text-main); font-size: 1.05rem;
+        }
+        .mission-box strong { color: var(--secondary); }
+
+        /* --- IMAGES --- */
+        .img-container { margin: 30px 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 15px; }
+        .img-container img { max-width: 100%; border: 1px solid var(--accent-card-border); border-radius: 6px; box-shadow: 0 5px 20px rgba(0,0,0,0.4); }
+        .img-caption { display: block; color: var(--text-dim); font-size: 0.9rem; font-style: italic; }
+
+        /* --- CODE --- */
+        .code-block {
+            background-color: var(--primary); color: #a6e22e; padding: 15px 20px; border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto;
+            border: 1px solid var(--accent-card-border); margin: 20px 0; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+            white-space: pre-wrap; word-break: break-word;
+        }
+
+        code { background: var(--primary); color: #38bdf8; padding: 4px 8px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; border: 1px solid var(--accent-card-border); }
+        ul { color: var(--text-main); line-height: 1.7; padding-left: 20px;}
+        li { margin-bottom: 8px; }
+
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop {
+            display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold;
+            border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer;
+            padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease;
+        }
+        #backToTop:hover { background-color: #fff; color: var(--primary); transform: translateY(-3px); }
+
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
+        footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden; }
+            nav { width: 95%; padding: 12px 10px; gap: 8px; border-radius: 12px; }
+            nav a { font-size: 0.75rem; }
+            section { padding: 40px 5%; }
+            article { padding: 20px 15px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="index.html">Accueil / À propos</a>
+        <a href="competences-certif.html">Compétences & Certif</a>
+        <a href="projets.html" class="active">Projets</a>
+        <a href="writeups.html">Write-Ups</a>
+        <a href="outils-veille.html">Outils & Veille</a>
+        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section>
+        <a href="projets.html" class="back-link">← Retour aux projets</a>
+
+        <article>
+            <h1>Déploiement d'un Mini-SOC Wazuh</h1>
+            <div class="authors">Projet réalisé en binôme avec Mehdi BEN MOULAY</div>
+            
+            <div>
+                <span class="badge">Blue Team</span>
+                <span class="badge">SIEM / XDR</span>
+                <span class="badge">Detection Engineering</span>
+                <span class="badge">MITRE ATT&CK</span>
+                <span class="badge">SOAR-lite</span>
+            </div>
+
+            <div class="mission-box">
+                <strong>OBJECTIF :</strong> Concevoir et déployer une infrastructure complète de surveillance, de détection et de réponse aux incidents (SOC) sur un parc hybride, afin de contrer des attaques réalistes.
+            </div>
+
+            <h2>1. Architecture & Télémétrie Avancée</h2>
+            <p>Le projet repose sur un cluster <strong>Wazuh</strong> (Manager, Indexer, Dashboard) déployé sur Ubuntu Server, chargé de superviser des endpoints Windows 11 et Debian 13.</p>
+            
+            <h3>La Télémétrie Windows (Sysmon)</h3>
+            <p>Les journaux Windows classiques manquant de granularité, nous avons déployé <strong>Sysmon</strong> avec la configuration recommandée par l'industrie (<em>SwiftOnSecurity</em>). Cela permet au SIEM d'ingérer des logs bas-niveau cruciaux, notamment la création de processus avec arguments (Event ID 1) et l'accès à la mémoire LSASS (Event ID 10).</p>
+
+            <div class="img-container">
+                <img src="wazuhdashboard.png" alt="Console d'administration Wazuh">
+                <span class="img-caption">Validation de l'enrôlement des agents Windows et Debian sur le Dashboard Wazuh.</span>
+            </div>
+
+            <h2>2. Ingénierie de Détection (Detection Engineering)</h2>
+            
+            <h3>Simulation d'Attaque (Atomic Red Team)</h3>
+            <p>Pour tester l'efficacité du SOC, nous avons utilisé le framework <strong>Atomic Red Team</strong> afin d'émuler des comportements adverses concrets, alignés sur le standard <strong>MITRE ATT&CK</strong>.</p>
+            
+            <h3>Création de Règle Sur-Mesure</h3>
+            <p>Suite à la simulation d'une attaque de persistance (T1547.001 - Registry Run Keys), nous avons rédigé une règle de détection personnalisée en XML, exploitant le moteur d'expressions régulières <code>PCRE2</code> pour déclencher une alerte critique :</p>
+
+            <div class="code-block">&lt;!-- Règle de détection SOC personnalisée : Persistance Run --&gt;
+&lt;rule id="100005" level="12"&gt;
+  &lt;if_sid&gt;61613, 61614, 61615&lt;/if_sid&gt;
+  &lt;field name="win.eventdata.targetObject" type="pcre2"&gt;(?i)CurrentVersion.*Run&lt;/field&gt;
+  &lt;description&gt;ALERTE SOC : Tentative de persistance detectee dans la cle de registre Run&lt;/description&gt;
+  &lt;mitre&gt;
+    &lt;id&gt;T1547.001&lt;/id&gt;
+  &lt;/mitre&gt;
+&lt;/rule&gt;</div>
+
+            <h2>3. Défense Active & Threat Intelligence</h2>
+            
+            <h3>Automatisation de la Réponse (SOAR-lite)</h3>
+            <p>Pour sortir d'une posture purement passive, nous avons configuré le module <strong>Active Response</strong> de Wazuh. Lors d'une tentative de brute-force SSH sur le serveur Debian, le SIEM ordonne dynamiquement l'ajout de l'IP attaquante dans la table de filtrage <code>iptables</code> (Action DROP) pour une durée de 60 secondes.</p>
+
+            <h3>Intégration CTI & Alerting</h3>
+            <ul>
+                <li><strong>VirusTotal :</strong> Corrélation en temps réel des hashs de fichiers suspects (via File Integrity Monitoring) avec l'API publique de VirusTotal.</li>
+                <li><strong>Chaîne d'Astreinte (Discord) :</strong> Développement d'un script d'intégration en <strong>Python</strong> qui parse les alertes critiques (JSON) générées par Wazuh, et les transmet en temps réel via un Webhook sur un canal Discord d'astreinte.</li>
+            </ul>
+
+            <div class="img-container">
+                <!-- Remplacer par ta capture d'écran de l'alerte Discord (Page 11 du PDF) -->
+                <img src="attackdiscord.png" alt="Alerte Discord SOC Wazuh">
+                <span class="img-caption">Notification Rich Embed envoyée dynamiquement par le script Python sur le canal de réponse à incident.</span>
+            </div>
+
+            <h2>4. Bilan</h2>
+            <p>Ce projet grandeur nature m'a permis de comprendre les rouages complexes du métier d'analyste SOC et d'ingénieur détection. Il a également mis en lumière des limites techniques réelles (SPOF lié à l'instance unique, quotas d'API), ouvrant la voie à de futures améliorations comme la mise en place d'un cluster en haute disponibilité.</p>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="Rapport_Mini-SOC_BlueScop (1).pdf" target="_blank" class="back-link" style="background-color: var(--secondary); color: var(--primary);">
+                    Consulter le rapport technique complet (PDF)
+                </a>
+            </div>
+
+        </article>
+    </section>
+
+    <!-- Bouton pour remonter en haut -->
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+    <footer>
+        <p>Projet technique réalisé par Lauryn Hecque--Nascimento - Spécialité SISR</p>
+    </footer>
+
+    <!-- SCRIPTS UI/UX -->
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#38bdf8" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+            },
+            "retina_detect": true
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) { backToTopBtn.style.display = "block"; } 
+            else { backToTopBtn.style.display = "none"; }
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>
