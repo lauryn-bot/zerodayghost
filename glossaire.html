@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- BALISES SEO & OPEN GRAPH -->
+    <title>Glossaire du Renseignement | Lauryn Hecque--Nascimento</title>
+    <meta name="description" content="Les 14 disciplines du renseignement (INTs) appliquées à la cybersécurité et à la Threat Intelligence.">
+    <meta property="og:title" content="Glossaire OSINT & CTI | Lauryn H-N">
+    <meta property="og:description" content="Découvrez les 14 grandes familles de collecte de renseignement (OSINT, HUMINT, SIGINT, TECHINT...).">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+
+    <!-- Script Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+        }
+
+        /* --- SCROLLBAR PERSONNALISÉE --- */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            position: sticky;
+            top: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); 
+            flex-wrap: wrap;
+            width: fit-content;
+            margin: 20px auto 0 auto;
+            border-radius: 50px;
+        }
+
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--secondary); }
+
+        /* --- SECTIONS --- */
+        section { padding: 60px 10%; max-width: 1400px; margin: auto; flex: 1; width: 100%; }
+
+        h3 { border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 20px; font-size: 2.2rem; color: #fff; letter-spacing: -0.5px; }
+        .subtitle { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 50px; max-width: 800px; }
+
+        /* --- GRILLES & CARTES --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 60px;
+        }
+
+        .card { 
+            background: rgba(15, 23, 42, 0.85); padding: 30px; border-radius: 6px; 
+            border: 1px solid var(--accent-card-border); transition: all 0.3s ease; backdrop-filter: blur(5px);
+            display: flex; flex-direction: column;
+        }
+
+        .card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+
+        .card-header {
+            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;
+        }
+
+        .card-acronym { font-size: 1.8rem; font-weight: 900; color: var(--secondary); letter-spacing: 1px; min-width: 110px; }
+        .card-title { font-size: 1.1rem; color: #fff; font-weight: 600; margin: 0; line-height: 1.2; }
+        p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 0; }
+
+        /* Tags d'outils */
+        .tools-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+        .tool-tag {
+            background: rgba(56, 189, 248, 0.05); color: var(--text-main); border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; font-weight: 600;
+        }
+
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop {
+            display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold; 
+            border: none; background-color: var(--secondary); color: var(--primary); cursor: pointer; padding: 12px 18px; 
+            border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease;
+        }
+        #backToTop:hover { background-color: #fff; transform: translateY(-3px); }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
+        footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden; }
+            nav { width: 95%; padding: 12px 10px; gap: 8px; border-radius: 12px; }
+            nav a { font-size: 0.70rem; }
+            section { padding: 40px 5%; }
+            h3 { font-size: 1.8rem; text-align: center; }
+            .subtitle { text-align: center; }
+            .card-header { flex-direction: column; text-align: center; gap: 5px; }
+            .card-acronym { min-width: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="competences-certif.html">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="writeups.html">Write-Ups</a>
+        <a href="outils-veille.html">Outils & Veille</a>
+        <a href="glossaire.html" class="active">Glossaire</a>
+        <a href="experiences-diplomes.html">Expériences</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section id="glossary">
+        <h3>Les 14 Disciplines du Renseignement</h3>
+        <p class="subtitle">Dans le domaine de la Cyber Threat Intelligence (CTI), la collecte d'informations s'appuie sur la doctrine militaire et stratégique. Voici les 14 familles de collecte (INTs) et leur application en cybersécurité.</p>
+
+        <div class="grid">
+            
+            <!-- 1. OSINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">OSINT</div>
+                    <div class="card-title">Open Source Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement d'Origine Sources Ouvertes</span></div>
+                </div>
+                <p>La discipline reine de l'investigation civile. Elle consiste à collecter et analyser des informations publiquement accessibles (DNS, bases de données, archives web) sans interaction directe avec la cible (approche EASM).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">SpiderFoot</span>
+                    <span class="tool-tag">Shodan</span>
+                    <span class="tool-tag">Google Dorks</span>
+                </div>
+            </div>
+
+            <!-- 2. SOCMINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">SOCMINT</div>
+                    <div class="card-title">Social Media Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement issu des Réseaux Sociaux</span></div>
+                </div>
+                <p>Sous-branche de l'OSINT dédiée à l'analyse des réseaux sociaux. En cyber, c'est crucial pour traquer des acteurs de la menace (Threat Actors) sur Telegram, X, ou enquêter sur des fuites de données (Leaks).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Maltego</span>
+                    <span class="tool-tag">Sherlock</span>
+                    <span class="tool-tag">TgDB</span>
+                </div>
+            </div>
+
+            <!-- 3. GEOINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">GEOINT</div>
+                    <div class="card-title">Geospatial Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Géospatial</span></div>
+                </div>
+                <p>Fusionne l'imagerie, la topographie et l'analyse de données de géolocalisation. Essentiel pour cartographier physiquement une infrastructure, un Data Center ou contextualiser une attaque physique.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Google Earth Pro</span>
+                    <span class="tool-tag">Strava Heatmaps</span>
+                </div>
+            </div>
+
+            <!-- 4. IMINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">IMINT</div>
+                    <div class="card-title">Imagery Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement d'Origine Image</span></div>
+                </div>
+                <p>Souvent associé au GEOINT, il se concentre purement sur l'analyse visuelle de photographies, de vidéos ou d'images satellites. Utilisé en Forensics pour extraire des métadonnées ou prouver l'altération d'une image (Deepfake).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">InVID</span>
+                    <span class="tool-tag">ExifTool</span>
+                    <span class="tool-tag">Forensically</span>
+                </div>
+            </div>
+
+            <!-- 5. CYBINT / DNINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">CYBINT</div>
+                    <div class="card-title">Cyber / Digital Network Intel<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement d'Origine Cybernétique</span></div>
+                </div>
+                <p>Le cœur de notre métier. Consiste à analyser les cybermenaces depuis l'intérieur : étude d'artefacts, analyse de logs, découverte des TTPs adverses et collecte d'Indicateurs de Compromission (IoC).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">SIEM (Wazuh)</span>
+                    <span class="tool-tag">VirusTotal (CTI)</span>
+                    <span class="tool-tag">Sysmon</span>
+                </div>
+            </div>
+
+            <!-- 6. SIGINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">SIGINT</div>
+                    <div class="card-title">Signals Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Électromagnétique</span></div>
+                </div>
+                <p>La grande famille de l'interception de signaux. En informatique (Blue Team), le SIGINT se traduit par la capture globale du trafic réseau, la détection d'anomalies radio (SDR) et l'écoute de canaux non sécurisés.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">SDR (Software Defined Radio)</span>
+                    <span class="tool-tag">Aircrack-ng</span>
+                </div>
+            </div>
+
+            <!-- 7. COMINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">COMINT</div>
+                    <div class="card-title">Communications Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement des Communications</span></div>
+                </div>
+                <p>Sous-branche du SIGINT ciblant spécifiquement les échanges entre personnes ou systèmes. En cyberdéfense, c'est l'interception et l'analyse de paquets (Deep Packet Inspection), l'analyse d'emails suspects ou de trafics en clair (HTTP/Telnet).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Wireshark</span>
+                    <span class="tool-tag">Suricata (IDS)</span>
+                    <span class="tool-tag">TCPdump</span>
+                </div>
+            </div>
+
+            <!-- 8. ELINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">ELINT</div>
+                    <div class="card-title">Electronic Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Électronique</span></div>
+                </div>
+                <p>Sous-branche du SIGINT ciblant les signaux "non-communicants" (ex: Radars militaires). Dans le monde cyber, cela rejoint les attaques par canaux auxiliaires (Side-Channel / TEMPEST) visant à capter les émissions électroniques des processeurs ou écrans.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Attaques TEMPEST</span>
+                    <span class="tool-tag">Side-Channel</span>
+                </div>
+            </div>
+
+            <!-- 9. FISINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">FISINT</div>
+                    <div class="card-title">Foreign Instrumentation Signals<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Signaux d'Instrumentation</span></div>
+                </div>
+                <p>Dernière sous-branche du SIGINT, spécialisée dans la télémétrie et les signaux de machines. Très pertinent en cybersécurité industrielle (OT/ICS) pour analyser le trafic des automates programmables (SCADA) et des objets connectés (IoT).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Analyse SCADA / ICS</span>
+                    <span class="tool-tag">Protocoles IoT (MQTT)</span>
+                </div>
+            </div>
+
+            <!-- 10. TECHINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">TECHINT</div>
+                    <div class="card-title">Technical Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Technique</span></div>
+                </div>
+                <p>L'analyse approfondie des armes et équipements adverses pour en comprendre le fonctionnement et les faiblesses. En cybersécurité, c'est le Reverse Engineering (rétro-ingénierie) de malwares et l'analyse de code malveillant en sandbox.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Ghidra</span>
+                    <span class="tool-tag">IDA Pro</span>
+                    <span class="tool-tag">Cuckoo Sandbox</span>
+                </div>
+            </div>
+
+            <!-- 11. MASINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">MASINT</div>
+                    <div class="card-title">Measurement & Signature Intel<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Mesure et Signature</span></div>
+                </div>
+                <p>Détection basée sur des traces physiques complexes (chimiques, acoustiques). Appliqué à l'informatique, c'est la détection de menaces par analyse de "signatures" (YARA rules, empreintes de fichiers) et d'anomalies comportementales complexes (UEBA).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">YARA Rules</span>
+                    <span class="tool-tag">Analyse Heuristique</span>
+                </div>
+            </div>
+
+            <!-- 12. FININT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">FININT</div>
+                    <div class="card-title">Financial Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Financier</span></div>
+                </div>
+                <p>L'analyse des flux monétaires. Aujourd'hui indissociable de la lutte contre la cybercriminalité (groupes Ransomwares). Implique le traçage minutieux des portefeuilles cryptographiques sur la Blockchain pour remonter aux attaquants.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Etherscan</span>
+                    <span class="tool-tag">Blockchain OSINT</span>
+                </div>
+            </div>
+
+            <!-- 13. MEDINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">MEDINT</div>
+                    <div class="card-title">Medical Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Médical</span></div>
+                </div>
+                <p>Analyse des capacités de santé d'une cible. En CTI, le domaine médical est particulièrement suivi car les hôpitaux sont des cibles critiques (Ransomwares). C'est aussi la surveillance des fuites massives de données de santé personnelle (HDS).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Suivi HDS</span>
+                    <span class="tool-tag">Threat Intel Hospitalière</span>
+                </div>
+            </div>
+
+            <!-- 14. HUMINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">HUMINT</div>
+                    <div class="card-title">Human Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Humain</span></div>
+                </div>
+                <p>La collecte d'informations via des sources humaines. En cybersécurité, cette discipline couvre l'ingénierie sociale (Phishing, Vishing) ainsi que l'infiltration sous couverture d'agents dans des forums du Dark Web pour sourcer des informations.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Social Engineering</span>
+                    <span class="tool-tag">Infiltration Dark Web</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#38bdf8" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+            },
+            "retina_detect": true
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) { backToTopBtn.style.display = "block"; } 
+            else { backToTopBtn.style.display = "none"; }
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>
