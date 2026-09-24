@@ -6,9 +6,9 @@
     
     <!-- BALISES SEO & OPEN GRAPH -->
     <title>Glossaire du Renseignement | Lauryn Hecque--Nascimento</title>
-    <meta name="description" content="Les 14 disciplines du renseignement (INTs) appliquées à la cybersécurité et à la Threat Intelligence.">
+    <meta name="description" content="Les 20 disciplines du renseignement (INTs) appliquées à la cybersécurité et à la Threat Intelligence.">
     <meta property="og:title" content="Glossaire OSINT & CTI | Lauryn H-N">
-    <meta property="og:description" content="Découvrez les 14 grandes familles de collecte de renseignement (OSINT, HUMINT, SIGINT, TECHINT...).">
+    <meta property="og:description" content="Découvrez les 20 grandes familles de collecte de renseignement (OSINT, DARKINT, DATINT, SIGINT...).">
     <meta property="og:type" content="website">
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
@@ -92,33 +92,17 @@
 
         .card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
-        /* CORRECTION DU DÉBORDEMENT ICI */
         .card-header {
-            display: flex; 
-            align-items: center; 
-            gap: 15px; 
-            margin-bottom: 15px;
-            border-bottom: 1px solid rgba(255,255,255,0.05); 
-            padding-bottom: 15px;
+            display: flex; align-items: center; gap: 15px; margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px;
         }
 
         .card-acronym { 
-            font-size: 1.8rem; 
-            font-weight: 900; 
-            color: var(--secondary); 
-            letter-spacing: 1px; 
-            flex-shrink: 0; /* <-- Empêche l'écrasement du texte ! */
+            font-size: 1.8rem; font-weight: 900; color: var(--secondary); letter-spacing: 1px; 
+            flex-shrink: 0; 
         }
         
-        .card-title { 
-            font-size: 1.1rem; 
-            color: #fff; 
-            font-weight: 600; 
-            margin: 0; 
-            line-height: 1.2; 
-            word-wrap: break-word; /* Force le titre à passer à la ligne si besoin */
-        }
-
+        .card-title { font-size: 1.1rem; color: #fff; font-weight: 600; margin: 0; line-height: 1.2; word-wrap: break-word; }
         p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-bottom: 0; }
 
         /* Tags d'outils */
@@ -148,8 +132,6 @@
             section { padding: 40px 5%; }
             h3 { font-size: 1.8rem; text-align: center; }
             .subtitle { text-align: center; }
-            
-            /* Sur téléphone, on empile l'acronyme et le titre l'un sur l'autre */
             .card-header { flex-direction: column; text-align: center; gap: 5px; }
         }
     </style>
@@ -170,8 +152,8 @@
     </nav>
 
     <section id="glossary">
-        <h3>Les 14 Disciplines du Renseignement</h3>
-        <p class="subtitle">Dans le domaine de la Cyber Threat Intelligence (CTI), la collecte d'informations s'appuie sur la doctrine militaire et stratégique. Voici les 14 familles de collecte (INTs) et leur application en cybersécurité.</p>
+        <h3>Les 20 Disciplines du Renseignement</h3>
+        <p class="subtitle">Dans le domaine de la Cyber Threat Intelligence (CTI), la collecte d'informations s'appuie sur la doctrine militaire et stratégique. Voici les 20 familles de collecte (INTs) et leur application en cybersécurité.</p>
 
         <div class="grid">
             
@@ -185,17 +167,31 @@
                 <div class="tools-container">
                     <span class="tool-tag">SpiderFoot</span>
                     <span class="tool-tag">Shodan</span>
-                    <span class="tool-tag">Google Dorks</span>
+                    <span class="tool-tag">Recon-ng</span>
                 </div>
             </div>
 
-            <!-- 2. SOCMINT -->
+            <!-- 2. GOOGLINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">GOOGLINT</div>
+                    <div class="card-title">Google Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement par Moteurs de Recherche</span></div>
+                </div>
+                <p>Sous-branche de l'OSINT dédiée à l'exploitation avancée des moteurs de recherche (Google Dorking / Google Hacking). Utilisée en cyber pour découvrir des serveurs mal configurés, des fichiers sensibles exposés ou des interfaces ouvertes.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Google Dorks</span>
+                    <span class="tool-tag">GHDB</span>
+                    <span class="tool-tag">Dorking Yandex/Bing</span>
+                </div>
+            </div>
+
+            <!-- 3. SOCMINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">SOCMINT</div>
                     <div class="card-title">Social Media Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement issu des Réseaux Sociaux</span></div>
                 </div>
-                <p>Sous-branche de l'OSINT dédiée à l'analyse des réseaux sociaux. En cyber, c'est crucial pour traquer des acteurs de la menace (Threat Actors) sur Telegram, X, ou enquêter sur des fuites de données (Leaks).</p>
+                <p>Sous-branche de l'OSINT dédiée à l'analyse des réseaux sociaux. En cyber, c'est crucial pour traquer des acteurs de la menace (Threat Actors) sur Telegram, X, ou profiler les employés d'une entreprise cible.</p>
                 <div class="tools-container">
                     <span class="tool-tag">Maltego</span>
                     <span class="tool-tag">Sherlock</span>
@@ -203,7 +199,49 @@
                 </div>
             </div>
 
-            <!-- 3. GEOINT -->
+            <!-- 4. DARKINT (NOUVEAU) -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">DARKINT</div>
+                    <div class="card-title">Dark Web Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement du Dark Web</span></div>
+                </div>
+                <p>Collecte et analyse d'informations issues des réseaux superposés et chiffrés (Tor, I2P). Indispensable en CTI pour surveiller les forums de cybercriminels, les marchés illicites et les sites de revendication de ransomwares (Ransomware Data Sites).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Tor Browser</span>
+                    <span class="tool-tag">Ransomwatch</span>
+                    <span class="tool-tag">Ahmia</span>
+                </div>
+            </div>
+
+            <!-- 5. DATINT (NOUVEAU) -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">DATINT</div>
+                    <div class="card-title">Data Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement de Données (Fuites)</span></div>
+                </div>
+                <p>Exploitation et croisement de bases de données issues de fuites (Leaks / Data breaches). Permet de retrouver des mots de passe compromis (combo lists), des configurations internes ou des identifiants d'employés pour prévenir des attaques.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">HaveIBeenPwned</span>
+                    <span class="tool-tag">Dehashed</span>
+                    <span class="tool-tag">Grep (CLI)</span>
+                </div>
+            </div>
+
+            <!-- 6. HOSINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">HOSINT</div>
+                    <div class="card-title">Historical Open Source Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement d'Origine Historique</span></div>
+                </div>
+                <p>Collecte et analyse de renseignements à partir de sources ouvertes historiques numérisées. Permet de retrouver d'anciens actes notariés, des registres ou des articles de presse anciens pour retracer l'historique profond d'une entreprise ou d'une personne.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Gallica (BnF)</span>
+                    <span class="tool-tag">RetroNews</span>
+                    <span class="tool-tag">Wayback Machine</span>
+                </div>
+            </div>
+
+            <!-- 7. GEOINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">GEOINT</div>
@@ -213,10 +251,11 @@
                 <div class="tools-container">
                     <span class="tool-tag">Google Earth Pro</span>
                     <span class="tool-tag">Strava Heatmaps</span>
+                    <span class="tool-tag">Overpass Turbo</span>
                 </div>
             </div>
 
-            <!-- 4. IMINT -->
+            <!-- 8. IMINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">IMINT</div>
@@ -230,7 +269,7 @@
                 </div>
             </div>
 
-            <!-- 5. CYBINT / DNINT -->
+            <!-- 9. CYBINT / DNINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">CYBINT</div>
@@ -244,7 +283,7 @@
                 </div>
             </div>
 
-            <!-- 6. SIGINT -->
+            <!-- 10. SIGINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">SIGINT</div>
@@ -257,7 +296,7 @@
                 </div>
             </div>
 
-            <!-- 7. COMINT -->
+            <!-- 11. COMINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">COMINT</div>
@@ -271,7 +310,7 @@
                 </div>
             </div>
 
-            <!-- 8. ELINT -->
+            <!-- 12. ELINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">ELINT</div>
@@ -284,7 +323,7 @@
                 </div>
             </div>
 
-            <!-- 9. FISINT -->
+            <!-- 13. FISINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">FISINT</div>
@@ -297,7 +336,21 @@
                 </div>
             </div>
 
-            <!-- 10. TECHINT -->
+            <!-- 14. ACINT -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">ACINT</div>
+                    <div class="card-title">Acoustic Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement d'Origine Acoustique</span></div>
+                </div>
+                <p>Basé sur l'analyse de signatures acoustiques (sonars sous-marins, bruits de moteurs). En cyber, cela rejoint l'Audio Forensics et les attaques par canaux auxiliaires (ex: deviner des mots de passe à l'oreille, ou <i>Acoustic Cryptanalysis</i>).</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Acoustic Cryptanalysis</span>
+                    <span class="tool-tag">Audio Forensics</span>
+                    <span class="tool-tag">Spectrogrammes</span>
+                </div>
+            </div>
+
+            <!-- 15. TECHINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">TECHINT</div>
@@ -311,7 +364,7 @@
                 </div>
             </div>
 
-            <!-- 11. MASINT -->
+            <!-- 16. MASINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">MASINT</div>
@@ -324,7 +377,7 @@
                 </div>
             </div>
 
-            <!-- 12. FININT -->
+            <!-- 17. FININT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">FININT</div>
@@ -337,7 +390,7 @@
                 </div>
             </div>
 
-            <!-- 13. MEDINT -->
+            <!-- 18. MEDINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">MEDINT</div>
@@ -350,16 +403,30 @@
                 </div>
             </div>
 
-            <!-- 14. HUMINT -->
+            <!-- 19. TRASHINT (NOUVEAU) -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-acronym">TRASHINT</div>
+                    <div class="card-title">Trash Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement de Déchets</span></div>
+                </div>
+                <p>Aussi connu sous le nom de "Dumpster Diving" (fouille de poubelles). En sécurité physique et Red Team, c'est l'art de récupérer des documents sensibles non broyés (post-its avec mots de passe, organigrammes) ou des disques durs mal détruits.</p>
+                <div class="tools-container">
+                    <span class="tool-tag">Dumpster Diving</span>
+                    <span class="tool-tag">Red Team Physique</span>
+                    <span class="tool-tag">OPSEC</span>
+                </div>
+            </div>
+
+            <!-- 20. HUMINT -->
             <div class="card">
                 <div class="card-header">
                     <div class="card-acronym">HUMINT</div>
                     <div class="card-title">Human Intelligence<br><span style="color:var(--text-dim); font-size:0.9rem; font-weight:normal;">Renseignement Humain</span></div>
                 </div>
-                <p>La collecte d'informations via des sources humaines. En cybersécurité, cette discipline couvre l'ingénierie sociale (Phishing, Vishing) ainsi que l'infiltration sous couverture d'agents dans des forums du Dark Web pour sourcer des informations.</p>
+                <p>La collecte d'informations via des sources humaines. En cybersécurité, cette discipline couvre l'ingénierie sociale (Phishing, Vishing) ainsi que l'infiltration sous couverture d'agents dans des forums pour sourcer des informations.</p>
                 <div class="tools-container">
                     <span class="tool-tag">Social Engineering</span>
-                    <span class="tool-tag">Infiltration Dark Web</span>
+                    <span class="tool-tag">Vishing / Phishing</span>
                 </div>
             </div>
 
