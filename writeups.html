@@ -5,21 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- BALISES SEO & OPEN GRAPH -->
-    <title>Write-Ups & Analyses | Lauryn Hecque--Nascimento</title>
-    <meta name="description" content="Découvrez mes Write-Ups et analyses de CTF. Méthodologie OSINT, Forensics et recommandations Blue Team.">
+    <title>Write-Ups CTF Deep Threats | Lauryn H-N</title>
+    <meta name="description" content="Sommaire de mes Write-Ups du CTF Deep Threats organisé par la DGA et Campus OSINT.">
     <meta property="og:title" content="Write-Ups | Lauryn Hecque--Nascimento">
-    <meta property="og:description" content="Mes rapports d'investigation : CTF, TryHackMe et Threat Intelligence.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+    <meta property="og:image" content="URL_DE_TON_IMAGE.png">
 
-    <!-- Script Particles.js pour l'arrière-plan immersif -->
+    <!-- Script Particles.js -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <style>
-        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
+        *, *::before, *::after { box-sizing: border-box; }
 
         :root {
             --primary: #050a14;
@@ -32,7 +28,6 @@
             --success: #3e9b85;
         }
 
-        /* --- SCROLLBAR PERSONNALISÉE --- */
         ::-webkit-scrollbar { width: 10px; }
         ::-webkit-scrollbar-track { background: var(--primary); }
         ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
@@ -51,24 +46,15 @@
             position: relative;
         }
 
-        /* Particules en arrière-plan fixe */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1; 
-        }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
 
-        /* --- BARRE DE NAVIGATION --- */
         /* --- BARRE DE NAVIGATION --- */
         nav {
             background-color: var(--bg-card);
-            padding: 12px 25px; /* Marges réduites */
+            padding: 15px 30px;
             display: flex;
             justify-content: center;
-            gap: 15px; /* Espacement réduit entre les mots */
+            gap: 20px;
             position: sticky;
             top: 20px;
             z-index: 1000;
@@ -79,326 +65,164 @@
             margin: 20px auto 0 auto;
             border-radius: 50px;
         }
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        nav a:hover { color: var(--secondary); }
 
-        nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem; /* Police légèrement réduite */
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+        /* --- SECTIONS --- */
+        section { padding: 60px 10%; max-width: 1200px; margin: auto; flex: 1; width: 100%; }
+
+        h3 { border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 20px; font-size: 2.2rem; color: #fff; letter-spacing: -0.5px; }
+        .subtitle { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 50px; max-width: 800px; }
+
+        /* --- GRILLE DES CHAPITRES --- */
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 60px;
         }
 
-        nav a:hover {
-            color: var(--secondary);
+        .card { 
+            background: rgba(15, 23, 42, 0.85); padding: 30px; border-radius: 8px; 
+            border: 1px solid var(--accent-card-border); transition: all 0.3s ease; backdrop-filter: blur(5px);
+            display: flex; flex-direction: column; border-left: 4px solid var(--secondary);
         }
+        .card:hover { transform: translateY(-5px); border-color: var(--secondary); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
 
-        /* --- SECTION PRINCIPALE (OPTIMISÉE POUR LA LECTURE) --- */
-        section { 
-            padding: 60px 10%; 
-            max-width: 900px; 
-            margin: auto; 
-            flex: 1; 
-            width: 100%;
-        }
+        .chapter-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .chapter-num { font-size: 0.9rem; color: var(--secondary); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .challs-count { background: var(--accent-badge); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; border: 1px solid rgba(255,255,255,0.1); }
 
-        h3 { 
-            border-left: 5px solid var(--secondary); 
-            padding-left: 20px; 
-            margin-bottom: 20px; 
-            font-size: 2.2rem; 
-            color: #fff;
-            letter-spacing: -0.5px;
-        }
+        .card h4 { font-size: 1.5rem; color: #fff; margin: 0 0 15px 0; }
+        .card p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.6; flex-grow: 1; margin-top: 0; margin-bottom: 25px; }
 
-        .subtitle {
-            color: var(--text-dim);
-            font-size: 1.1rem;
-            margin-bottom: 50px;
+        .btn-read { 
+            background: rgba(56, 189, 248, 0.1); color: var(--secondary); border: 1px solid var(--secondary); 
+            padding: 10px 0; text-align: center; border-radius: 4px; font-weight: bold; text-decoration: none; transition: 0.3s; 
         }
+        .btn-read:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
-        /* --- ARTICLE WRITE-UP --- */
-        .writeup-container {
-            background: rgba(15, 23, 42, 0.95);
-            padding: 40px;
-            border-radius: 8px;
-            border: 1px solid var(--accent-card-border);
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            margin-bottom: 40px;
-            width: 100%;
-        }
-
-        .writeup-header {
-            border-bottom: 1px solid var(--accent-card-border);
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-
-        .writeup-header h1 {
-            color: var(--secondary);
-            font-size: 2.2rem;
-            margin: 0 0 15px 0;
-            line-height: 1.2;
-        }
-
-        .writeup-meta {
-            display: flex;
-            gap: 10px;
-            color: var(--text-dim);
-            font-size: 0.9rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .badge { 
-            background: var(--accent-badge); 
-            color: var(--secondary); 
-            padding: 5px 12px; 
-            border-radius: 4px; 
-            font-size: 0.8rem; 
-            font-weight: 600;
-            border: 1px solid rgba(56, 189, 248, 0.1);
-        }
-
-        /* Contenu du rapport */
-        .writeup-content h4 {
-            color: #fff;
-            font-size: 1.4rem;
-            margin-top: 35px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            padding-bottom: 8px;
-        }
-
-        .writeup-content p {
-            color: var(--text-main);
-            font-size: 1.05rem;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        /* Faux bloc de code / Terminal */
-        .code-block {
-            background-color: var(--primary);
-            color: #a6e22e; /* Vert terminal */
-            padding: 15px 20px;
-            border-radius: 6px;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 0.95rem;
-            overflow-x: auto;
-            border: 1px solid var(--accent-card-border);
-            margin: 20px 0;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-        }
-
-        .highlight {
-            color: #f92672; /* Rose syntaxique */
-            font-weight: bold;
-        }
-
-        /* Boîte Blue Team (Recommandations) */
-        .blue-team-box {
-            background-color: rgba(62, 155, 133, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 20px;
-            border-radius: 0 6px 6px 0;
-            margin-top: 30px;
-        }
-
-        .blue-team-box h5 {
-            color: var(--success);
-            margin: 0 0 10px 0;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .blue-team-box ul {
-            margin: 0;
-            padding-left: 20px;
-            color: var(--text-main);
-            line-height: 1.6;
-        }
-
-        .blue-team-box li {
-            margin-bottom: 8px;
-        }
-
-        /* --- BOUTON RETOUR EN HAUT --- */
-        #backToTop {
-            display: none; 
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 99;
-            font-size: 1.2rem;
-            font-weight: bold;
-            border: none;
-            outline: none;
-            background-color: var(--secondary);
-            color: var(--primary);
-            cursor: pointer;
-            padding: 12px 18px;
-            border-radius: 50px;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        #backToTop:hover {
-            background-color: #fff;
-            color: var(--primary);
-            transform: translateY(-3px);
-        }
+        /* --- HEADER SPÉCIAL CTF --- */
+        .ctf-header-box { background: rgba(56, 189, 248, 0.05); border: 1px solid var(--accent-card-border); padding: 25px; border-radius: 8px; margin-bottom: 40px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+        .ctf-logo { width: 80px; height: 80px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.4)); flex-shrink: 0; }
+        .ctf-info h2 { margin: 0 0 5px 0; color: #fff; font-size: 1.8rem; }
+        .ctf-info p { margin: 0; color: var(--text-dim); }
 
         /* --- FOOTER --- */
-        footer {
-            background-color: var(--bg-card);
-            text-align: center;
-            padding: 20px;
-            border-top: 1px solid rgba(56, 189, 248, 0.1);
-            margin-top: auto;
-        }
-
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
         footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
 
-        /* ======================================================== */
-        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
-        /* ======================================================== */
+        /* RESPONSIVE */
         @media (max-width: 768px) {
-            
-            /* SÉCURITÉ : Bloque le défilement horizontal (la bande grise) */
-            body, html {
-                overflow-x: hidden;
-            }
-
-            /* On corrige la barre de navigation */
-            nav {
-                width: 95%; 
-                padding: 12px 10px;
-                gap: 8px;
-                border-radius: 12px; 
-            }
-            
-            nav a {
-                font-size: 0.75rem; 
-            }
-
-            /* On réduit les marges extérieures pour avoir plus de place */
-            section { 
-                padding: 30px 15px; 
-            }
-
-            /* On réduit les marges intérieures du rapport */
-            .writeup-container {
-                padding: 20px 15px;
-            }
-
-            /* On adapte la taille des titres pour qu'ils ne débordent pas */
-            .writeup-header h1 {
-                font-size: 1.6rem;
-                word-wrap: break-word; /* Force le titre à passer à la ligne s'il est trop long */
-            }
-
-            h3 {
-                font-size: 1.6rem;
-            }
-
-            /* On s'assure que les longs textes/liens dans le code ne cassent pas l'écran */
-            .code-block {
-                font-size: 0.8rem;
-                padding: 12px;
-                white-space: pre-wrap; 
-                word-break: break-word; /* Oblige les très longues lignes à se couper */
-            }
-            
-            .blue-team-box {
-                padding: 15px;
-            }
+            body, html { overflow-x: hidden; }
+            nav { width: 95%; padding: 12px 10px; gap: 8px; border-radius: 12px; }
+            nav a { font-size: 0.70rem; }
+            section { padding: 40px 5%; }
+            h3 { font-size: 1.8rem; text-align: center; }
+            .subtitle { text-align: center; }
+            .ctf-header-box { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Fond de particules -->
     <div id="particles-js"></div>
 
     <nav>
         <a href="index.html">Accueil</a>
-        <a href="competences-certif.html">Compétences & Certif</a>
+        <a href="competences-certif.html">Compétences</a>
         <a href="projets.html">Projets</a>
         <a href="writeups.html">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="glossaire.html">Glossaire</a>
-        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
+        <a href="experiences-diplomes.html">Expériences</a>
         <a href="contact.html">Contact</a>
     </nav>
 
     <section id="writeups">
-        <h3>Write-Ups & Analyses</h3>
-        <p class="subtitle">Méthodologie détaillée de mes investigations (CTF, OSINT) avec une approche défensive.</p>
+        <h3>Rapports d'Investigation (Write-Ups)</h3>
+        <p class="subtitle">Méthodologie détaillée de mes investigations avec une approche orientée Blue Team et EASM.</p>
 
-        <!-- DÉBUT DE L'ARTICLE WRITE-UP -->
-        <article class="writeup-container">
+        <!-- EN-TÊTE DU CTF -->
+        <div class="ctf-header-box">
+            <img src="Badge_Deep_Threats.png" alt="Badge Deep Threats" class="ctf-logo">
+            <div class="ctf-info">
+                <h2>CTF Deep Threats (DGA & Campus OSINT)</h2>
+                <p>Découvrez la résolution pas-à-pas de l'investigation sur l'entreprise Marinatech Industries et l'Institut Lotus. <strong>(22 challenges résolus)</strong>.</p>
+            </div>
+        </div>
+
+        <!-- GRILLE DES CHAPITRES -->
+        <div class="grid">
             
-            <div class="writeup-header">
-                <h1>CTF DGA : Investigation OSINT & Attaque de Surface (EASM)</h1>
-                <div class="writeup-meta">
-                    <span class="badge">DGA Deep Threats</span>
-                    <span class="badge">OSINT</span>
-                    <span class="badge">Threat Intelligence</span>
-                    <span class="badge">Web Forensics</span>
+            <!-- CHAPITRE 1 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 1</span>
+                    <span class="challs-count">3 Challs</span>
                 </div>
+                <h4>À vos marques</h4>
+                <p>La reconnaissance initiale sur la cible : exploitation des réseaux sociaux professionnels et analyse du profil des dirigeants.</p>
+                <a href="dt-chapitre1.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <div class="writeup-content">
-                <p>Ce compte-rendu détaille la méthodologie utilisée lors du CTF <strong>Deep Threats</strong> (organisé par la DGA et Campus OSINT) pour résoudre deux défis majeurs liés à la sécurité des infrastructures et à l'investigation de menaces.</p>
-
-                <h4>1. Threat Intel : Analyse d'un Courrier Indésirable</h4>
-                <p><strong>Contexte :</strong> L'employé Enzo Riesmeyer de Marinatech Industries a reçu un email de menaces. L'objectif était d'identifier l'expéditeur et son infrastructure.</p>
-                <p>En analysant l'en-tête (header) de l'email d'origine, j'ai pu extraire l'adresse IP source (<span class="highlight">47.242.108.213</span>). L'étude du domaine expéditeur a révélé un pixel de tracking, ce qui a permis de découvrir un domaine secondaire grâce à une politique SPF. La configuration DMARC de ce nouveau domaine (lotustrack.xyz) a fourni un pivot décisif :</p>
-                
-                <div class="code-block">
-                    _dmarc.lotustrack.xyz. IN TXT "v=DMARC1; p=none; ruf=mailto:admin@<span class="highlight">pxltrakln.int</span>;"
+            <!-- CHAPITRE 2 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 2</span>
+                    <span class="challs-count">9 Challs</span>
                 </div>
-
-                <p>En croisant ces données DNS avec l'adresse IP initiale (liée au VLAN gouvernemental du Lianhua), j'ai pu remonter jusqu'à la société écran "Lianhua-Europe Cultural & Economic Cooperation Ltd" et identifier l'acteur de la menace : <strong>Chen Rong</strong>.</p>
-
-                <h4>2. EASM : Mauvaise Configuration Serveur (Le Pacte)</h4>
-                <p><strong>Contexte :</strong> Retrouver un contrat confidentiel entre AquaVentis et Hydronix Marine Corporation, dissimulé sur une infrastructure mal sécurisée.</p>
-                <p>L'enquête a révélé deux versions du site d'Hydronix : une version locale (.ln) et une version internationale (.int). L'analyse de la version internationale a révélé une vulnérabilité critique : le module Apache <code>mod_status</code> était activé et publiquement accessible via <code>/server-status</code>.</p>
-                
-                <div class="code-block">
-                    [Misconfiguration detected]: <span class="highlight">/s3cr3tfileS3cuR7s3d</span> is accessible to everyone.
-                </div>
-
-                <p>Ce Directory Listing non intentionnel a permis d'accéder à l'arborescence des fichiers sensibles du serveur (Index of /s3cr3tfileS3cuR7s3d) et de télécharger l'accord stratégique (HMC_AquaVentis_Strategic_Development_Agreement.pdf) contenant la clause recherchée.</p>
-
-                <h4>Recommandations (Approche Blue Team)</h4>
-                <p>L'exploitation de ces failles met en évidence plusieurs lacunes de sécurité du côté des cibles. Voici les mesures de durcissement (Hardening) que je recommanderais en tant qu'administratrice sécurité :</p>
-                
-                <div class="blue-team-box">
-                    <h5>Mesures de remédiation :</h5>
-                    <ul>
-                        <li><strong>Durcissement Messagerie (Anti-Phishing) :</strong> Renforcer la politique DMARC en la passant de <code>p=none</code> à <code>p=reject</code> ou <code>p=quarantine</code> pour empêcher l'usurpation (Spoofing) des domaines.</li>
-                        <li><strong>Sécurisation Apache (Web) :</strong> Désactiver l'interface <code>/server-status</code> en production, ou en restreindre l'accès à l'IP locale (127.0.0.1) via la directive <code>Require ip</code>.</li>
-                        <li><strong>Désactivation du Directory Listing :</strong> Ajouter la directive <code>Options -Indexes</code> dans le fichier de configuration Apache ou le <code>.htaccess</code> pour empêcher l'affichage de l'arborescence des dossiers.</li>
-                        <li><strong>Audit d'Exposition Externe (EASM) :</strong> Mettre en place un scan régulier de la surface d'attaque pour détecter les services inutiles exposés sur le web.</li>
-                    </ul>
-                </div>
+                <h4>En eaux troubles</h4>
+                <p>Plongée dans l'investigation avancée : traçage de transactions cryptographiques (Blockchain OSINT) et analyse d'en-têtes réseau.</p>
+                <a href="dt-chapitre2.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-        </article>
+            <!-- CHAPITRE 3 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 3</span>
+                    <span class="challs-count">2 Challs</span>
+                </div>
+                <h4>What's up doc ?</h4>
+                <p>Fouille approfondie au sein des instances académiques et analyse des publications de recherche liées aux menaces.</p>
+                <a href="dt-chapitre3.html" class="btn-read"> Lire le chapitre</a>
+            </div>
 
+            <!-- CHAPITRE 4 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 4</span>
+                    <span class="challs-count">1 Chall</span>
+                </div>
+                <h4>Partenaire particulier</h4>
+                <p>Identification de réseaux d'influence et exploitation de documents partagés (Google Dorks / Métadonnées).</p>
+                <a href="dt-chapitre4.html" class="btn-read"> Lire le chapitre</a>
+            </div>
+
+            <!-- CHAPITRE 5 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 5</span>
+                    <span class="challs-count">5 Challs</span>
+                </div>
+                <h4>Une drôle de fleur</h4>
+                <p>L'attaque de surface (EASM) sur l'Institut Lotus : analyse de vulnérabilités serveur, Directory Listing et découverte de réseaux cachés (.onion).</p>
+                <a href="dt-chapitre5.html" class="btn-read"> Lire le chapitre</a>
+            </div>
+
+            <!-- CHAPITRE 6 -->
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Chapitre 6</span>
+                    <span class="challs-count">2 Challs</span>
+                </div>
+                <h4>L'île mystérieuse</h4>
+                <p>Application de techniques de GeoINT et d'IMINT pour la géolocalisation de précision d'infrastructures à partir d'images.</p>
+                <a href="dt-chapitre6.html" class="btn-read"> Lire le chapitre</a>
+            </div>
+
+        </div>
     </section>
-
-    <!-- Bouton pour remonter en haut -->
-    <button id="backToTop" title="Retour en haut">↑</button>
 
     <footer>
         <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
@@ -410,7 +234,7 @@
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#38bdf8" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": false },
+                "opacity": { "value": 0.2, "random": false },
                 "size": { "value": 3, "random": true },
                 "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 },
                 "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
@@ -421,15 +245,6 @@
                 "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
             },
             "retina_detect": true
-        });
-
-        const backToTopBtn = document.getElementById("backToTop");
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 300) { backToTopBtn.style.display = "block"; } 
-            else { backToTopBtn.style.display = "none"; }
-        });
-        backToTopBtn.addEventListener("click", () => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
