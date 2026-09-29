@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- BALISES SEO & OPEN GRAPH -->
+    <title>CTF Deep Threats - Chapitre 2 | Lauryn H-N</title>
+    <meta name="description" content="Write-Up du CTF Deep Threats (DGA) - Chapitre 2 : En eaux troubles. OSINT, Blockchain et Forensic.">
+    <meta property="og:title" content="Write-Up Deep Threats - Chapitre 2">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+
+    <!-- Script Particles.js -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+            --success: #3e9b85;
+            --flag-bg: rgba(226, 54, 112, 0.1);
+            --flag-text: #f92672;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card); padding: 12px 10px; display: flex; justify-content: center; gap: 8px; 
+            position: sticky; top: 20px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); flex-wrap: wrap; width: 95%; max-width: 900px; margin: 20px auto 0 auto; border-radius: 15px;
+        }
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 5px 10px; }
+        nav a:hover, nav a.active { color: var(--secondary); }
+
+        /* --- CONTENEUR DU RAPPORT --- */
+        section { padding: 40px 5%; max-width: 900px; margin: auto; flex: 1; width: 100%; }
+
+        .back-link {
+            display: inline-flex; align-items: center; color: var(--secondary); text-decoration: none; font-weight: 600;
+            margin-bottom: 25px; transition: 0.3s; background: rgba(56, 189, 248, 0.1); padding: 8px 16px;
+            border-radius: 30px; border: 1px solid var(--accent-card-border);
+        }
+        .back-link:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); transform: translateX(-5px); }
+
+        article {
+            background: rgba(15, 23, 42, 0.95); padding: 30px; border-radius: 8px; border: 1px solid var(--accent-card-border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+
+        h1 { color: var(--secondary); font-size: 2rem; margin-top: 0; margin-bottom: 10px; line-height: 1.2; }
+        .chapter-meta { color: var(--text-dim); font-size: 1rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        
+        h2 { color: #fff; font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .chall-num { background: var(--secondary); color: var(--primary); width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 1.1rem; font-weight: bold; flex-shrink: 0; }
+        p { color: var(--text-main); font-size: 1.05rem; margin-bottom: 15px; }
+
+        /* --- STYLE DES CHALLENGES --- */
+        .challenge-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--accent-card-border);
+            border-left: 4px solid var(--secondary);
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+        }
+
+        .question {
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+        .question strong { color: var(--secondary); }
+
+        .methodology {
+            background: rgba(56, 189, 248, 0.05);
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            border-left: 2px solid var(--text-dim);
+        }
+        .methodology strong { color: var(--text-main); }
+
+        .flag-box {
+            background: var(--flag-bg);
+            border: 1px solid rgba(249, 38, 114, 0.3);
+            color: var(--flag-text);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            margin-top: 20px;
+            display: inline-block;
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* --- NAVIGATION ENTRE CHAPITRES --- */
+        .chapter-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .btn-nav {
+            background: var(--primary); color: var(--secondary); border: 1px solid var(--secondary);
+            padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold;
+            transition: 0.3s; text-align: center; flex: 1; min-width: 200px;
+        }
+        .btn-nav:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold; border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer; padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease; }
+        #backToTop:hover { background-color: #fff; color: var(--primary); transform: translateY(-3px); }
+
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
+        footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden; }
+            article { padding: 20px; }
+            h1 { font-size: 1.6rem; word-wrap: break-word; }
+            .chapter-nav { flex-direction: column; }
+            .btn-nav { width: 100%; }
+            .challenge-box { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="competences-certif.html">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="writeups.html" class="active">Write-Ups</a>
+        <a href="outils-veille.html">Outils & Veille</a>
+        <a href="glossaire.html">Glossaire</a>
+        <a href="experiences-diplomes.html">Expériences</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section>
+        <a href="writeups.html" class="back-link">← Retour au sommaire des Write-Ups</a>
+
+        <article>
+            <h1>Chapitre 2 : En eaux troubles</h1>
+            <div class="chapter-meta">
+                Plongée dans l'investigation : Réseaux sociaux (SOCMINT), Géolocalisation (GeoINT), Forensics d'emails et analyse Blockchain.
+            </div>
+
+            <!-- CHALLENGE 1 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">1</span> Président !</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Vous cherchez à en savoir un peu plus sur Marc-Olivier Chasseneuil, président de Marinatech Industries.<br>
+                    <strong>Question :</strong> Avant d'entrer chez Marinatech, quelle était la fonction qu'il occupait ?
+                </div>
+                <div class="methodology">
+                    <strong>🔍 Méthodologie OSINT :</strong> Identification de la cible principale. Une recherche basique sur les moteurs de recherche permet d'isoler son profil LinkedIn. L'analyse de son historique professionnel (background check) livre la réponse immédiate.
+                </div>
+                <div class="flag-box">Flag : Ingénieur naval</div>
+            </div>
+
+            <!-- CHALLENGE 2 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">2</span> Un nouvel allié</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> En 2026, Marinatech a signé un partenariat pour accélérer son développement à l'international.<br>
+                    <strong>Question :</strong> A quelle date a t-elle signé ce partenariat ?
+                </div>
+                <div class="methodology">
+                    <strong>🔍 Méthodologie OSINT :</strong> En surveillant l'empreinte numérique de l'entreprise et de son dirigeant (LinkedIn posts / Communiqués de presse), on retrouve l'annonce du partenariat. Une vérification croisée sur le site web officiel de la société ou via des registres d'actualité permet de valider la date de signature exacte.
+                </div>
+                <div class="flag-box">Flag : 20/05/2026</div>
+            </div>
+
+            <!-- CHALLENGE 3 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">3</span> Un soupçon de soupçon</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> L'un des employés semble avoir commencé à se poser des questions avant même qu'une fuite sur les réseaux ne se produise.<br>
+                    <strong>Question :</strong> Depuis quand cet employé s'interroge t-il sur la situation de son entreprise ?
+                </div>
+                <div class="methodology">
+                    <strong>🔍 Méthodologie SOCMINT :</strong> Profiling de la cible (Enzo Riesmeyer). En recherchant ses traces sur les réseaux sociaux (X / Twitter), on analyse sa timeline. L'objectif est d'identifier un changement de comportement ou une plainte (sentiment analysis). La date de son premier tweet d'inquiétude constitue le flag.
+                </div>
+                <div class="flag-box">Flag : 30/05/2026</div>
+            </div>
+
+            <!-- CHALLENGE 4 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">4</span> "Wesh couz t'es où ?"</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Le cousin d'Enzo a disparu. La seule chose qu'il possède, c'est l'emplacement supposé de son dernier message (une photo).<br>
+                    <strong>Question :</strong> Quel est le nom du lieu visible à gauche sur la photo qu'il a partagée et dans quel pays se trouve ce lieu ?
+                </div>
+                <div class="methodology">
+                    <strong>🌍 Méthodologie GeoINT :</strong> Analyse visuelle d'une photographie. J'ai isolé les éléments textuels en arrière-plan (panneaux, devantures) et les caractéristiques architecturales. Une recherche croisée sur Google Images et Google Maps permet de "pinpoint" (localiser) la structure exacte et son pays d'origine.
+                </div>
+                <div class="flag-box">Flag : Mandaue Assembly of God International_Philippines</div>
+            </div>
+
+            <!-- CHALLENGE 5 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">5</span> Courrier indésirable 1/2</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Enzo vous confie un mail de menaces (Menace-Enzo.eml) reçu le lendemain de sa publication.<br>
+                    <strong>Question :</strong> Quelle est l'adresse IP de l'émetteur ?
+                </div>
+                <div class="methodology">
+                    <strong>🛡️ Méthodologie Cyber (Forensics d'Email) :</strong> Au lieu de lire le corps du mail (qui est souvent spoofé/falsifié), l'analyse technique se fait sur les <strong>Headers (En-têtes)</strong> du fichier <code>.eml</code>. En remontant le chemin de routage (champs <code>Received:</code>), on extrait l'adresse IP source réelle du serveur émetteur. C'est une étape classique en SOC pour bloquer un attaquant au niveau du pare-feu.
+                </div>
+                <div class="flag-box">Flag : 47.242.108.213</div>
+            </div>
+
+            <!-- CHALLENGE 6 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">6</span> L'écolo</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> L'information de l'emploi d'un produit chimique toxique a fuité. Le pseudo qui a diffusé l'info était "Tang Bordel".<br>
+                    <strong>Question :</strong> Pouvez-vous retrouver l'identité réelle de celui qui a diffusé l'information ?
+                </div>
+                <div class="methodology">
+                    <strong>⏳ Méthodologie Wayback Machine :</strong> Les cybercriminels (ou lanceurs d'alerte) suppriment ou modifient souvent leurs profils pour brouiller les pistes. En retrouvant l'URL du profil Mastodon/X de la cible, on l'injecte dans la <strong>Wayback Machine (Archive.org)</strong> pour remonter le temps. La consultation d'une ancienne version de la page ("snapshot") permet de désanonymiser la cible.
+                </div>
+                <div class="flag-box">Flag : Tanguy Bordelier</div>
+            </div>
+
+            <!-- CHALLENGE 7 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">7</span> Metal hurlant</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Le revêtement de sous-marins est élaboré avec une base de Lantrium. Un analyste DGA vous confie avoir lu un rapport à ce sujet.<br>
+                    <strong>Question :</strong> Quel est le numéro atomique du Lantrium ?
+                </div>
+                <div class="methodology">
+                    <strong>🔍 Méthodologie OSINT & Pivot :</strong> Le but est de trouver de la documentation technique spécifique. En fouillant les bases de données institutionnelles de la République du Lianhua (ou de leurs partenaires), on trouve une documentation scientifique ou un "Wiki" propre au scénario décrivant ce métal fictif.
+                </div>
+                <div class="flag-box">Flag : 128</div>
+            </div>
+
+            <!-- CHALLENGE 8 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">8</span> Deal</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Tanguy a pu être payé pour faire fuiter l'information.<br>
+                    <strong>Question :</strong> Quel est l'identifiant du moyen utilisé pour payer Tanguy ?
+                </div>
+                <div class="methodology">
+                    <strong>⛓️ Méthodologie FININT (Blockchain OSINT) :</strong> En partant d'une simple adresse crypto trouvée sur les réseaux de la cible, on utilise un explorateur de blocs (comme <strong>Etherscan</strong>). L'analyse des transactions entrantes (Inbound) permet d'identifier l'adresse du portefeuille (Wallet) de la personne qui l'a financé.
+                </div>
+                <div class="flag-box">Flag : 0x188E7f50B72A0E2cBFb327425D1cFe784428f260</div>
+            </div>
+
+            <!-- CHALLENGE 9 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">9</span> Un coin discret</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Vous avez le wallet d'origine. Il faut remonter à l'identité du payeur.<br>
+                    <strong>Question :</strong> Indiquez l’identité du payeur ainsi que la référence figurant sur l’élément ayant permis son identification.
+                </div>
+                <div class="methodology">
+                    <strong>⛓️ Méthodologie FININT avancée :</strong> La blockchain n'est pas totalement anonyme, elle est pseudonyme. En examinant les "Smart Contracts" ou les <strong>Input Data</strong> (données hexadécimales) attachées à la transaction sur Etherscan, il est souvent possible de décoder des messages cachés en clair (UTF-8). Ce message dévoile l'entité gouvernementale derrière le financement de la fuite.
+                </div>
+                <div class="flag-box">Flag : Institut Lotus_APT509</div>
+            </div>
+
+            <!-- NAVIGATION CHAPITRES -->
+            <div class="chapter-nav">
+                <a href="dt-chapitre1.html" class="btn-nav">← Précédent (Chapitre 1)</a>
+                <a href="writeups.html" class="btn-nav" style="background: transparent; border-color: rgba(255,255,255,0.2); color: var(--text-dim);">Sommaire</a>
+                <!-- Lien vers le chapitre 3 -->
+                <a href="dt-chapitre3.html" class="btn-nav">Suivant (Chapitre 3) →</a>
+            </div>
+
+        </article>
+    </section>
+
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": { "number": { "value": 50 }, "color": { "value": "#38bdf8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 }, "move": { "enable": true, "speed": 1 } },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } } },
+            "retina_detect": true
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) backToTopBtn.style.display = "block";
+            else backToTopBtn.style.display = "none";
+        });
+        backToTopBtn.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+    </script>
+</body>
+</html>
