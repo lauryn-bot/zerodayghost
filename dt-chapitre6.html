@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- BALISES SEO & OPEN GRAPH -->
-    <title>CTF Deep Threats - Chapitre 4 | Lauryn H-N</title>
-    <meta name="description" content="Write-Up du CTF Deep Threats (DGA) - Chapitre 4 : Un portefeuille bien garni. Analyse de code source web.">
-    <meta property="og:title" content="Write-Up Deep Threats - Chapitre 4">
+    <title>CTF Deep Threats - Chapitre 6 | Lauryn H-N</title>
+    <meta name="description" content="Write-Up du CTF Deep Threats (DGA) - Chapitre 6 : L'île mystérieuse. Renseignement géopolitique et OSINT documentaire.">
+    <meta property="og:title" content="Write-Up Deep Threats - Chapitre 6">
     <meta property="og:type" content="article">
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
@@ -56,7 +56,7 @@
             border: 1px solid rgba(56, 189, 248, 0.2); flex-wrap: wrap; width: 95%; max-width: 900px; margin: 20px auto 0 auto; border-radius: 15px;
         }
         nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 5px 10px; }
-        nav a:hover, nav a.active { color: var(--secondary); }
+        nav a:hover { color: var(--secondary); }
 
         /* --- CONTENEUR DU RAPPORT --- */
         section { padding: 40px 5%; max-width: 900px; margin: auto; flex: 1; width: 100%; }
@@ -166,7 +166,7 @@
         <a href="index.html">Accueil</a>
         <a href="competences-certif.html">Compétences</a>
         <a href="projets.html">Projets</a>
-        <a href="writeups.html" class="active">Write-Ups</a>
+        <a href="writeups.html">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="glossaire.html">Glossaire</a>
         <a href="experiences-diplomes.html">Expériences</a>
@@ -177,31 +177,43 @@
         <a href="writeups.html" class="back-link">← Retour au sommaire des Write-Ups</a>
 
         <article>
-            <h1>Chapitre 4 : Partenaire particulier</h1>
+            <h1>Chapitre 6 : L'île mystérieuse</h1>
             <div class="chapter-meta">
-                Identification de réseaux d'influence et analyse de code source web.
+                Recherche documentaire, analyse géopolitique et veille stratégique de la menace.
             </div>
 
             <!-- CHALLENGE 1 -->
             <div class="challenge-box">
-                <h2><span class="chall-num">1</span> Un portefeuille bien garni</h2>
+                <h2><span class="chall-num">1</span> Geoguessr level 1</h2>
                 <div class="question">
-                    <strong>Contexte :</strong> Aquaventis Partners se présente donc comme un accélérateur, qui en échange d'une part capitalistique d'une entreprise, accompagne celle-ci dans son développement grâce à du conseil en stratégie et surtout à un réseau très étendu à l'international.<br>
-                    <strong>Question :</strong> Combien d'autres entreprises accompagne t-elle en plus de Marinatech ?
+                    <strong>Contexte :</strong> Le nom de la République du Lianhua ressort beaucoup dans cette enquête. Il va falloir trouver des informations sur ce pays.<br>
+                    <strong>Question :</strong> Quelle est sa capitale ?
                 </div>
                 <div class="methodology">
-                    <strong>🔍 Méthodologie OSINT (Analyse de Code Source) :</strong> En poursuivant les recherches sur le site d'AquaVentis, on trouve un carrousel défilant regroupant les entreprises de son portefeuille. Le comptage visuel direct à l'écran est source d'erreurs en raison du défilement. La méthode la plus rigoureuse consiste à ouvrir les outils de développement (F12) et à analyser le <strong>code source (HTML/JS)</strong> de la page. En isolant le tableau de données (Array) qui alimente le carrousel, il est possible d'extraire la liste complète des entreprises et de les comptabiliser de manière fiable.
+                    <strong>🌍 Méthodologie OSINT & Renseignement Géopolitique :</strong> Face à une entité géopolitique fictive ou méconnue dans le cadre d'une investigation, l'approche consiste à rechercher des bases de connaissances institutionnelles, des wikis ou des atlas virtuels liés à l'environnement. La consultation de la page d'information du pays permet d'extraire des renseignements socio-politiques de base comme la capitale.
                 </div>
-                <div class="flag-box">Flag : 23</div>
+                <div class="flag-box">Flag : Xinhai</div>
+            </div>
+
+            <!-- CHALLENGE 2 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">2</span> French Touch</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Le Lianhua n'a de cesse de chercher à développer sa souveraineté dans de nombreux domaines, à commencer par le maritime. Pour cela, il cherche à établir des partenariats avec des pays qu'il considère posséder un avantage technologique.<br>
+                    <strong>Question :</strong> Quel est le premier domaine dans lequel la France est reconnue pour son expertise selon l'auteur d'un article au Lianhua ?
+                </div>
+                <div class="methodology">
+                    <strong>📰 Méthodologie OSINT (Veille médiatique) :</strong> L'investigation se déplace vers l'analyse de la presse étrangère et de la communication étatique de la menace. En utilisant des requêtes ciblées (Google Dorks ou moteur de recherche interne du site d'actualités local), on identifie l'article décrivant les accords bilatéraux et les domaines d'intérêts stratégiques. L'analyse du texte révèle le secteur d'expertise visé.
+                </div>
+                <div class="flag-box">Flag : Naval architecture</div>
             </div>
 
             <!-- NAVIGATION CHAPITRES -->
             <div class="chapter-nav">
-                <!-- Lien vers le chapitre 3 que tu m'enverras après -->
-                <a href="dt-chapitre3.html" class="btn-nav">← Précédent (Chapitre 3)</a>
+                <a href="dt-chapitre5.html" class="btn-nav">← Précédent (Chapitre 5)</a>
                 <a href="writeups.html" class="btn-nav" style="background: transparent; border-color: rgba(255,255,255,0.2); color: var(--text-dim);">Sommaire</a>
-                <!-- Lien vers le chapitre 5 -->
-                <a href="dt-chapitre5.html" class="btn-nav">Suivant (Chapitre 5) →</a>
+                <!-- Pas de bouton "suivant" puisque c'est le dernier chapitre ! -->
+                <a href="projets.html" class="btn-nav" style="color: #3e9b85; border-color: #3e9b85;">Terminer l'investigation 🏁</a>
             </div>
 
         </article>

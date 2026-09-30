@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- BALISES SEO & OPEN GRAPH -->
-    <title>CTF Deep Threats - Chapitre 4 | Lauryn H-N</title>
-    <meta name="description" content="Write-Up du CTF Deep Threats (DGA) - Chapitre 4 : Un portefeuille bien garni. Analyse de code source web.">
-    <meta property="og:title" content="Write-Up Deep Threats - Chapitre 4">
+    <title>CTF Deep Threats - Chapitre 5 | Lauryn H-N</title>
+    <meta name="description" content="Write-Up du CTF Deep Threats (DGA) - Chapitre 5 : Une drôle de fleur. DOCINT, CTI et Énumération CMS.">
+    <meta property="og:title" content="Write-Up Deep Threats - Chapitre 5">
     <meta property="og:type" content="article">
     <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
 
@@ -123,17 +123,19 @@
             max-width: 100%;
         }
 
+        /* --- CODE & TERMINAL --- */
+        .code-block {
+            background-color: var(--primary); color: #a6e22e; padding: 10px 15px; border-radius: 6px;
+            font-family: 'Courier New', Courier, monospace; font-size: 0.9rem; overflow-x: auto;
+            border: 1px solid var(--accent-card-border); margin: 15px 0; box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .highlight { color: #f92672; font-weight: bold; }
+
         /* --- NAVIGATION ENTRE CHAPITRES --- */
         .chapter-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
+            display: flex; justify-content: space-between; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px; flex-wrap: wrap; gap: 15px;
         }
-
         .btn-nav {
             background: var(--primary); color: var(--secondary); border: 1px solid var(--secondary);
             padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold;
@@ -177,31 +179,86 @@
         <a href="writeups.html" class="back-link">← Retour au sommaire des Write-Ups</a>
 
         <article>
-            <h1>Chapitre 4 : Partenaire particulier</h1>
+            <h1>Chapitre 5 : Une drôle de fleur</h1>
             <div class="chapter-meta">
-                Identification de réseaux d'influence et analyse de code source web.
+                Cyber Threat Intelligence (CTI), analyse de documents (DOCINT) et énumération Web (EASM) sur l'Institut Lotus.
             </div>
 
             <!-- CHALLENGE 1 -->
             <div class="challenge-box">
-                <h2><span class="chall-num">1</span> Un portefeuille bien garni</h2>
+                <h2><span class="chall-num">1</span> Tableau de chasse</h2>
                 <div class="question">
-                    <strong>Contexte :</strong> Aquaventis Partners se présente donc comme un accélérateur, qui en échange d'une part capitalistique d'une entreprise, accompagne celle-ci dans son développement grâce à du conseil en stratégie et surtout à un réseau très étendu à l'international.<br>
-                    <strong>Question :</strong> Combien d'autres entreprises accompagne t-elle en plus de Marinatech ?
+                    <strong>Contexte :</strong> Marinatech est citée dans une production de l'Institut Lotus aux côtés d'autres entreprises européennes.<br>
+                    <strong>Question :</strong> Combien d'entreprises font ainsi l'objet de l'attention du bienveillant institut ?
                 </div>
                 <div class="methodology">
-                    <strong>🔍 Méthodologie OSINT (Analyse de Code Source) :</strong> En poursuivant les recherches sur le site d'AquaVentis, on trouve un carrousel défilant regroupant les entreprises de son portefeuille. Le comptage visuel direct à l'écran est source d'erreurs en raison du défilement. La méthode la plus rigoureuse consiste à ouvrir les outils de développement (F12) et à analyser le <strong>code source (HTML/JS)</strong> de la page. En isolant le tableau de données (Array) qui alimente le carrousel, il est possible d'extraire la liste complète des entreprises et de les comptabiliser de manière fiable.
+                    <strong>📄 Méthodologie DOCINT :</strong> Recherche et analyse de documents publics. En localisant les rapports officiels de l'Institut Lotus (via des Google Dorks ciblant les PDF), on analyse le document qui traite des fournisseurs du secteur naval. L'extraction des entités citées permet de comptabiliser les entreprises ciblées par l'influence de l'institut.
                 </div>
-                <div class="flag-box">Flag : 23</div>
+                <div class="flag-box">Flag : 4</div>
+            </div>
+
+            <!-- CHALLENGE 2 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">2</span> La plume et le pouvoir</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Les préconisations de l'autrice de deux des principales publications de l'institut apparaissent très tournées vers les intérêts du Lianhua.<br>
+                    <strong>Question :</strong> Quelle fonction cette femme joue-t-elle au sein de l'Institut ?
+                </div>
+                <div class="methodology">
+                    <strong>🔎 Méthodologie d'Analyse Organisationnelle :</strong> Après avoir identifié l'autrice (Cheryl Lin) dans les métadonnées ou le corps des rapports, l'objectif est de définir sa place dans la hiérarchie. L'exploration de la page "Gouvernance" ou "Organigramme" du site de l'Institut permet de retrouver sa fonction exacte.
+                </div>
+                <div class="flag-box">Flag : Directrice des relations publiques et des partenariats stratégiques</div>
+            </div>
+
+            <!-- CHALLENGE 3 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">3</span> Un visage familier</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Son visage vous dit vaguement quelque chose mais vous avez du mal à la resituer. Creuser sur son identité vous aidera sans doute.<br>
+                    <strong>Question :</strong> Quel est son nom complet ?
+                </div>
+                <div class="methodology">
+                    <strong>⏳ Méthodologie SOCMINT & Wayback Machine :</strong> Une photo de Cheryl Lin apparaît sur le LinkedIn d'une de nos anciennes cibles (Jérôme Osfart). Pour confirmer son nom complet, on utilise la <strong>Wayback Machine</strong> sur le site de l'Institut Lotus. Une ancienne capture du site (avant qu'elle ne dissimule son nom marital) révèle son identité complète.
+                </div>
+                <div class="flag-box">Flag : Cheryl Lin Osfart</div>
+            </div>
+
+            <!-- CHALLENGE 4 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">4</span> Ça c'est de la doctrine !</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> Un des principes prônés par le rédacteur du rapport sur le Lantrium attire votre attention.<br>
+                    <strong>Question :</strong> En matière d'innovation, que conclut-il sur l'utilisation du Lantrium ?
+                </div>
+                <div class="methodology">
+                    <strong>🧠 Méthodologie CTI (Cyber Threat Intelligence) :</strong> La compréhension des motivations (motives) d'un Etat ou d'un acteur de la menace passe par la lecture de sa doctrine. En retrouvant le chapitre spécifique du rapport traitant du Lantrium, on extrait le paragraphe définissant la stratégie industrielle et technologique du Lianhua.
+                </div>
+                <div class="flag-box">Flag : Chaque kilogramme de Lantrium exporté devrait contribuer à l'acquisition d'un savoir, d'une technologie ou d'une capacité industrielle nouvelle au bénéfice du Lianhua.</div>
+            </div>
+
+            <!-- CHALLENGE 5 -->
+            <div class="challenge-box">
+                <h2><span class="chall-num">5</span> The creator</h2>
+                <div class="question">
+                    <strong>Contexte :</strong> En découvrant le véritable auteur derrière le site de l'institut vous pourriez trouver un fil à tirer pour savoir qui le pilote réellement.<br>
+                    <strong>Question :</strong> Qui est le créateur de ce site ?
+                </div>
+                <div class="methodology">
+                    <strong>💻 Méthodologie EASM (Attaque de Surface) :</strong> Le site de l'Institut repose sur un CMS (système de gestion de contenu) type WordPress. L'une des failles classiques de configuration (Information Disclosure) permet d'énumérer les utilisateurs du site en modifiant l'URL. En testant le paramètre d'auteur, le site redirige vers le profil du créateur, révélant son nom.
+                </div>
+                <div class="code-block">
+https://institut-lotus.online<span class="highlight">/?author=5</span>
+                </div>
+                <div class="flag-box">Flag : Liam Rong</div>
             </div>
 
             <!-- NAVIGATION CHAPITRES -->
             <div class="chapter-nav">
-                <!-- Lien vers le chapitre 3 que tu m'enverras après -->
-                <a href="dt-chapitre3.html" class="btn-nav">← Précédent (Chapitre 3)</a>
+                <!-- Lien vers le chapitre précédent (qu'on créera) -->
+                <a href="dt-chapitre4.html" class="btn-nav">← Précédent (Chapitre 4)</a>
                 <a href="writeups.html" class="btn-nav" style="background: transparent; border-color: rgba(255,255,255,0.2); color: var(--text-dim);">Sommaire</a>
-                <!-- Lien vers le chapitre 5 -->
-                <a href="dt-chapitre5.html" class="btn-nav">Suivant (Chapitre 5) →</a>
+                <!-- Lien vers le chapitre 6 -->
+                <a href="dt-chapitre6.html" class="btn-nav">Suivant (Chapitre 6) →</a>
             </div>
 
         </article>
