@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- BALISES SEO & OPEN GRAPH -->
-    <title>Write-Ups CTF Deep Threats | Lauryn H-N</title>
-    <meta name="description" content="Sommaire de mes Write-Ups du CTF Deep Threats organisé par la DGA et Campus OSINT.">
+    <title>Write-Ups | Lauryn H-N</title>
+    <meta name="description" content="Sommaire de mes Write-Ups des CTF Deep Threats et YouArePlayer.">
     <meta property="og:title" content="Write-Ups | Lauryn Hecque--Nascimento">
     <meta property="og:type" content="website">
     <meta property="og:image" content="URL_DE_TON_IMAGE.png">
@@ -66,7 +66,7 @@
             border-radius: 50px;
         }
         nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        nav a:hover { color: var(--secondary); }
+        nav a:hover, nav a.active { color: var(--secondary); }
 
         /* --- SECTIONS --- */
         section { padding: 60px 10%; max-width: 1200px; margin: auto; flex: 1; width: 100%; }
@@ -132,7 +132,7 @@
         <a href="index.html">Accueil</a>
         <a href="competences-certif.html">Compétences</a>
         <a href="projets.html">Projets</a>
-        <a href="writeups.html">Write-Ups</a>
+        <a href="writeups.html" class="active">Write-Ups</a>
         <a href="outils-veille.html">Outils & Veille</a>
         <a href="glossaire.html">Glossaire</a>
         <a href="experiences-diplomes.html">Expériences</a>
@@ -141,21 +141,22 @@
 
     <section id="writeups">
         <h3>Rapports d'Investigation (Write-Ups)</h3>
-        <p class="subtitle">Méthodologie détaillée de mes investigations avec une approche orientée Blue Team et EASM.</p>
+        <p class="subtitle">Méthodologie détaillée de mes investigations avec une approche orientée Blue Team, CTI et OSINT.</p>
 
-        <!-- EN-TÊTE DU CTF -->
+        <!-- ============================================== -->
+        <!-- EN-TÊTE DU CTF : DEEP THREATS                  -->
+        <!-- ============================================== -->
         <div class="ctf-header-box">
-            <img src="LOGO-DT.png" alt="Badge Deep Threats" class="ctf-logo">
+            <img src="LOGO-DT.png" alt="Badge Deep Threats" class="ctf-logo" onerror="this.src='https://via.placeholder.com/80/0f172a/38bdf8?text=DT'">
             <div class="ctf-info">
                 <h2>CTF Deep Threats (DGA & Campus OSINT)</h2>
                 <p>Découvrez la résolution pas-à-pas de l'investigation sur l'entreprise Marinatech Industries et l'Institut Lotus. <strong>(22 challenges résolus)</strong>.</p>
             </div>
         </div>
 
-        <!-- GRILLE DES CHAPITRES -->
+        <!-- GRILLE DEEP THREATS -->
         <div class="grid">
             
-            <!-- CHAPITRE 1 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 1</span>
@@ -166,7 +167,6 @@
                 <a href="dt-chapitre1.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <!-- CHAPITRE 2 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 2</span>
@@ -177,7 +177,6 @@
                 <a href="dt-chapitre2.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <!-- CHAPITRE 3 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 3</span>
@@ -188,7 +187,6 @@
                 <a href="dt-chapitre3.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <!-- CHAPITRE 4 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 4</span>
@@ -199,7 +197,6 @@
                 <a href="dt-chapitre4.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <!-- CHAPITRE 5 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 5</span>
@@ -210,7 +207,6 @@
                 <a href="dt-chapitre5.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
-            <!-- CHAPITRE 6 -->
             <div class="card">
                 <div class="chapter-header">
                     <span class="chapter-num">Chapitre 6</span>
@@ -221,7 +217,45 @@
                 <a href="dt-chapitre6.html" class="btn-read"> Lire le chapitre</a>
             </div>
 
+        </div> <!-- FIN DE LA GRILLE DEEP THREATS -->
+
+
+        <!-- ============================================== -->
+        <!-- EN-TÊTE DU CTF : YOUAREPLAYER (YAP)            -->
+        <!-- ============================================== -->
+        <div class="ctf-header-box" style="margin-top: 60px;">
+            <img src="LOGO-YAP.png" alt="Badge YouArePlayer" class="ctf-logo" onerror="this.src='https://via.placeholder.com/80/0f172a/38bdf8?text=YAP'">
+            <div class="ctf-info">
+                <h2>YouArePlayer (YAP) - ARG & OSINT</h2>
+                <p>Plateforme d'investigation immersive orientée Renseignement en Sources Ouvertes (ROSO), Cyber Threat Intelligence (CTI) et logique déductive.</p>
+            </div>
         </div>
+
+        <!-- GRILLE YOUAREPLAYER -->
+        <div class="grid">
+            
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Catégorie</span>
+                    <span class="challs-count">1 Chall (PGA)</span>
+                </div>
+                <h4>Investigations OSINT & CTI</h4>
+                <p>Reconstruction d'une attaque majeure sur des infrastructures critiques (Malware, ICS/SCADA, Attribution) via la recherche d'incidents historiques.</p>
+                <a href="yap-osint.html" class="btn-read"> Lire le Write-Up</a>
+            </div>
+
+            <div class="card">
+                <div class="chapter-header">
+                    <span class="chapter-num">Catégorie</span>
+                    <span class="challs-count">1 Chall (Emoji)</span>
+                </div>
+                <h4>Challenges "Fun" & Logique</h4>
+                <p>Analyse sémantique, déduction logique et culture générale sportive. Corrélation d'indices géographiques pour retrouver une cible.</p>
+                <a href="yap-fun.html" class="btn-read"> Lire le Write-Up</a>
+            </div>
+
+        </div> <!-- FIN DE LA GRILLE YAP -->
+
     </section>
 
     <footer>
