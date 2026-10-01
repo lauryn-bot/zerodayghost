@@ -108,6 +108,10 @@
         .ctf-info h2 { margin: 0 0 5px 0; color: #fff; font-size: 1.8rem; }
         .ctf-info p { margin: 0; color: var(--text-dim); }
 
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold; border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer; padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease; }
+        #backToTop:hover { background-color: #fff; color: var(--primary); transform: translateY(-3px); }
+
         /* --- FOOTER --- */
         footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
         footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
@@ -258,6 +262,9 @@
 
     </section>
 
+    <!-- Bouton pour remonter en haut -->
+    <button id="backToTop" title="Retour en haut">↑</button>
+
     <footer>
         <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
     </footer>
@@ -279,6 +286,16 @@
                 "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
             },
             "retina_detect": true
+        });
+
+        // Script pour le bouton retour en haut
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) backToTopBtn.style.display = "block";
+            else backToTopBtn.style.display = "none";
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
         });
     </script>
 </body>
