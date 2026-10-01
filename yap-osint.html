@@ -201,6 +201,28 @@
                 <div class="flag-box">Flag : YAP{BLACKENERGY3_WINDOWS_30_15:35_SANDWORM}</div>
             </div>
 
+            <!-- CHALLENGE 2 : PEPSI -->
+            <div class="challenge-box">
+                <h2>2. PEPSI <span style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">+100 pts</span></h2>
+                
+                <div class="question">
+                    <strong>Énoncé :</strong><br>
+                    Give the full name of the 9th finisher of this race, along with their official time.<br>
+                    <em>(Une image est fournie montrant un athlète handisport en fauteuil avec le dossard 11, estampillée "Getty Images : Boston Globe").</em><br><br>
+                    <strong>Flag format :</strong> fullname officialtime
+                </div>
+                
+                <p>Ce challenge combine de l'<strong>IMINT</strong> (Renseignement par l'Image) et de la recherche archivistique pure (OSINT). La première étape consistait à identifier l'événement sportif.</p>
+                
+                <p>L'analyse visuelle de l'image met en évidence un filigrane <em>"Credit: Boston Globe"</em> ainsi que le logo de Getty Images (avec l'ID de l'image visible). Une recherche inversée ou une requête ciblée sur la banque d'images confirme qu'il s'agit de Heinz Frei lors du <strong>Marathon de Boston de 1995</strong>.</p>
+                
+                <p>Connaissant la course, l'année et la catégorie (Wheelchair / Fauteuil roulant), j'ai orienté mes recherches vers les sources officielles : le site de la <em>Boston Athletic Association (B.A.A.)</em>. J'ai localisé la base de données des résultats historiques, qui renvoie vers un document d'archive complet (<code>BostonMarathonHistoricalResults.pdf</code>).</p>
+                
+                <p>En parcourant ce volumineux PDF jusqu'à la section des résultats de 1995 (catégorie masculine handisport), j'ai pu identifier avec précision le 9ème finisseur de la course : <strong>George Vandamme</strong>, ayant franchi la ligne avec un temps officiel de <strong>1:33:14</strong>.</p>
+                
+                <div class="flag-box">Flag : vandammegeorge 1:33:14</div>
+            </div>
+
             <!-- NAVIGATION CHAPITRES -->
             <div class="chapter-nav">
                 <a href="writeups.html" class="btn-nav">← Sommaire</a>
