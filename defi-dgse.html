@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Défi DGSE - Cybermois | Lauryn H-N</title>
+    <meta name="description" content="Write-Up du défi cryptographique de la DGSE publié sur LinkedIn pour le Cybermois.">
+    <meta property="og:title" content="Write-Up DGSE Cybermois">
+    <meta property="og:type" content="article">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --primary: #050a14;
+            --secondary: #38bdf8;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(56, 189, 248, 0.2);
+            --accent-badge: #1e293b;
+            --success: #3e9b85;
+            --flag-bg: rgba(226, 54, 112, 0.1);
+            --flag-text: #f92672;
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: var(--primary); color: var(--text-main); line-height: 1.6; margin: 0; padding: 0; display: flex; flex-direction: column; min-height: 100vh; }
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        nav { background-color: var(--bg-card); padding: 12px 10px; display: flex; justify-content: center; gap: 8px; position: sticky; top: 20px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.6); border: 1px solid rgba(56, 189, 248, 0.2); flex-wrap: wrap; width: 95%; max-width: 900px; margin: 20px auto 0 auto; border-radius: 15px; }
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 5px 10px; }
+        nav a:hover, nav a.active { color: var(--secondary); }
+
+        section { padding: 40px 5%; max-width: 900px; margin: auto; flex: 1; width: 100%; }
+
+        .back-link { display: inline-flex; align-items: center; color: var(--secondary); text-decoration: none; font-weight: 600; margin-bottom: 25px; transition: 0.3s; background: rgba(56, 189, 248, 0.1); padding: 8px 16px; border-radius: 30px; border: 1px solid var(--accent-card-border); }
+        .back-link:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); transform: translateX(-5px); }
+
+        article { background: rgba(15, 23, 42, 0.95); padding: 30px; border-radius: 8px; border: 1px solid var(--accent-card-border); box-shadow: 0 10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); }
+
+        h1 { color: var(--secondary); font-size: 2rem; margin-top: 0; margin-bottom: 10px; line-height: 1.2; }
+        .chapter-meta { color: var(--text-dim); font-size: 1rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+        
+        h2 { color: #fff; font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;}
+        p { color: var(--text-main); font-size: 1.05rem; margin-bottom: 15px; }
+
+        .challenge-box { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--accent-card-border); border-left: 4px solid var(--secondary); padding: 25px; border-radius: 6px; margin-bottom: 35px; }
+        
+        .challenge-box.dgse-box { border-left-color: #f92672; }
+        .challenge-box.dgse-box h2 { color: #f92672; }
+
+        .question { font-style: italic; color: var(--text-dim); margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed rgba(255,255,255,0.1); }
+        .question strong { color: var(--secondary); font-style: normal; }
+
+        .flag-box { background: var(--flag-bg); border: 1px solid rgba(249, 38, 114, 0.3); color: var(--flag-text); padding: 10px 15px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; font-weight: bold; margin-top: 20px; display: inline-block; word-wrap: break-word; max-width: 100%; }
+
+        #backToTop { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold; border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer; padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease; }
+        #backToTop:hover { background-color: #fff; color: var(--primary); transform: translateY(-3px); }
+
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
+        footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        @media (max-width: 768px) { body, html { overflow-x: hidden; } article { padding: 20px; } h1 { font-size: 1.6rem; word-wrap: break-word; } h2 { flex-direction: column; align-items: flex-start; gap: 5px; } .challenge-box { padding: 15px; } }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="competences-certif.html">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="writeups.html" class="active">Write-Ups</a>
+        <a href="outils-veille.html">Outils & Veille</a>
+        <a href="glossaire.html">Glossaire</a>
+        <a href="experiences-diplomes.html">Expériences</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section>
+        <a href="writeups.html" class="back-link">← Retour au sommaire des Write-Ups</a>
+
+        <article>
+            <h1>Défis Flash : DGSE</h1>
+            <div class="chapter-meta">
+                Source : LinkedIn (Officiel DGSE) | Événement : Cybermois | Type : Cryptographie visuelle
+            </div>
+
+            <!-- CHALLENGE DGSE -->
+            <div class="challenge-box dgse-box">
+                <h2>Challenge Secret - Cybermois <span style="font-size: 0.9rem; color: var(--text-dim); font-weight: normal;">OSINT / Crypto</span></h2>
+                <div class="question">
+                    <strong>Contexte (Post LinkedIn) :</strong><br>
+                    À l’occasion du #Cybermois, testez vos capacités d’observation et d’analyse cryptographique !<br>
+                    🤔 Saurez-vous trouver le mot de passe ?<br>
+                    <em>(Une image accompagnait le post, montrant un setup de hacker avec de multiples terminaux et une fausse fenêtre de mot de passe).</em>
+                </div>
+                
+                <p>La résolution de ce type de défi institutionnel requiert un grand sens de l'observation pour séparer le <em>signal</em> du <em>bruit</em>. De nombreux éléments à l'écran ont été placés intentionnellement par la DGSE pour agir comme des <strong>Red Herrings</strong> (pistes trompeuses).</p>
+
+                <p><strong>1. L'élimination des fausses pistes :</strong><br>
+                Lors de ma première phase d'analyse (IMINT), j'ai repéré plusieurs éléments suspects qui auraient pu composer le mot de passe :
+                <ul>
+                    <li>Le hashtag <code>#CybeRENSemble</code> avec le mot <strong>REN</strong> en majuscule.</li>
+                    <li>Un grand <strong>069</strong> sur l'écran de droite (qui correspond à la lettre <strong>E</strong> en valeur décimale ASCII).</li>
+                    <li>Le dossier <strong>Cyber</strong> sur le bureau virtuel.</li>
+                    <li>La date système affichée en bas à droite : <strong>01/10/2026</strong>.</li>
+                </ul>
+                Cependant, aucun de ces éléments n'était le mot de passe final.</p>
+
+                <p><strong>2. L'extraction du signal (Cryptographie) :</strong><br>
+                Le véritable indice se trouvait discrètement dissimulé en bas de l'écran de gauche, sous la forme d'une fine ligne de pixels ressemblant à du code Morse.<br>
+                Après transcription méticuleuse du motif <code>(-.-. . ... / -.. .)</code>, j'ai passé la chaîne dans un décodeur. La traduction brute a donné un résultat parasité (<em>"CEST PRTIT POUR LE MOIS DE LA CLCER RETROULEYT NOS OFFRES DANS LE DOMANIA SUR NOTRE INTERTET"</em>), témoignant probablement d'une légère distorsion graphique de l'image.</p>
+
+                <p><strong>3. La déduction logique finale :</strong><br>
+                Malgré le bruit généré par le décodage, l'analyse sémantique permet de reconstruire la phrase logique sans aucune ambiguïté. Le mot de passe attendu par la DGSE était bien la phrase complète !</p>
+
+                <div class="flag-box">Mot de passe : C'est parti pour le mois de la cyber, retrouvez nos offres dans le domaine sur notre site internet.</div>
+            </div>
+
+            <!-- Bouton de retour -->
+            <div style="margin-top: 40px; text-align: center;">
+                <a href="writeups.html" class="back-link" style="margin-bottom: 0;">← Retour au sommaire</a>
+            </div>
+
+        </article>
+    </section>
+
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": { "number": { "value": 50 }, "color": { "value": "#38bdf8" }, "shape": { "type": "circle" }, "opacity": { "value": 0.2 }, "size": { "value": 3, "random": true }, "line_linked": { "enable": true, "distance": 150, "color": "#38bdf8", "opacity": 0.15, "width": 1 }, "move": { "enable": true, "speed": 1 } },
+            "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "grab" } }, "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } } },
+            "retina_detect": true
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) backToTopBtn.style.display = "block";
+            else backToTopBtn.style.display = "none";
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>
