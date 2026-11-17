@@ -1,642 +1,163 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Lauryn Hecque--Nascimento | Portfolio Cyber & Infrastructure</title>
-    <meta name="description" content="Portfolio de Lauryn Hecque--Nascimento. Étudiante spécialisée en cybersécurité défensive (Blue Team), OSINT et administration infrastructure réseaux.">
-    <meta property="og:title" content="Lauryn Hecque--Nascimento | Portfolio Cyber">
-    <meta property="og:description" content="Découvrez mes projets, certifications et compétences en cybersécurité défensive (Blue Team) et OSINT.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="bannierelinkedinportfolio.png">
-
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-    <style>
-        /* SÉCURITÉ ANTI-DÉBORDEMENT POUR TOUT LE SITE */
-        *, *::before, *::after {
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #050a14;        
-            --secondary: #38bdf8;      
-            --text-main: #e2e8f0;      
-            --text-dim: #94a3b8;       
-            --bg-card: #0f172a;        
-            --accent-badge: #1e293b;
-            --accent-card-border: rgba(56, 189, 248, 0.2);
-        }
-
-        /* --- SCROLLBAR PERSONNALISÉE --- */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--primary); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--primary);
-            color: var(--text-main);
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* --- BARRE DE NAVIGATION --- */
-        nav {
-            background-color: var(--bg-card);
-            padding: 12px 25px; 
-            display: flex;
-            justify-content: center;
-            gap: 15px; 
-            position: sticky;
-            top: 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-            border: 1px solid rgba(56, 189, 248, 0.2); 
-            flex-wrap: wrap;
-            width: fit-content;
-            margin: 20px auto 0 auto;
-            border-radius: 50px;
-        }
-
-        nav a {
-            color: var(--text-dim);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.85rem; 
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--secondary);
-        }
-
-        /* ------------------------------------ */
-        /* MODIFICATIONS HEADER POUR EFFETS UI */
-
-        header {
-            min-height: 55vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 60px 20px;
-            background: radial-gradient(circle at center, #0f172a 0%, #050a14 100%);
-            position: relative; 
-            overflow: hidden;
-        }
-
-        #particles-js {
-            position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 1; 
-        }
-
-        .header-container {
-            display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; 
-            max-width: 1200px; z-index: 2; position: relative;
-        }
-
-        .header-text {
-            display: flex; flex-direction: column; text-align: left;
-        }
-
-        .profile-pic {
-            width: 220px; height: 220px; border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--secondary); box-shadow: 0 0 20px rgba(56, 189, 248, 0.2); z-index: 2;
-        }
-
-        h1 { font-size: 3.5rem; color: var(--secondary); margin: 0; letter-spacing: -1px; font-weight: 800; }
-
-        h2 { 
-            font-size: 1.6rem; color: var(--text-main); margin-top: 10px; font-weight: 400; opacity: 0.9;
-            min-height: 2.5rem; 
-        }
-
-        /* Curseur de la machine à écrire */
-        .typewriter-text {
-            border-right: 2px solid var(--secondary); animation: blinkCursor 0.7s infinite; display: inline-block;
-        }
-
-        @keyframes blinkCursor {
-            0% { border-right-color: var(--secondary); }
-            50% { border-right-color: transparent; }
-            100% { border-right-color: var(--secondary); }
-        }
-
-        .availability { 
-            color: var(--secondary); font-weight: 600; margin-bottom: 2.5rem; text-transform: uppercase;
-            font-size: 0.85rem; letter-spacing: 2px;
-        }
-
-        section { padding: 80px 10%; max-width: 1200px; margin: auto; }
-
-        h3 { border-left: 5px solid var(--secondary); padding-left: 20px; margin-bottom: 40px; font-size: 2rem; color: #fff; }
-
-        .badge { 
-            background: var(--accent-badge); color: var(--secondary); padding: 6px 14px; border-radius: 4px; 
-            font-size: 0.85rem; margin-right: 8px; margin-bottom: 8px; display: inline-block;
-            border: 1px solid rgba(56, 189, 248, 0.2); font-weight: 500;
-        }
-
-        .contact-links a { 
-            color: #fff; text-decoration: none; margin: 0 5px 0 0; border: 1px solid var(--secondary); 
-            padding: 12px 25px; border-radius: 4px; transition: 0.4s; font-weight: 600; font-size: 0.9rem;
-            background: transparent; position: relative; z-index: 2;
-        }
-
-        .contact-links a:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
-        .contact-links a:last-child { background: rgba(56, 189, 248, 0.1); }
-         
-        .contact-links { display: flex; flex-wrap: wrap; justify-content: flex-start; gap: 15px; margin-top: 10px; }
-
-        p { color: var(--text-dim); font-size: 1.1rem; max-width: 800px; margin-bottom: 35px; }
-
-        /* --- STYLES DU NOUVEAU DASHBOARD OSINT/CTF --- */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .platform-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--accent-card-border); padding: 20px; border-radius: 8px; transition: 0.3s; display: flex; flex-direction: column; }
-        .platform-card:hover { border-color: var(--secondary); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2); }
-        .platform-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .platform-icon { width: 45px; height: 45px; border-radius: 8px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; border: 1px solid var(--accent-card-border); }
-        .platform-info h4 { margin: 0; color: #fff; font-size: 1.1rem; }
-        .platform-info span { color: var(--secondary); font-size: 0.85rem; font-weight: 600; }
-        .platform-desc { color: var(--text-dim); font-size: 0.9rem; flex-grow: 1; margin-bottom: 15px; }
-        .platform-link { color: var(--secondary); text-decoration: none; font-size: 0.9rem; font-weight: bold; transition: 0.2s; }
-        .platform-link:hover { text-decoration: underline; }
-
-        .ctf-list { display: flex; flex-direction: column; gap: 20px; }
-        .ctf-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--accent-card-border); border-left: 4px solid var(--secondary); padding: 25px; border-radius: 8px; transition: 0.3s; }
-        .ctf-card:hover { background: rgba(15, 23, 42, 0.9); box-shadow: 0 5px 20px rgba(0,0,0,0.3); }
-        .ctf-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;}
-        .ctf-title-group { display: flex; gap: 15px; align-items: center; }
-        .ctf-icon-large { width: 60px; height: 60px; border-radius: 10px; background: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 2rem; border: 1px solid rgba(56, 189, 248, 0.3); }
-        .ctf-title h4 { margin: 0 0 5px 0; color: #fff; font-size: 1.3rem; }
-        .ctf-title span { color: var(--text-dim); font-size: 0.9rem; display: block;}
-        .top-badge { background: rgba(56, 189, 248, 0.15); color: var(--secondary); padding: 4px 10px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; border: 1px solid var(--secondary); display: inline-block; margin-top: 5px;}
-        .ctf-rank { text-align: right; }
-        .ctf-rank h4 { margin: 0; color: #fff; font-size: 1.5rem; }
-        .ctf-rank span { color: var(--text-dim); font-size: 0.9rem; }
-        
-        /* Barres de progression */
-        .progress-container { margin-top: 15px; }
-        .progress-stats { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px; font-weight: 600; }
-        .progress-bar-bg { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
-        .progress-bar-fill { height: 100%; background: var(--secondary); border-radius: 10px; box-shadow: 0 0 10px var(--secondary); }
-
-        /* --- BOUTON RETOUR EN HAUT --- */
-        #backToTop {
-            display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold;
-            border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer;
-            padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease;
-        }
-        #backToTop:hover { background-color: #fff; color: var(--primary); box-shadow: 0 4px 20px rgba(255, 255, 255, 0.6); transform: translateY(-3px); }
-
-        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: 40px; }
-        footer p { margin: 0 auto; font-size: 0.9rem; }
-
-        /* ======================================================== */
-        /* --- CORRECTION POUR LES TÉLÉPHONES (RESPONSIVE) --- */
-        /* ======================================================== */
-        @media (max-width: 768px) {
-            body, html { overflow-x: hidden; }
-            nav { width: 95%; padding: 12px 10px; gap: 8px; border-radius: 12px; }
-            nav a { font-size: 0.75rem; }
-            h1 { font-size: 2.2rem; text-align: center; word-wrap: break-word; }
-            h2 { font-size: 1.2rem; text-align: center; }
-            .header-text { align-items: center; text-align: center; }
-            .profile-pic { width: 150px; height: 150px; }
-            section { padding: 40px 5%; }
-            .contact-links { justify-content: center; }
-        }
-    </style>
+<meta charset="utf-8">
+<!-- Politique de sécurité (CSP) : seuls les scripts du site et les polices Google sont autorisés.
+     En balise meta car GitHub Pages ne permet pas d'envoyer des en-têtes HTTP personnalisés.
+     (frame-ancestors, sandbox et report-uri ne fonctionnent qu'en en-têtes HTTP, pas en meta.) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Opération Kriegspiel · Échecs et Dames de cyberdéfense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-    <nav>
-        <a href="index.html">Accueil</a>
-        <a href="competences-certif.html">Compétences & Certif</a>
-        <a href="projets.html">Projets</a>
-        <a href="writeups.html">Write-Ups</a>
-        <a href="outils-veille.html">Outils & Veille</a>
-        <a href="glossaire.html">Glossaire</a>
-        <a href="experiences-diplomes.html">Expériences & Diplômes</a>
-        <a href="contact.html">Contact</a>
+<body data-game="chess">
+<div class="wrap">
+  <header class="masthead">
+    <div class="brand">
+      <p class="eyebrow">Simulation de lutte informatique défensive · Blue Team contre Red Team</p>
+      <h1>Opération <span class="accent">Kriegspiel</span></h1>
+    </div>
+    <nav class="tabs" aria-label="Choix du théâtre">
+      <a href="#echecs" id="tab-chess"><span class="tab-k">Échecs</span> Brouillard de guerre</a>
+      <a href="#dames" id="tab-dames"><span class="tab-k">Dames</span> Kill Chain</a>
     </nav>
+  </header>
 
-    <header>
-        <div id="particles-js"></div>
-
-        <div class="header-container">
-            <img src="photodeprofil.JPG" alt="Photo de Lauryn" class="profile-pic">
-            
-            <div class="header-text">
-                <h1>Lauryn Hecque--Nascimento</h1>
-                <h2><span id="typewriter" class="typewriter-text"></span></h2>
-                <p class="availability">Alternante chez Hartwood</p>
-                
-                <div class="contact-links">
-                    <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank">TryHackMe</a>
-                    <a href="mailto:hecquelauryn@proton.me">Mail</a>
-                    <a href="https://www.linkedin.com/in/lauryn-hecque-nascimento" target="_blank">LinkedIn</a>
-                    <a href="CV-Lauryn-HECQUE--NASCIMENTO-BTS.pdf" download style="background-color: #3e8d9ba6; color: var(--primary);">Télécharger CV</a>
-                </div>
-            </div>
+  <main class="room">
+    <section class="board-wrap" aria-label="Théâtre d'opérations">
+      <div class="board-head">
+        <span class="team red">Red Team · l'attaquant (IA)</span>
+        <span class="board-mode" id="board-mode"></span>
+      </div>
+      <div class="board chess" id="board"></div>
+      <div class="board-head">
+        <span class="team blue">Blue Team · vos forces</span>
+      </div>
+      <div class="promo" id="promo" hidden>
+        <div class="promo-card" role="dialog" aria-modal="true" aria-labelledby="promo-title">
+          <p id="promo-title">Renforcer le poste sentinelle en…</p>
+          <div class="promo-row" id="promo-row"></div>
+          <button type="button" class="linklike" id="promo-cancel">Annuler</button>
         </div>
-    </header>
-
-    <section id="about">
-        <h3>À propos</h3>
-           <p> Étudiante en 2ème année de BTS SIO SISR (Félicitations du conseil de classe), je me spécialise dans la <strong>cybersécurité défensive (Blue Team)</strong> et l'<strong>OSINT</strong>. Mon engagement se traduit par des résultats concrets : une place de finaliste au CTF Bpifrance, une participation au CTF DGA Deep Threats, et un entraînement intensif sur diverses plateformes d'investigation (OscarZulu, YAP, TryHackMe - Top 5% mondial). Titulaire de multiples certifications internationales (Stanford, Microsoft...) et forte de mon expérience au programme Orion aux Invalides, je franchis aujourd'hui une nouvelle étape en créant ma propre mini-entreprise dédiée à l'<strong>Audit d'Exposition Externe</strong> et au <strong>Durcissement</strong> (EASM & Blue Team).</p>
+      </div>
     </section>
 
-    <section id="languages">
-        <h3>Langues</h3>
-        <div style="margin-top: 15px;">
-            <span class="badge">Français : Langue natale</span>
-            <span class="badge">Anglais : Niveau C1</span>
-            <span class="badge">Espagnol : Niveau B1</span>
-            <span class="badge">Latin & Grec : 6 ans d'apprentissage scolaire</span>
-            <span class="badge">Portugais : En cours d'apprentissage (A2)</span>
-            <span class="badge">Arabe : En cours d'apprentissage (A2)</span>
+    <aside class="panel" aria-label="Poste de commandement">
+      <div class="card status" id="status-card" aria-live="polite">
+        <p class="label">Situation</p>
+        <p class="status-main" id="status-main">Vos ordres</p>
+        <p class="status-sub" id="status-sub"></p>
+        <div class="gauge" id="gauge">
+          <p class="gauge-text" id="gauge-text"></p>
+          <div class="gauge-bar" id="gauge-bar"></div>
         </div>
-    </section>
+        <div class="thinking-bar" id="thinking" hidden><span></span></div>
+        <button type="button" class="btn primary" id="open-report" hidden>Voir le compte rendu d'incident</button>
+      </div>
 
-    <section id="hobbies">
-        <h3>Dashboard OSINT & CTF</h3>
-        <p class="subtitle" style="color: var(--text-dim); margin-bottom: 30px;">Aperçu de mes performances en compétition et de mon activité sur les plateformes d'entraînement cyber.</p>
-        
-        <!-- 1. MES PLATEFORMES -->
-        <h4 style="color: #fff; margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">Mes Plateformes</h4>
-        <div class="dashboard-grid">
-            
-            <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">☁️</div>
-                    <div class="platform-info">
-                        <h4>TryHackMe</h4>
-                        <span>ZeroDayGhostNull</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Mon terrain de jeu principal pour la Blue Team. Top 5% mondial, +100 salles de hacking et défense résolues.</div>
-                <a href="https://tryhackme.com/p/ZeroDayGhostNull" target="_blank" class="platform-link">Voir le profil →</a>
-            </div>
-                <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">📃</div>
-                    <div class="platform-info">
-                        <h4>Osintopia</h4>
-                        <span>Z3r0D4y_Gh05t</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Mon terrain d'entrainement en OSINT. Actuellement 6ème du classement de cette saison 2026 en solo & duo. </div>
-                <a href="https://challenges.osintopia.fr/user" target="_blank" class="platform-link">Voir le profil →</a>
-            </div>
-
-            <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">🔎</div>
-                    <div class="platform-info">
-                        <h4>OSINT-FR</h4>
-                        <span>Z3r0D4y_Gh05t</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Plateforme communautaire francophone. Résolution de challenges d'investigation, GEOINT et SOCMINT réalistes.</div>
-                <a href="https://ctf.challenge-osint.fr/user" class="platform-link">Voir le profil →</a>
-            </div>
-
-            <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">🎯</div>
-                    <div class="platform-info">
-                        <h4>CyberSup</h4>
-                        <span>Lauryn H-N</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Participation aux ateliers Forensic et OSINT pour perfectionner mes méthodes de traçabilité numérique.</div>
-                <a href="projet-forensic.html" class="platform-link">Voir les projets liés →</a>
-            </div>
-                <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">👾</div>
-                    <div class="platform-info">
-                        <h4>YouArePlayer (YAP)</h4>
-                        <span>Z3r0D4y_Gh05t</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Plateforme d'investigation immersive orientée Renseignement en Sources Ouvertes (ROSO), Cyber Threat Intelligence (CTI) et logique déductive. </div>
-                <a href="https://youareplayer.com/profile" target="_blank" class="platform-link">Voir le profil →</a>
-            </div>
-                <div class="platform-card">
-                <div class="platform-header">
-                    <div class="platform-icon">🦏</div>
-                    <div class="platform-info">
-                        <h4>OscarZulu</h4>
-                        <span>Z3r0D4y_Gh05t</span>
-                    </div>
-                </div>
-                <div class="platform-desc">Résolution de challs via un serveur Discord. </div>
-            </div>
+      <div class="card">
+        <p class="label" id="level-label">Niveau de menace (force de l'IA)</p>
+        <fieldset class="seg" aria-labelledby="level-label">
+          <legend>Niveau de menace</legend>
+          <input type="radio" name="level" id="lv-debutant" value="debutant"><label for="lv-debutant">Faible</label>
+          <input type="radio" name="level" id="lv-club" value="club" checked><label for="lv-club">Modérée</label>
+          <input type="radio" name="level" id="lv-fort" value="fort"><label for="lv-fort">Élevée</label>
+        </fieldset>
+        <p class="label">Nouvelle opération</p>
+        <div class="row">
+          <button type="button" class="btn" id="new-white">Vous ouvrez</button>
+          <button type="button" class="btn" id="new-black">L'attaquant ouvre</button>
+          <button type="button" class="btn" id="undo">Annuler mon ordre</button>
         </div>
+        <p class="hint">Vos forces sont toujours en bleu. « Vous ouvrez » : vous avez les Blancs, qui jouent en premier.</p>
+      </div>
 
-        <!-- 2. RÉSULTATS CTF -->
-        <h4 style="color: #fff; margin-bottom: 20px; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">Résultats CTF & Plateformes</h4>
-        <div class="ctf-list">
-            <div class="ctf-card">
-                <div class="ctf-header">
-                    <div class="ctf-title-group">
-                        <div class="ctf-title">
-                            <h4>"Perce le front numérique v2" - Gouverneur Militaire de Paris</h4>
-                            <span>Octobre 2026 • Format : Trio (Équipe DGSI - Direction Générale des Suppositions Improbables)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
- <!-- CTF Opération Culot (BPI FRANCE) -->
-            <div class="ctf-card" style="border-left-color: #facc15;">
-                <div class="ctf-header">
-                    <div class="ctf-title-group">
-                        
-                        <!-- LE BADGE OFFICIEL (À remplacer par le tien si tu as une image) -->
-                        <div class="ctf-icon-large" style="background: transparent; border: none;">
-                            <!-- N'hésite pas à mettre le logo de l'event à la place du placeholder -->
-                            <img src="logo-bpifrance.jpg" alt="Badge Opération Culot" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 8px rgba(250, 204, 21, 0.6)); transform: scale(1.2); border-radius: 8px;">
-                        </div>
-                        
-                        <div class="ctf-title">
-                            <h4>"Opération Culot" - Bpifrance</h4>
-                            <span>Octobre 2026 • Format : Trio (Équipe DGSI - Direction Générale des Suppositions Improbables)</span>
-                            <div class="top-badge" style="background: rgba(250, 204, 21, 0.15); color: #facc15; border: 1px solid rgba(250, 204, 21, 0.3);">Top 1.5%</div>
-                        </div>
-                    </div>
-                    <div class="ctf-rank">
-                        <h4 style="color: #facc15;">8ᵉ</h4>
-                        <span>sur 655 personnes (315 équipes)</span>
-                    </div>
-                </div>
-                
-                <div class="progress-container">
-                    <div class="progress-stats">
-                        <span>Participants devancés (Score max : 1900 pts)</span>
-                        <span style="color: #facc15;">98.5%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <!-- La width correspond au % -->
-                        <div class="progress-bar-fill" style="width: 98.5%; background: #facc15; box-shadow: 0 0 10px rgba(250, 204, 21, 0.5);"></div>
-                    </div>
-                </div>
-                
-                <div style="margin-top: 20px; font-size: 0.95rem; font-weight: 600;">
-                    <span style="color: #facc15;">8ᵉ en Présentiel (Accor Arena)</span>
-                     <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <span style="color: #facc15;">7ᵉ Speed Runner</span>
-                    <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <span style="color: #facc15;">10ᵉ en Ligne</span>
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="Certif_OpérationCulotBPiFrance.pdf" target="_blank" class="platform-link" style="color: #fc9904;">Certificat vérifié en pdf</a>
-                    <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <a href="https://badgify.eu/badge/FzeBboA5B16MWUPFqkRf6e0CwO_qVaAX8k5vaN-xmCQiFZMW_UxhLNREGxztsPj9" target="_blank" class="platform-link" style="color: #af5521;">Certificat (Participant) vérifié en ligne</a>
-                    <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <a href="https://badgify.eu/badge/UX0V1Oz6sgbxg4Sh9HVX5EhF0ikW4MStpp2piQcwnIjD6ZSXi9gFC4WDz8BcM8J2" target="_blank" class="platform-link" style="color: #af5521;">Certificat (Participant présentiel) vérifié en ligne</a>
-                    <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <a href="https://badgify.eu/badge/zCglZCVddZeyA6HFEhF63nZa6Yl8yJotsU3MGJDir3AzPRG87578cxy_iefeAtju" target="_blank" class="platform-link" style="color: #af5521;">Certificat (Finisher) vérifié en ligne</a>
-                </div>
-            </div>
+      <div class="card manual">
+        <label class="label" for="manual-input">Ordre joué sur l'échiquier réel</label>
+        <form id="manual" autocomplete="off">
+          <input id="manual-input" name="coup" maxlength="20" spellcheck="false" autocapitalize="off">
+          <button type="submit" class="btn primary" id="manual-submit">Transmettre</button>
+        </form>
+        <p class="hint" data-for="chess">Notation française : R D T F C. Ex. <code>Cf3</code>, <code>exd5</code>, <code>O-O</code>, <code>e8=D</code> ou <code>e2e4</code>. Sur votre échiquier, ne posez que vos pièces : l'arbitre vous dira quoi retirer.</p>
+        <p class="hint" data-for="dames">Numéros des cases : <code>32-28</code> pour avancer, <code>19x28</code> pour prendre.</p>
+        <p class="msg" id="manual-msg" role="status"></p>
+      </div>
 
-            <!-- CTF Deep Threats -->
-            <div class="ctf-card">
-                <div class="ctf-header">
-                    <div class="ctf-title-group">
-                        
-                        <!-- LE BADGE OFFICIEL FINISHER -->
-                        <div class="ctf-icon-large" style="background: transparent; border: none;">
-                            <img src="Badge_finisher-removebg-preview.png" alt="Badge Finisher Deep Threats" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)); transform: scale(1.2);">
-                        </div>
-                        
-                        <div class="ctf-title">
-                            <h4>"Deep Threats" - DGA & Campus OSINT</h4>
-                            <span>Septembre 2026 • Format : Duo (Équipe OsFantaPatos)</span>
-                            <div class="top-badge">Top 38%</div>
-                        </div>
-                    </div>
-                    <div class="ctf-rank">
-                        <h4>184ᵉ</h4>
-                        <span>sur 487 équipes</span>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-stats">
-                        <span>Participants devancés</span>
-                        <span style="color: var(--secondary);">62%</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <!-- La width correspond au % -->
-                        <div class="progress-bar-fill" style="width: 62%;"></div>
-                    </div>
-                </div>
-                <div style="margin-top: 20px;">
-                    <a href="https://badgify.eu/verify?id=ID-ABECUQA" target="_blank" class="platform-link" style="color: #3e9b85;">Certificat vérifié en ligne</a>
-                     <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <a href="DeepThreatsOSINT_Certificat.png" target="_blank" class="platform-link" style="color: #3e9b5a;">Certificat vérifié en pdf</a>
-                    <span style="color: rgba(255,255,255,0.2); margin: 0 10px;">|</span>
-                    <a href="writeups.html" class="platform-link">Lire mon Write-Up</a>
-                </div>
-            </div>
-
-            <!-- CTF OSINTOPIA -->
-            <div class="ctf-card">
-                <div class="ctf-header">
-                    <div class="ctf-title-group">
-                        <div class="ctf-icon-large" style="background: transparent; border: none; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;">
-                            <img src="favicon-osintopia.png" alt="Badge Osintopia" style="width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));">
-                        </div>
-                        <div class="ctf-title">
-                            <h4>OSINTOPIA (Saison)</h4>
-                            <span>2026 • Format : Équipe / Solo</span>
-                            <div class="top-badge">Top 10</div>
-                        </div>
-                    </div>
-                    <div class="ctf-rank">
-                        <h4>6ᵉ</h4>
-                        <span>au classement général</span>
-                    </div>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-stats">
-                        <span>Progression des challenges (34 Solves)</span>
-                        <span style="color: var(--secondary);">Grade actuel : Trail hunter</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" style="width: 85%;"></div>
-                    </div>
-                </div>
-            </div>
-<!-- CTF YOUAREPLAYER (YAP) -->
-            <div class="ctf-card">
-                <div class="ctf-header">
-                    <div class="ctf-title-group">
-                        <div class="ctf-icon-large" style="background: transparent; border: none; flex-shrink: 0; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px;">
-                            <!-- N'oublie pas de mettre le bon nom de ton logo YAP ici -->
-                        <img src="Logo-YAP.png" alt="Logo YouArePlayer" style="width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)); image-rendering: pixelated;">                        </div>
-                        <div class="ctf-title">
-                            <h4>YouArePlayer (YAP) - ARG & OSINT</h4>
-                            <span>2026 • Format : Solo</span>
-                            <div class="top-badge">Top 15</div>
-                        </div>
-                    </div>
-                    <div class="ctf-rank">
-                        <h4>10</h4>
-                        <span>Solves (Challenges)</span>
-                    </div>
-                </div>
-                
-                <div class="progress-container">
-                    <div class="progress-stats">
-                        <span>Progression des enquêtes (1020 points)</span>
-                        <span style="color: var(--secondary);">6 Collectible Card débloquées</span>
-                    </div>
-                    <div class="progress-bar-bg">
-                        <!-- Tu pourras ajuster la largeur (width) au fil de tes futurs challenges résolus -->
-                        <div class="progress-bar-fill" style="width: 30%;"></div>
-                    </div>
-                </div>
-                
-                <!-- SECTION BADGE COLLECTIBLE & LIEN WRITE-UP -->
-                <div style="margin-top: 20px; display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                    
-                    <!-- Le petit badge de la carte Pepsi -->
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <!-- Remplace le src par ton image de carte -->
-                        <img src="pepsi_yap.png" alt="Collectible Card PEPSI" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : PEPSI</span>
-                    </div> 
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <img src="20fails_yap.png" alt="Collectible Card FAILS" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : Trial and Error</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <img src="selfmade_yap.png" alt="Collectible Card SELFMADE" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : Self-Made</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <img src="warmup.png" alt="Collectible Card WARMUP" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : Warm-Up</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <img src="scorer_yap.png" alt="Collectible Card SCORER" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : Scorer</span>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(56, 189, 248, 0.08); padding: 5px 15px 5px 5px; border-radius: 30px; border: 1px solid rgba(56, 189, 248, 0.3);">
-                        <img src="challenger_yap.png" alt="Collectible Card CHALLENGER" style="width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid var(--secondary); box-shadow: 0 0 8px rgba(56, 189, 248, 0.5);">
-                        <span style="color: #fff; font-size: 0.85rem; font-weight: 600;">Collectible : Challenger</span>
-                    </div>
-                    <span style="color: rgba(255,255,255,0.2);">|</span>
-                    
-                </div>
-            </div>
+      <div class="card journal">
+        <h2>Journal des opérations</h2>
+        <div class="journal-scroll" id="journal-scroll">
+          <ol class="events" id="journal"></ol>
         </div>
+        <p class="ai-info" id="ai-info"></p>
+      </div>
 
-    </section>
+      <div class="card legend">
+        <h2 id="legend-title">Ordre de bataille</h2>
+        <div id="legend"></div>
+      </div>
 
-    <!-- Bouton pour remonter en haut de la page -->
-    <button id="backToTop" title="Retour en haut">↑</button>
+      <div class="card">
+        <details class="rules">
+          <summary>Règles d'engagement</summary>
+          <ul data-for="chess">
+            <li>Vous ne voyez que votre zone de couverture : vos cases, celles où vos pièces peuvent aller et les diagonales de vos postes sentinelles. Le reste est dans le brouillard.</li>
+            <li>L'attaquant voit tout le théâtre : il a terminé sa reconnaissance.</li>
+            <li>L'arbitre annonce les neutralisations, les menaces sur votre poste de commandement (échec) et refuse les ordres impossibles.</li>
+            <li>Victoire : mat du serveur C2 adverse. Règles FIDE : roque, prise en passant, promotion, nulles automatiques (pat, triple répétition, 50 coups, matériel insuffisant).</li>
+            <li>Sur un échiquier réel, ne posez que vos pièces, comme au Kriegspiel. Quand l'arbitre annonce une neutralisation, retirez la pièce indiquée.</li>
+          </ul>
+          <ul data-for="dames">
+            <li>Les rangées sont colorées selon les 7 phases de la Cyber Kill Chain, vues depuis l'attaquant : ses 4 rangées de départ correspondent à la reconnaissance, puis chaque rangée franchie à une phase.</li>
+            <li>Un implant promu en dame : compromission, l'attaquant a atteint ses objectifs.</li>
+            <li>Chaque prise casse un maillon de la chaîne. La prise est obligatoire : un pion offert devient un leurre que l'attaquant doit prendre.</li>
+            <li>Victoire : l'attaquant n'a plus aucun coup possible. Règles FMJD : prise majoritaire, dame volante, nulles (triple répétition, 25 coups de dames, fins de partie à 16 et 5 coups).</li>
+          </ul>
+          <ul>
+            <li>Chacun de vos ordres est classé selon une tactique MITRE D3FEND : Modéliser, Durcir, Détecter, Isoler, Leurrer, Évincer, Restaurer.</li>
+          </ul>
+          <p class="sources">Référentiels :
+            <a href="https://d3fend.mitre.org/about" target="_blank" rel="noopener noreferrer">MITRE D3FEND</a> ·
+            <a href="https://www.eccouncil.org/cybersecurity-exchange/threat-intelligence/cyber-kill-chain-seven-steps-cyberattack" target="_blank" rel="noopener noreferrer">Cyber Kill Chain</a> ·
+            <a href="https://www.defense.gouv.fr/comcyber/quotidien-cybercombattants/glossaire-du-futur-cybercombattant-10-termes-connaitre-valider-vos-voeux" target="_blank" rel="noopener noreferrer">Glossaire du COMCYBER</a>
+          </p>
+        </details>
+      </div>
+    </aside>
+  </main>
 
-    <footer>
-        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
-    </footer>
+  <footer>
+    <p>Simulation pédagogique réalisée pour un portfolio, inspirée de la lutte informatique défensive (LID). Sans lien avec le ministère des Armées.</p>
+    <p>L'IA de l'attaquant est codée à la main : minimax avec élagage alpha-bêta, approfondissement itératif et recherche de quiescence. Elle tourne dans un Web Worker : vos coups ne quittent pas votre navigateur.</p>
+  </footer>
+</div>
 
-    <!-- SCRIPTS UI/UX (Typewriter, Particules, Back To Top) -->
-    <script>
-        const textToType = "Administratrice Sécurité, Systèmes & Réseaux";
-        const typewriterElement = document.getElementById("typewriter");
-        let i = 0;
+<dialog class="report" id="report" aria-labelledby="report-title">
+  <div class="report-head">
+    <p class="label">Compte rendu d'incident</p>
+    <h2 id="report-title"></h2>
+    <p class="report-why" id="report-why"></p>
+  </div>
+  <dl class="report-meta" id="report-meta"></dl>
+  <h3>Synthèse</h3>
+  <ul class="report-summary" id="report-summary"></ul>
+  <h3>Chronologie</h3>
+  <ol class="events report-chrono" id="report-chrono"></ol>
+  <div class="row report-actions">
+    <button type="button" class="btn primary" id="report-download">Télécharger (.txt)</button>
+    <button type="button" class="btn" id="report-new">Nouvelle opération</button>
+    <button type="button" class="btn" id="report-close">Fermer</button>
+  </div>
+</dialog>
 
-        function typeWriter() {
-            if (i < textToType.length) {
-                typewriterElement.innerHTML += textToType.charAt(i);
-                i++;
-                setTimeout(typeWriter, 40);
-            }
-        }
-        
-        window.onload = function() {
-            setTimeout(typeWriter, 400); 
-        };
-
-        particlesJS('particles-js', {
-            "particles": {
-                "number": {
-                    "value": 70, 
-                    "density": { "enable": true, "value_area": 800 }
-                },
-                "color": { "value": "#38bdf8" }, 
-                "shape": { "type": "circle" },
-                "opacity": {
-                    "value": 0.5,
-                    "random": false
-                },
-                "size": {
-                    "value": 3,
-                    "random": true
-                },
-                "line_linked": {
-                    "enable": true,
-                    "distance": 150,
-                    "color": "#38bdf8",
-                    "opacity": 0.2,
-                    "width": 1
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1.5, 
-                    "direction": "none",
-                    "random": false,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false
-                }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "grab" 
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push" 
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": { "distance": 180, "line_linked": { "opacity": 0.6 } },
-                    "push": { "particles_nb": 3 }
-                }
-            },
-            "retina_detect": true
-        });
-
-        // 3. Script pour le bouton "Retour en haut"
-        const backToTopBtn = document.getElementById("backToTop");
-
-        window.addEventListener("scroll", () => {
-            if (window.scrollY > 300) { 
-                backToTopBtn.style.display = "block";
-            } else {
-                backToTopBtn.style.display = "none";
-            }
-        });
-
-        backToTopBtn.addEventListener("click", () => {
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-        });
-    </script>
+<!-- 1) les moteurs (règles + IA), 2) la couche militaire, 3) l'interface qui les utilise -->
+<script src="engines.js"></script>
+<script src="ops.js"></script>
+<script src="ui.js"></script>
 </body>
 </html>
