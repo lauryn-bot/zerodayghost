@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CTF Opération Icare & AEGIS | Lauryn H-N</title>
+    <meta name="description" content="Write-Up du concours Opération Icare & AEGIS (Armée de l'Air et de l'Espace, Root-Me) : 11 missions résolues, du contrôle d'intégrité à l'attribution forensique.">
+    <meta property="og:title" content="Write-Up Opération Icare & AEGIS">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="URL_DE_TON_IMAGE_DE_PREVISUALISATION.png">
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --primary: #050a14;
+            --secondary: #f05252;
+            --text-main: #e2e8f0;
+            --text-dim: #94a3b8;
+            --bg-card: #0f172a;
+            --accent-card-border: rgba(220, 38, 38, 0.25);
+            --accent-badge: #1e293b;
+            --success: #3e9b85;
+            --flag-bg: rgba(220, 38, 38, 0.1);
+            --flag-text: #f87171;
+            --code-bg: #020611;
+            --code-border: rgba(220, 38, 38, 0.2);
+        }
+
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-badge); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--secondary); }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--primary);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
+        /* --- BARRE DE NAVIGATION --- */
+        nav {
+            background-color: var(--bg-card); padding: 12px 10px; display: flex; justify-content: center; gap: 8px;
+            position: sticky; top: 20px; z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            border: 1px solid rgba(56, 189, 248, 0.2); flex-wrap: wrap; width: 95%; max-width: 900px; margin: 20px auto 0 auto; border-radius: 15px;
+        }
+        nav a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; padding: 5px 10px; }
+        nav a:hover, nav a.active { color: var(--secondary); }
+
+        /* --- CONTENEUR DU RAPPORT --- */
+        section { padding: 40px 5%; max-width: 900px; margin: auto; flex: 1; width: 100%; }
+
+        .back-link {
+            display: inline-flex; align-items: center; color: var(--secondary); text-decoration: none; font-weight: 600;
+            margin-bottom: 25px; transition: 0.3s; background: rgba(56, 189, 248, 0.1); padding: 8px 16px;
+            border-radius: 30px; border: 1px solid var(--accent-card-border);
+        }
+        .back-link:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); transform: translateX(-5px); }
+
+        article {
+            background: rgba(15, 23, 42, 0.95); padding: 30px; border-radius: 8px; border: 1px solid var(--accent-card-border);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+        }
+
+        h1 { color: var(--secondary); font-size: 2rem; margin-top: 0; margin-bottom: 10px; line-height: 1.2; }
+        .chapter-meta { color: var(--text-dim); font-size: 1rem; margin-bottom: 30px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; }
+
+        .intro-text { color: var(--text-main); font-size: 1.05rem; margin-bottom: 30px; }
+        .intro-text strong { color: var(--secondary); }
+
+        h2 { color: #fff; font-size: 1.5rem; margin-top: 0; margin-bottom: 15px; }
+        p { color: var(--text-main); font-size: 1.05rem; margin-bottom: 15px; }
+
+        /* --- EN-TÊTE D'OPÉRATION --- */
+        .op-header {
+            background: rgba(56, 189, 248, 0.05); border: 1px solid var(--accent-card-border); border-left: 4px solid var(--secondary);
+            padding: 22px 25px; border-radius: 8px; margin: 45px 0 30px 0;
+        }
+        .op-header:first-of-type { margin-top: 10px; }
+        .op-header .op-tag { color: var(--secondary); font-size: 0.85rem; font-weight: bold; text-transform: uppercase; letter-spacing: 2px; }
+        .op-header h2 { margin: 6px 0 8px 0; font-size: 1.9rem; color: #fff; }
+        .op-header p { margin: 0; color: var(--text-dim); font-size: 1rem; }
+
+        /* --- STYLE DES MISSIONS --- */
+        .challenge-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--accent-card-border);
+            border-left: 4px solid var(--secondary);
+            padding: 25px;
+            border-radius: 6px;
+            margin-bottom: 35px;
+        }
+
+        .mission-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+        .mission-head h2 { margin: 0; }
+        .theme-badge { background: var(--accent-badge); color: var(--secondary); padding: 4px 12px; border-radius: 20px; font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; border: 1px solid rgba(56,189,248,0.25); }
+
+        .question {
+            font-style: italic;
+            color: var(--text-dim);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
+        }
+        .question strong { color: var(--secondary); font-style: normal; }
+
+        .mission-body p:last-of-type { margin-bottom: 0; }
+        .mission-body strong { color: #fff; }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            background: rgba(56,189,248,0.1);
+            color: var(--secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* bloc de code / terminal */
+        pre {
+            background: var(--code-bg);
+            border: 1px solid var(--code-border);
+            border-radius: 6px;
+            padding: 16px 18px;
+            overflow-x: auto;
+            margin: 18px 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: var(--text-main);
+        }
+        pre code { background: none; color: var(--text-main); padding: 0; font-size: 1em; }
+        pre .c { color: var(--text-dim); }
+        pre .g { color: var(--success); }
+
+        /* encart "piège" */
+        .pitfall {
+            background: rgba(249, 38, 114, 0.06);
+            border: 1px solid rgba(249, 38, 114, 0.25);
+            border-left: 4px solid var(--flag-text);
+            padding: 14px 18px;
+            border-radius: 6px;
+            margin: 20px 0;
+            font-size: 0.98rem;
+            color: var(--text-dim);
+        }
+        .pitfall strong { color: var(--flag-text); }
+
+        /* tableau */
+        .tbl-wrap { overflow-x: auto; margin: 18px 0; }
+        table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+        th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+        th { color: var(--secondary); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+        td code { font-size: 0.85em; }
+
+        /* liste à puces */
+        .mission-body ul { padding-left: 0; list-style: none; margin: 15px 0; }
+        .mission-body ul li { position: relative; padding-left: 22px; margin-bottom: 8px; color: var(--text-main); }
+        .mission-body ul li::before { content: "▸"; position: absolute; left: 0; color: var(--secondary); }
+
+        /* flag */
+        .flag-box {
+            background: var(--flag-bg);
+            border: 1px solid rgba(249, 38, 114, 0.3);
+            color: var(--flag-text);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            margin-top: 22px;
+            display: block;
+            word-wrap: break-word;
+            word-break: break-all;
+            max-width: 100%;
+        }
+        .flag-box .flag-label { color: var(--text-dim); font-weight: normal; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 6px; }
+
+        /* source */
+        .source-line {
+            font-size: 0.85rem; color: var(--text-dim); margin-top: 18px; padding-top: 14px;
+            border-top: 1px dashed rgba(255,255,255,0.12);
+        }
+        .source-line strong { color: var(--secondary); text-transform: uppercase; font-size: 0.72rem; letter-spacing: 1px; }
+        .source-line a { color: var(--secondary); text-decoration: none; }
+        .source-line a:hover { text-decoration: underline; }
+
+        /* bilan */
+        .bilan { background: rgba(56, 189, 248, 0.05); border: 1px solid var(--accent-card-border); border-radius: 8px; padding: 25px; margin-top: 15px; }
+        .bilan h2 { color: var(--secondary); }
+        .skills-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .skills-tags span { background: var(--accent-badge); color: var(--text-main); padding: 5px 12px; border-radius: 20px; font-size: 0.82rem; border: 1px solid rgba(255,255,255,0.08); }
+
+        /* navigation chapitres */
+        .chapter-nav { display: flex; justify-content: space-between; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; flex-wrap: wrap; gap: 15px; }
+        .btn-nav { background: var(--primary); color: var(--secondary); border: 1px solid var(--secondary); padding: 10px 20px; border-radius: 4px; text-decoration: none; font-weight: bold; transition: 0.3s; text-align: center; flex: 1; min-width: 200px; }
+        .btn-nav:hover { background: var(--secondary); color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+
+        /* --- BOUTON RETOUR EN HAUT --- */
+        #backToTop { display: none; position: fixed; bottom: 30px; right: 30px; z-index: 99; font-size: 1.2rem; font-weight: bold; border: none; outline: none; background-color: var(--secondary); color: var(--primary); cursor: pointer; padding: 12px 18px; border-radius: 50px; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); transition: all 0.3s ease; }
+        #backToTop:hover { background-color: #fff; color: var(--primary); transform: translateY(-3px); }
+
+        footer { background-color: var(--bg-card); text-align: center; padding: 20px; border-top: 1px solid rgba(56, 189, 248, 0.1); margin-top: auto; }
+        footer p { margin: 0 auto; font-size: 0.9rem; color: var(--text-dim); }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden; }
+            article { padding: 20px; }
+            h1 { font-size: 1.6rem; word-wrap: break-word; }
+            .op-header h2 { font-size: 1.5rem; }
+            .chapter-nav { flex-direction: column; }
+            .btn-nav { width: 100%; }
+            .challenge-box { padding: 16px; }
+            .mission-head { flex-direction: row; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="competences-certif.html">Compétences</a>
+        <a href="projets.html">Projets</a>
+        <a href="writeups.html" class="active">Write-Ups</a>
+        <a href="outils-veille.html">Outils & Veille</a>
+        <a href="glossaire.html">Glossaire</a>
+        <a href="experiences-diplomes.html">Expériences</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <section>
+        <a href="writeups.html" class="back-link">← Retour au sommaire des Write-Ups</a>
+
+        <article>
+            <h1>Opération Icare &amp; AEGIS</h1>
+            <div class="chapter-meta">
+                Concours de cybersécurité de l'Armée de l'Air et de l'Espace (Root-Me) &nbsp;·&nbsp; 11 missions résolues &nbsp;·&nbsp; Crypto · Reverse · Forensic · Réseau · LID
+            </div>
+
+            <p class="intro-text">Deux opérations liées, menées en approche <strong>Blue Team</strong>. <strong>Icare</strong> reconstitue le sabotage d'une chaîne de déploiement satellite : un paquet signé piégé, une porte dérobée d'authentification, puis la remontée jusqu'au compte compromis et le confinement des tâches malveillantes. <strong>AEGIS</strong> enchaîne sur le détournement d'un drone en vol par injection MAVLink, et attribue l'attaque jusqu'au boîtier physique et à la personne qui l'a introduit sur l'emprise. Fil conducteur : <strong>l'absence de signature</strong>, côté commits git comme côté trames radio.</p>
+
+            <!-- ===================== OPERATION ICARE ===================== -->
+            <div class="op-header">
+                <span class="op-tag">Opération 1</span>
+                <h2>Icare</h2>
+                <p>Sabotage d'une chaîne de déploiement satellite — du paquet signé piégé jusqu'au confinement et à l'attribution.</p>
+            </div>
+
+            <!-- M1 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>1. Contrôle d'intégrité</h2><span class="theme-badge">Cryptographie</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> La chaîne de déploiement vérifie qu'un paquet correspond à ce qui a été signalé avant son envoi en orbite. Sur le paquet du soir, la vérification échoue à la signature — un transfert défectueux produirait le même symptôme.<br><br>
+                    <strong>Objectif :</strong> Calculer l'empreinte réelle du paquet livré et confirmer l'écart avec le manifeste signé.
+                </div>
+                <div class="mission-body">
+                    <p>Le manifeste annonce pour <code>SAT-ALPHA-3</code> une empreinte SHA-256 et une taille de 2 943 octets. On recalcule l'empreinte réelle du paquet reçu :</p>
+                    <pre><span class="c"># empreinte annoncée (manifeste)</span>
+9310f4c26ef83e56fd569ab8e3afd9e6cc959e6b9037d2a389ead0abada0bff8
+
+<span class="c"># empreinte recalculée (paquet livré)</span>
+$ sha256sum update-SAT-ALPHA-3-4.7.2.tar.gz
+65609e9a9e7710b8c1a1a9b2d56d7df2f3964eadf67edb2333103298c0e3eccf</pre>
+                    <p>Les deux ne correspondent pas, et la taille réelle (15 163 octets) dépasse largement celle annoncée. <strong>Ce n'est pas un transfert défectueux mais une altération volontaire :</strong> <code>gzip -t</code> passe, l'archive se liste entièrement, elle embarque un dossier <code>.git/</code> inattendu, et le <code>SHA256SUMS</code> interne n'échoue que sur <code>src/tcuplink/auth.py</code>. La signature du manifeste, décodée depuis le base64, n'est qu'un texte factice entre balises BEGIN/END — le contrôle repose entièrement sur la comparaison du digest.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{65609e9a9e7710b8c1a1a9b2d56d7df2f3964eadf67edb2333103298c0e3eccf}</span>
+                    <p class="source-line"><strong>Source ·</strong> Page de manuel GNU coreutils — <code>sha256sum</code> affiche/vérifie des sommes SHA-256 (FIPS-180-2). <a href="https://www.gnu.org/software/coreutils/sha256sum">gnu.org/software/coreutils/sha256sum</a></p>
+                </div>
+            </div>
+
+            <!-- M2 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>2. Analyse du paquet</h2><span class="theme-badge">Reverse</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Ce paquet met à jour le service qui authentifie les ordres des opérateurs avant leur envoi au satellite. Comparer ses fichiers à ce qui a été signé, trouver celui qui a été modifié, lire ce qui y a été ajouté.<br><br>
+                    <strong>Objectif :</strong> Identifier le fichier modifié (chemin SHA256SUMS), relever l'identifiant d'opérateur en hexadécimal et le jeton codés en dur.
+                </div>
+                <div class="mission-body">
+                    <p>La vérification <code>sha256sum -c SHA256SUMS</code> n'échoue que sur <strong>un fichier</strong> : <code>src/tcuplink/auth.py</code>. L'historique git confirme que la version signée correspond au commit de release 4.7.2, et que la version livrée vient d'un commit postérieur ajoutant 10 lignes :</p>
+                    <pre><span class="c"># Field-maintenance hook ajouté hors release</span>
+_MAINT_OPERATOR = 0xA5
+_MAINT_TOKEN = bytes.fromhex("9e3ab7f04c118d26")
+
+def verify_command(frame, keyring) -> bool:
+    if frame.operator_id == _MAINT_OPERATOR \
+       and frame.payload[:8] == _MAINT_TOKEN:
+        return True   <span class="c"># court-circuite les 3 contrôles</span></pre>
+                    <p><strong>C'est une porte dérobée d'authentification.</strong> Le test est placé avant les trois contrôles légitimes : opérateur <code>0xA5</code> absent du registre (<code>operators.py</code> ne liste que <code>0x11</code>, <code>0x12</code>, <code>0x21</code>), aucun HMAC vérifié, aucun anti-rejeu. Toute trame portant l'opérateur <code>0xA5</code> et un payload commençant par ces 8 octets est acceptée et relayée au satellite.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{src/tcuplink/auth.py:0xA5:9e3ab7f04c118d26}</span>
+                    <p class="source-line"><strong>Source ·</strong> MITRE CWE-798, « Use of Hard-coded Credentials ». <a href="https://cwe.mitre.org/data/definitions/798">cwe.mitre.org/data/definitions/798</a></p>
+                </div>
+            </div>
+
+            <!-- M3 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>3. Remontée à la source</h2><span class="theme-badge">DevOps</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Identifier le commit qui a introduit la porte dérobée et l'identité sous laquelle il a été poussé.<br><br>
+                    <strong>Objectif :</strong> Retrouver le commit et l'adresse e-mail de son auteur.
+                </div>
+                <div class="mission-body">
+                    <p>Un seul commit modifie <code>auth.py</code> après la release. L'objet brut donne le même nom et le même e-mail pour l'auteur et le committer, vérifiés octet par octet (aucun homoglyphe). Le compte a produit des commits légitimes auparavant : c'est bien un accès de développeur compromis.</p>
+                    <pre>$ git cat-file -p 2e192f3
+author Camille Roussel &lt;c.roussel@segment-sol.aae&gt; ...
+    auth: add field-maintenance recovery path</pre>
+                    <div class="pitfall"><strong>À noter —</strong> le commit n'est pas signé (pas d'en-tête <code>gpgsig</code>). L'identité git est simplement déclarée par le client : elle prouve le commit sous l'identité de Camille Roussel, pas que Camille Roussel l'a écrit. D'où la mission 6.</div>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{2e192f32d090bf23007a6563b37c5c219e43c4a1:c.roussel@segment-sol.aae}</span>
+                    <p class="source-line"><strong>Source ·</strong> Pro Git, ch. 7.4 — vérifier l'origine d'un commit demande une signature GPG. <a href="https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work">git-scm.com · Signing Your Work</a></p>
+                </div>
+            </div>
+
+            <!-- M4 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>4. Identification d'IOC</h2><span class="theme-badge">Threat Hunting</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Via un scanner YARA, identifier tous les paquets du lot porteurs de l'implant SAT-ALPHA-3 et lister leurs cibles.<br><br>
+                    <strong>Objectif :</strong> Donner les cibles porteuses de l'implant, triées alphabétiquement.
+                </div>
+                <div class="mission-body">
+                    <p>Le jeton <code>9e3ab7f04c118d26</code> n'existe que dans SAT-ALPHA-3 : l'attaquant a utilisé des valeurs différentes par cible. L'implant doit donc se reconnaître à son <strong>mécanisme</strong>, pas à ses valeurs. La règle YARA cible les noms de variables, la comparaison <code>payload[:8]</code> et le <code>return True</code> de contournement :</p>
+                    <pre>rule implant_sat_alpha3 {
+  strings:
+    $name_tok  = "_MAINT_TOKEN"
+    $name_op   = "_MAINT_OPERATOR"
+    $logic_cmp = "payload[:8]"
+    $logic_ret = { 5F 4D 41 49 4E 54 5F [1-150] 3A
+                   ( 0A | 0D 0A ) [0-20]
+                   72 65 74 75 72 6E 20 54 72 75 65 }
+  condition:
+    any of them
+}</pre>
+                    <div class="pitfall"><strong>Pièges du lot —</strong> trois leurres cassent les règles trop strictes. <strong>SAT-BETA-2</strong> ne contient que <code>payload[:8]</code>, légitime dans son planificateur (faux positif). Une règle exigeant le jeton ne trouve que SAT-ALPHA-3 ; une règle exigeant les deux noms rate GS-SUD et SAT-BETA-1. La comparaison avec les paquets « jumeaux » de même version (écart de taille) confirme les vrais porteurs.</div>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{GS-SUD:SAT-ALPHA-3:SAT-BETA-1:SAT-DELTA-2}</span>
+                    <p class="source-line"><strong>Source ·</strong> Documentation YARA — chaînes texte / hexadécimales / regex, sauts <code>[x-y]</code> et alternatives. <a href="https://yara.readthedocs.io/en/stable/writingrules.html">yara.readthedocs.io · Writing rules</a></p>
+                </div>
+            </div>
+
+            <!-- M5 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>5. Confinement</h2><span class="theme-badge">LID</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Identifier les tâches mises en file par l'intrus sur l'orchestrateur et les bloquer toutes. Le bon blocage donne le flag.<br><br>
+                    <strong>Objectif :</strong> Bloquer exactement les tâches frauduleuses, sans oubli ni blocage d'une tâche légitime.
+                </div>
+                <div class="mission-body">
+                    <p>Trois jobs seulement portent l'opérateur illégitime <code>0xA5</code>, mais le journal d'audit révèle que l'intrus a aussi usurpé des opérateurs légitimes. La signature fiable est dans les sessions : authentification <code>maint</code> (porte dérobée) ou HMAC valide mais depuis une IP externe, avec un compteur anti-rejeu à 0.</p>
+                    <div class="tbl-wrap"><table>
+                        <thead><tr><th>Session</th><th>Auth</th><th>Source</th><th>Signature</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>7f3a9c</code></td><td><code>maint</code></td><td><code>203.0.113.41</code></td><td>Porte dérobée</td></tr>
+                            <tr><td><code>6e0b93</code></td><td><code>maint</code></td><td><code>203.0.113.77</code></td><td>Porte dérobée</td></tr>
+                            <tr><td><code>c21e55</code></td><td><code>hmac</code></td><td><code>198.51.100.23</code></td><td>IP externe</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Ces trois sessions ont mis en file <strong>7 tâches</strong> : DK-8072, DK-4846, DK-8973, DK-7432, DK-2372 (session <code>7f3a9c</code>), DK-9476 (<code>c21e55</code>) et DK-1075 (<code>6e0b93</code>). Les jobs affichant <code>0x11</code> ou <code>0x21</code> dans la file sont des usurpations, trahies par leur <code>sid</code> et leur compteur à 0.</p>
+                    <span class="flag-box"><span class="flag-label">Action</span>RETENUS 7 / 23 → CONFIRMER LE BLOCAGE → flag RM{...}</span>
+                    <p class="source-line"><strong>Source ·</strong> Règles d'authentification de <code>auth.py</code> (opérateur connu + HMAC + compteur strictement croissant) ; IP réservées à la documentation par la RFC 5737. <a href="https://www.rfc-editor.org/rfc/rfc5737.html">rfc-editor.org/rfc/rfc5737</a></p>
+                </div>
+            </div>
+
+            <!-- M6 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>6. Attribution</h2><span class="theme-badge">Forensic</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Camille Roussel affirme ne jamais avoir écrit ce commit. Le journal VPN filtré sur son compte et l'export complet de sa messagerie sont remis. Une connexion suit de près un message d'hameçonnage : c'est elle qui couvre le commit.<br><br>
+                    <strong>Objectif :</strong> Donner l'heure UTC de la connexion VPN frauduleuse et l'adresse de l'expéditeur du phishing.
+                </div>
+                <div class="mission-body">
+                    <p>Un seul message vient d'un domaine imitant l'organisation — <code>segrnent-sol.aae</code> (m → rn) — relayé depuis <code>203.0.113.41</code>, l'IP de la porte dérobée de la mission 5, avec <code>spf=fail</code>. 21 minutes plus tard, une connexion VPN inhabituelle apparaît :</p>
+                    <pre><span class="c"># client OpenConnect 9.17 (vs 9.12 habituel), IP externe</span>
+2026-11-05T20:31:05Z auth.ok user=c.roussel
+  src=192.0.2.88 client=OpenConnect/9.17 tunnel=tun23</pre>
+                    <p>La session couvre le commit (21:14) et le push. La session propre de Camille Roussel était encore ouverte en parallèle depuis son IP habituelle — deux sessions simultanées.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{2026-11-05T20:31:05Z:it-support@segrnent-sol.aae}</span>
+                    <p class="source-line"><strong>Source ·</strong> RFC 7208 — un résultat SPF « Fail » déclare que le client n'est pas autorisé à utiliser le domaine. <a href="https://www.rfc-editor.org/rfc/rfc7208">rfc-editor.org/rfc/rfc7208</a></p>
+                </div>
+            </div>
+
+            <!-- ===================== OPERATION AEGIS ===================== -->
+            <div class="op-header">
+                <span class="op-tag">Opération 2</span>
+                <h2>AEGIS</h2>
+                <p>Détournement d'un drone en vol par injection MAVLink — de la capture radio à l'attribution du matériel abandonné.</p>
+            </div>
+
+            <!-- A1 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>7. Capture du lien</h2><span class="theme-badge">Réseau</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> La position du drone a sauté, puis l'appareil a abandonné son plan de vol sans ordre de l'opérateur. Tout le trafic radio reçu depuis le décollage a été enregistré. La flotte pilote en MAVLink.<br><br>
+                    <strong>Objectif :</strong> Déterminer si un autre émetteur s'est adressé à l'appareil, l'instant UTC de réception de l'ordre et le nom MAVLink de la commande.
+                </div>
+                <div class="mission-body">
+                    <p>Les 45 127 trames sont en MAVLink v2 <strong>sans signature</strong>. Au niveau réseau, l'intrus réutilise MAC, IP et port de la station sol ; c'est l'identité MAVLink qui le trahit :</p>
+                    <div class="tbl-wrap"><table>
+                        <thead><tr><th>Émetteur</th><th>sysid / compid</th><th>Trames</th></tr></thead>
+                        <tbody>
+                            <tr><td>Station sol</td><td><code>255 / 190</code></td><td>1 041</td></tr>
+                            <tr><td><strong>Intrus</strong></td><td><code>42 / 1</code></td><td>177</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>L'intrus envoie 176 messages <code>GPS_INPUT</code> falsifiés (position décalée d'environ 1,4 km) puis un unique <code>COMMAND_LONG</code> à <strong>06:41:27 UTC</strong> : commande 176 <code>MAV_CMD_DO_SET_MODE</code>, <code>param1=1</code> (custom mode), <code>param2=15</code>. Le drone répond par un ACK puis un <code>STATUSTEXT</code> « Mode GUIDED » et abandonne son plan AUTO.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{2026-11-09T06:41:27Z:MAV_CMD_DO_SET_MODE}</span>
+                    <p class="source-line"><strong>Source ·</strong> ArduPilot — changement de mode MAVLink (<code>param1</code> = CUSTOM_MODE_ENABLED, <code>param2</code> = n° de mode). <a href="https://ardupilot.org/dev/docs/mavlink-get-set-flightmode.html">ardupilot.org</a> · <a href="https://mavlink.io/en/messages/common.html">mavlink.io</a></p>
+                </div>
+            </div>
+
+            <!-- A2 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>8. Investigation</h2><span class="theme-badge">Forensic</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> L'appareil tient son propre journal de bord (autopilote), plus fin que la liaison. Son horloge compte le temps depuis le démarrage — à recaler en UTC.<br><br>
+                    <strong>Objectif :</strong> Identifier la source de position suivie en plein vol, l'instant UTC de sa première trame et son numéro d'instance dans le champ I des messages GPS.
+                </div>
+                <div class="mission-body">
+                    <p>Le log DataFlash révèle un ArduPlane à deux GPS : <code>GPS_TYPE=1</code> (u-blox embarqué, instance <strong>I=0</strong>) et <code>GPS_TYPE2=14</code> (GPS alimenté par MAVLink, instance <strong>I=1</strong>), avec <code>GPS_AUTO_SWITCH=1</code>. Le faux GPS annonce 19 satellites et un HDOP de 0,61, meilleur que le vrai récepteur : l'autopilote le préfère.</p>
+                    <p><strong>Recalage horloge :</strong> l'écart entre <code>TimeUS</code> et le temps GPS du vrai récepteur est constant ; en retirant les 18 s intercalaires, la première trame GPS tombe à 06:34:30 UTC, exactement le début de la capture réseau.</p>
+                    <div class="tbl-wrap"><table>
+                        <thead><tr><th>UTC</th><th>Événement</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>06:41:06.410</code></td><td>Première trame GPS I=1 (≈1,4 km du vrai GPS)</td></tr>
+                            <tr><td><code>06:41:06.800</code></td><td>« EKF3 IMU0 is using GPS 2 »</td></tr>
+                            <tr><td><code>06:41:27.500</code></td><td>Passage en mode GUIDED</td></tr>
+                            <tr><td><code>06:41:41.100</code></td><td>Retour au vrai GPS (fin injection)</td></tr>
+                        </tbody>
+                    </table></div>
+                    <div class="pitfall"><strong>Piège —</strong> les messages texte affichent « GPS 2 » (numérotés à partir de 1), mais le champ <code>I</code> demandé indexe à partir de 0 : la réponse est <strong>GPS1</strong>, pas GPS2.</div>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{2026-11-09T06:41:06Z:GPS1}</span>
+                    <p class="source-line"><strong>Source ·</strong> USNO — après 2016, GPS−UTC = +18 s ; aucune seconde intercalaire fin 2026 (IERS Bulletin C 72). <a href="https://maia.usno.navy.mil/ser7/series14.txt">maia.usno.navy.mil</a></p>
+                </div>
+            </div>
+
+            <!-- A3 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>9. Localisation de la source</h2><span class="theme-badge">Radiofréquence</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Quatre antennes de surveillance spectrale couvrent l'emprise et ont toutes entendu l'émission.<br><br>
+                    <strong>Objectif :</strong> Croiser les portées des quatre antennes et donner la désignation de l'installation à l'intersection.
+                </div>
+                <div class="mission-body">
+                    <p>Trilatération à partir des quatre portées relevées sur la console, converties en mètres via l'échelle de la carte. Les quatre cercles se croisent sur un même point :</p>
+                    <div class="tbl-wrap"><table>
+                        <thead><tr><th>Antenne</th><th>Portée</th><th>Distance → PYL-AC04</th></tr></thead>
+                        <tbody>
+                            <tr><td><code>SV-11</code></td><td>≈ 2100 m</td><td>2131 m</td></tr>
+                            <tr><td><code>SV-12</code></td><td>≈ 400 m</td><td>398 m</td></tr>
+                            <tr><td><code>SV-13</code></td><td>≈ 1980 m</td><td>1993 m</td></tr>
+                            <tr><td><code>SV-14</code></td><td>≈ 890 m</td><td>880 m</td></tr>
+                        </tbody>
+                    </table></div>
+                    <p>Le point optimal (moindres carrés) tombe à ~28 m du pylône <strong>PYL-AC04</strong>, en limite est de l'emprise, à portée radio de la trajectoire du drone. Les autres installations sont à plus de 450 m.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{PYL-AC04}</span>
+                    <p class="source-line"><strong>Source ·</strong> Portées et échelle relevées sur la console de surveillance spectrale (barre 500 m sur 2 cases de grille).</p>
+                </div>
+            </div>
+
+            <!-- A4 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>10. Matériel abandonné</h2><span class="theme-badge">Reverse</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Un boîtier avec carte radio et antenne filaire a été trouvé au pied du pylône. Partiellement fondu, « nettoyé » avant sabotage, mais le début de la carte mémoire a été copié.<br><br>
+                    <strong>Objectif :</strong> Retrouver le point de contrôle vers lequel le boîtier ouvrait sa liaison, sous la forme adresse:port.
+                </div>
+                <div class="mission-body">
+                    <p>L'image contient deux partitions (FAT32 boot + ext4 rootfs d'un Raspberry Pi). Le service <code>fieldlink.service</code> lance un script effacé. Comme ext4 n'efface pas le contenu des blocs, <code>debugfs</code> récupère 6 fichiers supprimés — dont la configuration de liaison :</p>
+                    <pre>$ debugfs -R "lsdel" p2.img
+$ debugfs -R "dump &lt;118&gt; uplink.conf" p2.img
+
+<span class="c"># uplink.conf récupéré</span>
+endpoint = 198.51.100.47:8443
+unit_id = fl-07
+reconnect_s = 30</pre>
+                    <p>Le <code>config.json</code> récupéré reproduit exactement l'attaque observée : <code>source_system=42</code>, fenêtre 06:41:05 + 35 s, offsets ≈1,4 km, <code>mode_delay=22,4 s</code>, <code>custom_mode=15</code>. L'historique root effacé montre le ménage (suppression des dossiers, vidage des logs, <code>history -c</code>, <code>poweroff</code>) à 06:42:10 UTC.</p>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{198.51.100.47:8443}</span>
+                    <p class="source-line"><strong>Source ·</strong> Image <code>sdcard-partial.img</code> (inodes supprimés 115–121) ; <code>man debugfs</code> pour <code>lsdel</code>. <a href="https://man7.org/linux/man-pages/man8/debugfs.8.html">man7.org · debugfs</a></p>
+                </div>
+            </div>
+
+            <!-- A5 -->
+            <div class="challenge-box">
+                <div class="mission-head"><h2>11. Attribution</h2><span class="theme-badge">Forensic</span></div>
+                <div class="question">
+                    <strong>Énoncé :</strong> Le matériel entrant sur l'emprise est enregistré à l'arrivée, avec son étiquette et le nom de celui qui l'apporte. Le registre de l'année est transmis.<br><br>
+                    <strong>Objectif :</strong> Relever la date d'entrée du boîtier et le nom de celui qui l'a apporté.
+                </div>
+                <div class="mission-body">
+                    <p>Deux identifiants extraits de la carte pointent vers la même entrée du registre : l'adresse MAC <code>b8:27:eb:4f:1a:9c</code> (règle udev + journal dhcpcd) et le numéro de série FTDI <code>A50285BI</code> (journal noyau). Les deux lignes partagent le bon de livraison <code>BL-2026-1184</code> :</p>
+                    <pre>2026-10-26 ; BL-2026-1184 ; Raspberry Pi 3 B+ ;
+  8241-307714 ; b8:27:eb:4f:1a:9c ; Bruno Tessier
+2026-10-26 ; BL-2026-1184 ; FTDI FT232R ;
+  A50285BI ; Bruno Tessier</pre>
+                    <div class="pitfall"><strong>Leurre —</strong> le 23/10, la même personne a fait entrer un autre Pi + FTDI (MAC et n° de série différents). Seuls les identifiants exacts de la carte désignent le bon boîtier.</div>
+                    <span class="flag-box"><span class="flag-label">Flag</span>RM{2026-10-26:bruno_tessier}</span>
+                    <p class="source-line"><strong>Source ·</strong> Registre d'entrées (lignes 593–595) et <code>sdcard-partial.img</code> ; préfixe MAC <code>b8:27:eb</code> attribué à Raspberry Pi Foundation (registre IEEE). <a href="https://regauth.standards.ieee.org/standards-ra-web/pub/view.html">IEEE · MA-L registry</a></p>
+                </div>
+            </div>
+
+            <!-- BILAN -->
+            <div class="challenge-box bilan">
+                <h2>Bilan de la chaîne d'attaque</h2>
+                <p>Les deux opérations forment une seule histoire défensive : un développeur hameçonné (<strong>phishing par domaine sosie</strong>) → un commit poussé sous son identité (<strong>porte dérobée d'authentification</strong>) → un paquet signé piégé déployé (<strong>contrôle d'intégrité contourné</strong>) → la réutilisation de la même infrastructure pour piloter un boîtier physique (<strong>injection MAVLink</strong>) détournant un drone → la remontée jusqu'au matériel et à la personne qui l'a introduit (<strong>attribution forensique</strong>).</p>
+                <p>Fil conducteur technique : <strong>l'absence de signature</strong>, qu'il s'agisse des commits git ou des trames MAVLink. C'est la recommandation centrale du rapport : signer et chiffrer la liaison de la flotte.</p>
+                <div class="skills-tags">
+                    <span>SHA-256 / intégrité</span>
+                    <span>Git forensics</span>
+                    <span>YARA</span>
+                    <span>Threat hunting</span>
+                    <span>Analyse de logs</span>
+                    <span>MAVLink / ArduPilot</span>
+                    <span>pcapng</span>
+                    <span>DataFlash</span>
+                    <span>Trilatération RF</span>
+                    <span>ext4 / debugfs</span>
+                    <span>OSINT matériel</span>
+                </div>
+            </div>
+
+            <!-- NAVIGATION -->
+            <div class="chapter-nav">
+                <a href="writeups.html" class="btn-nav">← Sommaire des Write-Ups</a>
+            </div>
+
+        </article>
+    </section>
+
+    <button id="backToTop" title="Retour en haut">↑</button>
+
+    <footer>
+        <p>Tous droits réservés, 2026 - Lauryn HECQUE--NASCIMENTO</p>
+    </footer>
+
+    <script>
+        particlesJS('particles-js', {
+            "particles": {
+                "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#dc2626" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#dc2626", "opacity": 0.15, "width": 1 },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "resize": true },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 0.5 } } }
+            },
+            "retina_detect": true
+        });
+
+        const backToTopBtn = document.getElementById("backToTop");
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) backToTopBtn.style.display = "block";
+            else backToTopBtn.style.display = "none";
+        });
+        backToTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </script>
+</body>
+</html>
